@@ -1,0 +1,26 @@
+<p>lista-visitas works!</p>
+<div class="container-fluid">
+    <table class="table table-light table-striped table-hover table-sm" *ngIf="viewTable">
+        <thead>
+            <tr>
+                <th>Serviço prestado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vs of visitas">
+                <td>{{vs.recomendacao}}</td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+        </ul>
+      </nav>
+
+</div>

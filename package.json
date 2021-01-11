@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json --aot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,13 +12,18 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.3",
+    "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.0.3",
     "@angular/compiler": "~9.0.3",
     "@angular/core": "~9.0.3",
     "@angular/forms": "~9.0.3",
+    "@angular/material": "^9.2.4",
     "@angular/platform-browser": "~9.0.3",
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
+    "@types/jwt-decode": "^3.1.0",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

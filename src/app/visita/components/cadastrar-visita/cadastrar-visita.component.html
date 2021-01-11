@@ -1,0 +1,159 @@
+<div class="container-fluid">
+  <div class="col-12" [formGroup]="visitaForm">
+    <div class="row g-3">
+      <div class="col-12 form-check">
+        <input class="form-check-input" checked=false type="checkbox" id="criar-pasta" formControlName="createFolder">
+        <label class="form-check-label" for="gridCheck">
+          Criar pasta para atendimento
+        </label>
+      </div>
+      <div class="row">
+        <div class="col-9">
+          <label for="local-do-atendimento" class="form-label">Local do Atendimento</label>
+          <input type="text" class="form-control" id="local-do-atendimento" placeholder="Fazenda, Sitio..."
+            formControlName="localDoAtendimeno">
+        </div>
+        <div class="col-3">
+          <label for="data-da-visita" class="form-label">Data da visita</label>
+          <input type="date" class="form-control" id="data-da-visita" placeholder="19/06/2020"
+            formControlName="dataDaVisita">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 text-muted d-flex justify-content-center">
+      <h5>
+        <strong>Informações sobre o produtor atendido</strong>
+      </h5>
+    </div>
+    <div class="border m-2 pb-2 row" [formGroup]="produtoresForm">
+      <div class="col-md-3">
+        <label for="cpf-do-produtor" class="form-label">CPF</label>
+        <input type="text" class="form-control" id="cpf-do-produtor" formControlName="cpf" mascara="999.999.999-99">
+      </div>
+      <div class="col-md-5">
+        <label for="nome-do-produtor" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome-do-produtor" formControlName="nome">
+      </div>
+      <div class="col-4 d-flex align-items-end">
+        <button title="" class="btn btn-primary" (click)="incluirProdutor($event)" [disabled]="!produtoresForm.valid">
+          <span><span class="fas fa-user-plus"></span></span> Incluir
+        </button>
+      </div>
+    </div>
+    <div class="col-12 text-muted d-flex justify-content-center">
+      <h5>
+        <strong>Informações sobre o serviço prestado</strong>
+      </h5>
+    </div>
+    <div class="border m-2 pb-2 row" [formGroup]="servicosForm">
+      <div class="col-8">
+        <search-servicos [servico]="servico" (atualizouServico)="onSelecionaServico($event)"></search-servicos>
+      </div>
+      <div class="col-4">
+        <search-tecnico-auto-complete [inputObject]="tecnicoResponsavel" (updated)="onSelecionaTecnico($event)"></search-tecnico-auto-complete>
+      </div>
+      <div class="col-12">
+        <label for="descricao-do-servico" class="form-label">Descrição do serviço</label>
+        <input type="text" class="form-control" id="descricao-do-servico"
+          placeholder="Elaboração de laudo de vistoria para acesso a crédito rural"
+          formControlName="servicoPrestado">
+      </div>
+      <div class="col-12">
+        <label for="ocorrencia" class="form-label">Ocorrência</label>
+        <input type="text" class="form-control" id="ocorrencia" placeholder="***" 
+        formControlName="ocorrencia">
+      </div>
+      <div class="row mt-2">
+        <div class="col-2">
+          <label for="valor-do-servico" class="form-label">Valor do serviço</label>
+          <input type="number" class="form-control" id="valor-do-servico" placeholder="150"
+            formControlName="valor">
+        </div>
+        <div class="col-4 d-flex align-items-end">
+          <button title="" class="btn btn-primary" (click)="incluirServico($event)" [disabled]="!servicosForm.valid">
+            <span><span class="fas fa-mug-hot"></span></span> Incluir
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="situacao-atual" class="form-label">Situação atual</label>
+      <textarea type="text" class="form-control texto" id="situacao-atual"
+        placeholder="O produtor reclama que a vaca dá pouco leite" 
+        formControlName="situacaoAtual"></textarea>
+    </div>
+    <div class="col-12">
+      <label for="orientacoes" class="form-label">Orientações</label>
+      <textarea type="text" class="form-control texto" id="orientacoes"
+        placeholder="Administrar o suao de suplementação alimentar e disponibilizar água de qualidade"
+        formControlName="orientacao"></textarea>
+    </div>
+    <div class="col-12">
+      <label for="recomendaoes" class="form-label">Recomendações</label>
+      <textarea type="text" class="form-control texto" id="recomendaoes" placeholder="Suplementar com ração 18% PB"
+        formControlName="recomendacao"></textarea>
+    </div>
+    <div class="col-md-4">
+      <label for="municipio" class="form-label">Cidade</label>
+      <select id="municipio" class="form-select mb-2" formControlName="municipio">
+        <option *ngFor="let mn of municipios">{{mn.nome}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <table class="col-6 table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>CPF</th>
+            <th>Nome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prd of produtores">
+            <td>
+              <button type="button" class="btn btn-danger btn-sm btn-custom"
+              (click)="removerProdutor(prd, $event)"
+              >
+                <i class="far fa-calendar-times"></i>
+              </button>
+            </td>
+            <td>{{prd.cpf}}</td>
+            <td>{{prd.nome}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-6">
+      <table class="col-6 table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Servico</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let call of chamadas">
+            <td>
+              <button type="button" class="btn btn-danger btn-sm btn-custom"
+              (click)="removerChamada(call, $event)">
+                <i class="far fa-calendar-times"></i>
+              </button>
+            </td>
+            <td>{{call.servicoPrestado}}</td>
+            <td>{{call.valor}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <button class="btn btn-primary" (click)="registrarVisita()" [disabled]="!visitaForm.valid">Registrar</button>
+</div>

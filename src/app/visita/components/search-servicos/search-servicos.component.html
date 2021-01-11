@@ -1,0 +1,13 @@
+<form class="md-form">
+    <div class="form-group">
+        <label for="servico_prestado" class="form-label">Selecione o serviço prestado</label>
+        <input class="form-control" id="servico_prestado" type="text" class="search" placeholder="pesquisar serviço"
+            [formControl]="controlservicos" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfn" autoActiveFirstOption>
+            <mat-option *ngFor="let servico of servicosFiltered$ | async" [value]="servico"
+                (onSelectionChange)="selecionaServico(servico)">
+                {{servico.referency}}
+            </mat-option>
+        </mat-autocomplete>
+</div> 
+</form>
