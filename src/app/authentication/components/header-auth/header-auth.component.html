@@ -1,19 +1,25 @@
-<div class="container">
+<div class="container text-light m-1 bg-primary">
     <div class="logo">
-        <img src="../../../../assets/agro-logo.png" height="30" class="d-inline-block align-top" alt="">
-    </div>
-    <h5 class="mt-1">JP - Agrodata</h5><small>V02.2021</small>
-    <div class="row">
-        <div class="col-sm">
-        </div>
-        <!-- Dados do usuario -->
-        <div class="col-sm">
-            <div class="row d-flex flex-reverse">
-                <div class="col-10 d-flex d-flex justify-content-end">{{nome}}</div>
-                <button type="button" class="col-2 m-2px btn btn-outline-primary btn-sm" (click)="logout()">
-                    Logout</button>
-            </div>
-        </div>
 
+    </div>
+    <div>
+        <h5 class="mt-1">JP - Agrodata</h5>
+        <small>V02.2021</small>
+    </div>
+    <div class="row d-flex justify-content-sm-around align-items-baseline">
+        <!-- Dados do usuario -->
+            <div class="col-11 align-items-baseline">
+                {{nome}}
+                <span class="badge badge-pill text-danger bg-warning badge-warning">4</span>
+
+            </div>
+    
+            <div class="col-1 d-flex justify-content-start">
+                <button type="button" class="col-1 btn " (click)="logout()">
+                    <span class="d-flex justify-content-start">
+                        <i class="fas fa-door-open text-light"></i>
+                    </span>
+                </button>
+            </div>
     </div>
 </div>
