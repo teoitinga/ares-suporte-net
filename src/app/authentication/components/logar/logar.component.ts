@@ -14,13 +14,17 @@ import { MessageService } from 'src/app/shared/service/responses-errors.service'
 export class LogarComponent implements OnInit {
 
   form: FormGroup;
-
+  loginmessage = "Error";
+  status = 200;
+  
   constructor(
     private authService: AuthenticationService,
     private fb: FormBuilder,
     private router: Router,
     private mesageService: MessageService
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit(): void {
     this.createForm();
@@ -49,7 +53,9 @@ export class LogarComponent implements OnInit {
         }
       },
       error=>{
-       this.mesageService.sendError(JSON.stringify(console.error()));
+       this.mesageService.sendError(error.error.message);
+       this.status = error.error.status;
+       this.loginmessage = error.error.message;
       }
     )
 

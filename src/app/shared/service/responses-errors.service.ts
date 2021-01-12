@@ -10,7 +10,7 @@ export class MessageService {
 
   constructor() { }
   sendError(error:any){
-    console.log("Erro a ser tratado: " + JSON.stringify(error));
+    console.log(error);
     
   }
 }
