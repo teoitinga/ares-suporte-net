@@ -8,20 +8,28 @@ import { LogarComponent } from './components/logar/logar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
-
+import { ListaAcoesComponent } from '../chamadas/components/lista-acoes/lista-acoes.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
     LoginComponent, 
     LogarComponent, 
     HeaderAuthenticationComponent,
-
+    ListaAcoesComponent,
     HomeComponent
   ],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
     HttpClientModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule
   ],
   exports:[

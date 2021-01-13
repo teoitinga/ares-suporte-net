@@ -10,11 +10,15 @@ import * as moment from 'moment';
 import { tap, shareReplay } from 'rxjs/operators';
 import { LoginModel } from '../shared/models/login.model';
 import { Router } from '@angular/router';
+import { ChamadaService } from '../chamadas/services/chamada.service';
+import { dataAttributes } from '@material/data-table';
+import { QueryBindingType } from '@angular/compiler/src/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+
 
   private readonly PATH: string = 'auth';
   private readonly TOKEN_DATA: string = 'token';
@@ -25,6 +29,7 @@ export class AuthenticationService {
   private readonly USERNAME_DATA: string = 'sub';
 
   usuarioLogado: UserToken = new UserToken('','','','');
+  numCalls: number = 0;
 
   private _headerData = new BehaviorSubject<LoginModel>({
     nome: '',
@@ -32,13 +37,33 @@ export class AuthenticationService {
     icon: 'home',
     role: '',
     title: '',
-    expires: moment().format('LLL')
+    expires: moment().format('LLL'),
+    callsNum: 0
   });
 
   constructor(
     private http: HttpClient,
-    private router: Router
-  ) { }
+    private router: Router,
+    private chamadaService: ChamadaService
+  ) { 
+    this.getCallsNumber();
+  }
+
+  getCallsNumber(): any {
+    this.chamadaService.countCalls().subscribe(
+      data=>{
+        const num = data;
+        console.log("Dentro do obs ...");
+        console.log(data);
+        this.numCalls = num;
+      },
+      err=>{
+        console.log(err);
+      }
+      
+    );
+    return this.numCalls;
+  }
   logar(login: UserPost): Observable<any> {
     return this.http.post(`${env.BASE_API_URL}${this.PATH}`, login)
       .pipe(
@@ -63,6 +88,17 @@ export class AuthenticationService {
 
     localStorage.setItem(this.TOKEN_DATA, token);
     localStorage.setItem(this.EXPIRES_DATA, JSON.stringify(payload.expiration));
+
+    const header: LoginModel = {
+      nome: '',
+      route: 'login/home',
+      icon: 'home',
+      role: '',
+      title: '',
+      expires: moment().format('LLL'),
+      callsNum: this.numCalls
+    };
+    this.headerData = header;
 
   }
   private parseJwt(token: string) {
@@ -122,6 +158,10 @@ export class AuthenticationService {
     const roleData = localStorage.getItem(this.ROLE_DATA);
     return roleData;
   }
+  public getNumCalls() {
+    const num = this.headerData.callsNum;
+    return num;
+  }
   isLoggedIn() {
     return moment().isBefore(this.getExpiration());
   }
@@ -138,6 +178,7 @@ export class AuthenticationService {
     const payload = this.parseJwt(token);
     headerData.nome = payload.name;
     headerData.role = payload.role;
+    headerData.callsNum = this.numCalls;
 
     this._headerData.next(headerData);
   }

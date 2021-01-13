@@ -9,8 +9,8 @@
     <div class="row d-flex justify-content-sm-around align-items-baseline">
         <!-- Dados do usuario -->
             <div class="col-11 align-items-baseline">
-                {{nome}}
-                <span class="badge badge-pill text-danger bg-warning badge-warning">4</span>
+                {{ nome }}
+                <span (click)="conferirChamadas()" *ngIf="qtdCall>=0" class="badge badge-pill text-danger bg-warning badge-warning">{{ qtdCall }}</span>
 
             </div>
     
