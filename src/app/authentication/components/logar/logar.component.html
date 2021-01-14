@@ -23,31 +23,35 @@
       <img src="../../../../assets/320x200/producao-pec.png">
     </div>
     <div class="col-3 login-form justify-content-md-center">
-      <div class="p-2">
-        <form [formGroup]="form" class="border" novalidate>
-          <div class="form-row p-2">
-            <div class="col">
-              <div class="row p-3">
-                <label class="text-light">
-                  Username:
-                </label>
-                <input type="text" formControlName="login">
+
+        <div class="p-2">
+          <form [formGroup]="form" class="border" novalidate>
+            <div class="form-row p-2">
+              <div class="col">
+                <div class="row p-3">
+                  <label class="text-light">
+                    Usuário:
+                  </label>
+                  <input type="text" formControlName="login">
+                </div>
+              </div>
+              <div class="col">
+                <div class="row p-3">
+                  <label class="text-light">
+                    Senha:
+                  </label>
+                  <input type="password" formControlName="senha">
+                </div>
               </div>
             </div>
-            <div class="col">
-              <div class="row p-3">
-                <label class="text-light">
-                  Senha:
-                </label>
-                <input type="password" formControlName="senha">
+            <div class="row p-2">
+              <div class="col mt-3 d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-info" type="button" (click)="logar()" [disabled]="!form.valid">acessar</button>
               </div>
             </div>
-            <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-center">
-              <button class="btn btn-info" type="button" (click)="logar()" [disabled]="!form.valid">acessar</button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+
     </div>
   </div>
 </div>

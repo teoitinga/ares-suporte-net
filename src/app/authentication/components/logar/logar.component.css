@@ -5,7 +5,7 @@
         0 0 0.2em #87F}
 
 .agro-header{
-    background: linear-gradient(to right,rgb(90, 120, 110), #4e76e3);
+    /*background: linear-gradient(to right,rgb(90, 120, 110), #4e76e3);*/
 }
 .agro-header h5{
     margin: 5px;
@@ -15,9 +15,10 @@
     width: 5rem;
 }
 .form-gate{
+    /*
     height: 100%;
     width: 100%;
-    background: linear-gradient(to right,rgb(90, 120, 110), #4e76e3);
+    background: linear-gradient(to right,rgb(90, 120, 110), #4e76e3);*/
 }
 .login-form{
 
@@ -32,5 +33,5 @@ margin-top: 5px;
 .banner img {
     width: 320px;
     height: 200px;
-    opacity: 0.3; /*esta linha é a que clareia a imagem*/
+    /*opacity: 0.3; /*esta linha é a que clareia a imagem*/
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
 
 @Component({
@@ -9,8 +10,12 @@ import { AuthenticationService } from '../../authentication.service';
 export class HeaderAuthenticationComponent implements OnInit {
 
   constructor(
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router,
   ) {
+    //carrega as chamadas não atendidas pelo tecnico
+    this.authService.countCalls();
+    //carrega o header
     this.authService.headerData = {
       nome: this.authService.getUsuarioLogado().name,
       route: 'login/home',
@@ -24,6 +29,9 @@ export class HeaderAuthenticationComponent implements OnInit {
   ngOnInit(): void {
 
   }
+get callNumber(): number{
+return this.authService.callNumber;
+}
   logout(){
     this.authService.logout();
   }
@@ -47,7 +55,12 @@ export class HeaderAuthenticationComponent implements OnInit {
   get route(): string {
     return this.authService.headerData.route;
   }
+
   private normalizeString(texto: string):string{
     return  texto.replace(/Ã£/g,"ã");
+  }
+  conferirChamadas(){
+    
+    this.router.navigate(['/login/chamadas']);
   }
 }

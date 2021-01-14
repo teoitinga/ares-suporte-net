@@ -13,14 +13,14 @@ export class VisitaComponent implements OnInit {
     ) {
 
     }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.authService.headerData = {
       nome: this.authService.getUsuarioLogado().name,
       route: 'login/visitas',
       icon: 'home',
       role: this.authService.getUsuarioLogado().role,
       title: 'tela  Visitas',
-      expires: this.authService.getExpiration().calendar()
+      expires: this.authService.getExpiration().calendar(),
     }
   }
 

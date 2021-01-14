@@ -41,7 +41,7 @@ export class LogarComponent implements OnInit {
     }
     const login: UserPost = this.form.value;
     this.authService.logar(login).subscribe(
-      data=>{
+      async data=>{
         this.router.navigate(['login/home']);
         this.authService.headerData = {
           nome: this.authService.getUsuarioLogado().login,
@@ -50,6 +50,7 @@ export class LogarComponent implements OnInit {
           role: this.authService.getUsuarioLogado().role,
           title: 'tela  home',
           expires: this.authService.getExpiration().calendar()
+          
         }
       },
       error=>{

@@ -1,0 +1,35 @@
+table {
+  width: 80%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+
+}
+
+.data-prevista{
+  width: 10%;
+}
+.servico{
+  width: 20%;;
+}
+.status-call{
+  width: 10%;
+}
+.propriedade{
+  width: 20%;
+}
+.produtor{
+  width: 40%;
+}
+.acoes{
+  width: 60%;
+}
+.pesquisa-input{
+  width: 15%;
+
+}
