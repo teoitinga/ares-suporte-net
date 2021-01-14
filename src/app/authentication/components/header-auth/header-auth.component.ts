@@ -9,40 +9,29 @@ import { AuthenticationService } from '../../authentication.service';
 })
 export class HeaderAuthenticationComponent implements OnInit {
 
-  qtdCall: number = 0;
-
   constructor(
     private authService: AuthenticationService,
     private router: Router,
   ) {
-    this.setCallsQtd();
+    //carrega as chamadas não atendidas pelo tecnico
+    this.authService.countCalls();
+    //carrega o header
     this.authService.headerData = {
       nome: this.authService.getUsuarioLogado().name,
       route: 'login/home',
       icon: 'home',
       role: this.authService.getUsuarioLogado().role,
       title: 'tela  home',
-      expires: this.authService.getExpiration().calendar(),
-      callsNum: this.authService.getCallsNumber()
+      expires: this.authService.getExpiration().calendar()
     }
   }
 
   ngOnInit(): void {
 
   }
-  async setCallsQtd(){
-    await this.espereEDecida();
-    this.funcaoteste2();
-  }
-  async espereEDecida(){
-    // Vamos esperar um segundo primeiro
-  const num = await this.authService.getCallsNumber();
-  console.info("aqui...");
-  console.info(num);
-  }
-  funcaoteste2(){
-    console.log("arquivo 02assasasyhiuyhiasyihiUASYZ");
-  }
+get callNumber(): number{
+return this.authService.callNumber;
+}
   logout(){
     this.authService.logout();
   }
@@ -66,13 +55,12 @@ export class HeaderAuthenticationComponent implements OnInit {
   get route(): string {
     return this.authService.headerData.route;
   }
-  get numCalls(): number {
-    return this.authService.headerData.callsNum;
-  }
+
   private normalizeString(texto: string):string{
     return  texto.replace(/Ã£/g,"ã");
   }
   conferirChamadas(){
+    
     this.router.navigate(['/login/chamadas']);
   }
 }

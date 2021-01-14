@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { CallData, Content } from '../../models/call-get-list';
@@ -40,14 +40,43 @@ const NAMES: string[] = [
   
     callData: CallData;
     
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.loadCalls(this.pageSizeOptions);
+    }
+  }
+
+  loadCalls(pageSizeOptions){
+          //obtem todas as chamadas
+          this.callService.loadCalls(pageSizeOptions).subscribe(
+            data=>{
+              this.callData = data;
+              console.info(this.callData.content);
+              this.dataSource = new MatTableDataSource(this.callData.content);
+            },
+            error=>{
+              console.error(error);
+    
+            }
+    
+          );
+  }
     constructor(
       private callService: ChamadaService
     ) {
       //obtem todas as chamadas
-      this.callService.loadCalls().subscribe(
+      this.callService.loadCalls(this.pageSizeOptions).subscribe(
         data=>{
           this.callData = data;
-          console.info(this.callData.content);
           this.dataSource = new MatTableDataSource(this.callData.content);
         },
         error=>{
@@ -64,8 +93,8 @@ const NAMES: string[] = [
     }
   
     ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      //this.dataSource.paginator = this.paginator;
+      //this.dataSource.sort = this.sort;
     }
   
     applyFilter(event: Event) {

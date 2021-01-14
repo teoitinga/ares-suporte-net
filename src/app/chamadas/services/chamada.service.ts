@@ -14,8 +14,8 @@ export class ChamadaService {
     private http: HttpClient
   ) { }
 
-  loadCalls(): Observable<any>{
-    return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
+  loadCalls(pageSizeOptions): Observable<any>{
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}?${pageSizeOptions}`)
     ;
   }
   countCalls(): Observable<any>{

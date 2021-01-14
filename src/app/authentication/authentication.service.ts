@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ChamadaService } from '../chamadas/services/chamada.service';
 import { dataAttributes } from '@material/data-table';
 import { QueryBindingType } from '@angular/compiler/src/core';
+import { EventEmitter } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class AuthenticationService {
   private readonly USERNAME_DATA: string = 'sub';
 
   usuarioLogado: UserToken = new UserToken('','','','');
-  numCalls: number = 0;
+  //private callsNumber$: EventEmitter<number> = new EventEmitter<0>();
+  private callsNumber: number=0;
 
   private _headerData = new BehaviorSubject<LoginModel>({
     nome: '',
@@ -38,31 +40,33 @@ export class AuthenticationService {
     role: '',
     title: '',
     expires: moment().format('LLL'),
-    callsNum: 0
   });
+
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private chamadaService: ChamadaService
   ) { 
-    this.getCallsNumber();
-  }
 
-  getCallsNumber(): any {
+  }
+  get callNumber(): number{
+    return this.callsNumber;
+  }
+  set callNumber(value){
+    this.callsNumber = value; 
+  }
+  countCalls()  {
     this.chamadaService.countCalls().subscribe(
       data=>{
-        const num = data;
-        console.log("Dentro do obs ...");
-        console.log(data);
-        this.numCalls = num;
-      },
-      err=>{
-        console.log(err);
+        this.callsNumber = data;
       }
+      );
       
-    );
-    return this.numCalls;
+  }
+  setCalls(value: any){
+    console.log(value);
+
   }
   logar(login: UserPost): Observable<any> {
     return this.http.post(`${env.BASE_API_URL}${this.PATH}`, login)
@@ -96,7 +100,7 @@ export class AuthenticationService {
       role: '',
       title: '',
       expires: moment().format('LLL'),
-      callsNum: this.numCalls
+      
     };
     this.headerData = header;
 
@@ -158,10 +162,7 @@ export class AuthenticationService {
     const roleData = localStorage.getItem(this.ROLE_DATA);
     return roleData;
   }
-  public getNumCalls() {
-    const num = this.headerData.callsNum;
-    return num;
-  }
+
   isLoggedIn() {
     return moment().isBefore(this.getExpiration());
   }
@@ -178,7 +179,6 @@ export class AuthenticationService {
     const payload = this.parseJwt(token);
     headerData.nome = payload.name;
     headerData.role = payload.role;
-    headerData.callsNum = this.numCalls;
 
     this._headerData.next(headerData);
   }

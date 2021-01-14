@@ -10,8 +10,9 @@
         <!-- Dados do usuario -->
             <div class="col-11 align-items-baseline">
                 {{ nome }}
-                <span (click)="conferirChamadas()" *ngIf="qtdCall>=0" class="badge badge-pill text-danger bg-warning badge-warning">{{ qtdCall }}</span>
-
+                <button type="button" class="btn " (click)="conferirChamadas()" *ngIf="callNumber >= 0"  >
+                    <span class="badge badge-pill text-danger bg-warning badge-warning">{{ callNumber }}</span>
+                </button>
             </div>
     
             <div class="col-1 d-flex justify-content-start">

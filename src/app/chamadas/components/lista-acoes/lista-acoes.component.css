@@ -1,5 +1,5 @@
 table {
-  width: 100%;
+  width: 80%;
 }
 
 .mat-form-field {
@@ -8,7 +8,26 @@ table {
 }
 
 td, th {
-  width: 25%;
+
+}
+
+.data-prevista{
+  width: 10%;
+}
+.servico{
+  width: 20%;;
+}
+.status-call{
+  width: 10%;
+}
+.propriedade{
+  width: 20%;
+}
+.produtor{
+  width: 40%;
+}
+.acoes{
+  width: 60%;
 }
 .pesquisa-input{
   width: 15%;

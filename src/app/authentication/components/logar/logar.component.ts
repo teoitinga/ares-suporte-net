@@ -49,8 +49,8 @@ export class LogarComponent implements OnInit {
           icon: 'home',
           role: this.authService.getUsuarioLogado().role,
           title: 'tela  home',
-          expires: this.authService.getExpiration().calendar(),
-          callsNum: await this.authService.getCallsNumber()
+          expires: this.authService.getExpiration().calendar()
+          
         }
       },
       error=>{

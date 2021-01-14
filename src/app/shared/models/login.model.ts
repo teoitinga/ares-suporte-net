@@ -1,3 +1,5 @@
+import { Observable } from "rxjs";
+
 export interface LoginModel{
         nome: string;
         route: string;
@@ -5,5 +7,4 @@ export interface LoginModel{
         role: string;
         title: string;
         expires: string;
-        callsNum: number;
 }
