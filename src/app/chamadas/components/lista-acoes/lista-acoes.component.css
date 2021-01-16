@@ -1,5 +1,7 @@
 table {
-  width: 80%;
+  width: 100%;
+  align-items: center;
+  padding: 5%;
 }
 
 .mat-form-field {
@@ -12,7 +14,7 @@ td, th {
 }
 
 .data-prevista{
-  width: 10%;
+  width: 15%;
 }
 .servico{
   width: 20%;;
@@ -24,10 +26,10 @@ td, th {
   width: 20%;
 }
 .produtor{
-  width: 40%;
+  width: 35%;
 }
 .acoes{
-  width: 60%;
+  width: 50%;
 }
 .pesquisa-input{
   width: 15%;

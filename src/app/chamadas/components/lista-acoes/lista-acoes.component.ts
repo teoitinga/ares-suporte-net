@@ -31,7 +31,7 @@ const NAMES: string[] = [
     styleUrls: ['./lista-acoes.component.css']
   })
   export class ListaAcoesComponent implements AfterViewInit  {
-    displayedColumns: string[] = ['data-previsao', 'id', 'name', 'progress', 'color'];
+    displayedColumns: string[] = ['data-previsao', 'servico', 'progress', 'produtor', 'acao'];
     //dataSource: MatTableDataSource<UserData>;
     dataSource: MatTableDataSource<Content>;
   

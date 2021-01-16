@@ -14,27 +14,37 @@
     </ng-container>
 
     <!-- ID Column -->
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="servico">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="servico"> Serviço </th>
       <td mat-cell *matCellDef="let row"> {{row.descricaoDoServico}} </td>
     </ng-container>
 
     <!-- Progress Column -->
     <ng-container matColumnDef="progress">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="status-call"> Valor </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="status-call"> Propriedade </th>
       <td mat-cell *matCellDef="let row"> {{row.propriedadeRural}} </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="propriedade"> Status </th>
-      <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+    <!-- Color Column -->
+    <ng-container matColumnDef="produtor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="produtor"> Produtor </th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.nomeDoProdutor}} </td>
     </ng-container>
 
     <!-- Color Column -->
-    <ng-container matColumnDef="color">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="produtor"> Produtor </th>
-      <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.nomeDoProdutor}} </td>
+    <ng-container matColumnDef="acao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="produtor"> Ações </th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
+        <button mat-mini-fab matTooltip="Finalizada" color="primary" aria-label="Example icon button with a menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>  
+        <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+          <mat-icon>home</mat-icon>
+        </button>  
+        <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+          <mat-icon>home</mat-icon>
+        </button>  
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
