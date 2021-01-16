@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
 import * as moment from 'moment';
-import { MessageService } from 'src/app/shared/service/responses-errors.service';
+import { MessageService } from 'src/app/shared/service/responses-messages.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-logar',
@@ -21,7 +22,8 @@ export class LogarComponent implements OnInit {
     private authService: AuthenticationService,
     private fb: FormBuilder,
     private router: Router,
-    private mesageService: MessageService
+    private mesageService: MessageService,
+    private _snackBar: MatSnackBar
   ) {
     
    }
@@ -40,6 +42,7 @@ export class LogarComponent implements OnInit {
       return;
     }
     const login: UserPost = this.form.value;
+    const component = this;
     this.authService.logar(login).subscribe(
       async data=>{
         this.router.navigate(['login/home']);
@@ -50,11 +53,11 @@ export class LogarComponent implements OnInit {
           role: this.authService.getUsuarioLogado().role,
           title: 'tela  home',
           expires: this.authService.getExpiration().calendar()
-          
         }
+
       },
       error=>{
-       this.mesageService.sendError(error.error.message);
+       this.mesageService.sendError(this._snackBar, "Erro", error.error.message);
        this.status = error.error.status;
        this.loginmessage = error.error.message;
       }

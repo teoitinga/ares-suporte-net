@@ -3,3 +3,18 @@
 
     /*background-image: linear-gradient(to right, rgba(71, 252, 0, 0.411) , rgb(74, 149, 184));*/
 }
+.farm {text-shadow: 0 0 0.2em #8F7}
+.moon {text-shadow: 0 0 0.2em #F87, 0 0 0.2em #F87}
+.sky {text-shadow: 0 0 0.2em #87F, 0 0 0.2em #87F,
+        0 0 0.2em #87F
+    }
+        .agro-header{
+            /*background: linear-gradient(to right,rgb(90, 120, 110), #4e76e3);*/
+        }
+        .agro-header h5{
+            margin: 5px;
+        }
+        .agro-header img{
+            height: 50x;
+            width: 5rem;
+        }

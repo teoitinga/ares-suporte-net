@@ -1,6 +1,5 @@
 import { HeaderAuthenticationComponent } from './authentication/components/header-auth/header-auth.component';
 import { VisitaModule } from './visita/visita.module';
-
 import { AuthenticationModule } from './authentication/authentication.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,9 +11,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './authentication/auth-interceptor';
 import { AuthenticationService } from './authentication/authentication.service';
 
-import { MessageService } from './shared/service/responses-errors.service';
+import { MessageService } from './shared/service/responses-messages.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -25,11 +25,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     AuthenticationModule,
     VisitaModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
 
-    AppRoutingModule,
-
-    BrowserAnimationsModule
-  ],
+    AppRoutingModule
+],
   exports: [
     RouterModule
 ],

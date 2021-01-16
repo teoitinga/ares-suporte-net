@@ -6,8 +6,9 @@ import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
 import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
-import { MessageService } from 'src/app/shared/service/responses-errors.service';
+import { MessageService } from 'src/app/shared/service/responses-messages.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cadastrar-visita',
@@ -39,7 +40,8 @@ export class CadastrarVisitaComponent implements OnInit {
     private municipioService: SearchMunicipioService,
     private visitaService: VisitaService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { 
     this.loadMunicipios();
 
@@ -62,7 +64,7 @@ export class CadastrarVisitaComponent implements OnInit {
       situacaoAtual: new FormControl('O produtor solicitou apoio pois necessita da prestação deste serviço', [Validators.required]),
       orientacao: new FormControl(''),
       recomendacao: new FormControl(''),
-      municipio: new FormControl('', [Validators.required])
+      municipio: new FormControl('')
     });
   }
 
@@ -83,25 +85,26 @@ export class CadastrarVisitaComponent implements OnInit {
   }
 
   loadMunicipios(){
+    const component = this;
     this.municipioService.getMunicipios().subscribe(
       data=>{
         this.municipios = data;
       },
       error=>{
-        this.messageService.sendError(error);
+        this.messageService.sendError(this._snackBar, "Erro na API IBGE", JSON.stringify(error.message));
       }
     );
   }
 
   incluirProdutor(event){
     event.preventDefault();
+    const component = this;
     this.produtor = this.produtoresForm.value;
-    console.log(this.produtoresForm.value);
     if(!this.produtores.includes(this.produtor)){
       this.produtores.push(this.produtor);
     }else{
 
-      this.messageService.sendError("Já existe este elemento!");
+      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
   }
   produtoresFormClean() {
@@ -110,6 +113,7 @@ export class CadastrarVisitaComponent implements OnInit {
   }
   
   incluirServico(event){
+    const component = this;
     event.preventDefault();
     this.chamada = this.servicosForm.value;
     
@@ -117,7 +121,7 @@ export class CadastrarVisitaComponent implements OnInit {
       this.chamada.cpfReponsavel = this.tecnicoResponsavel.login;
       this.chamadas.push(this.chamada);
     }else{
-      this.messageService.sendError("Já existe este serviço!");
+      this.messageService.sendError(this._snackBar, "Erro",  "Já existe este serviço!");
     }
 
   }
@@ -136,7 +140,6 @@ export class CadastrarVisitaComponent implements OnInit {
   }
   registrarVisita(){
 
-    this.messageService.sendInfoMessage(JSON.stringify(this.visitaForm.value))
     //Configurando visita com os dados do form
     /*
     this.visita = new VisitaPostModel(
@@ -151,20 +154,19 @@ export class CadastrarVisitaComponent implements OnInit {
       this.visitaForm['municipio']
       );
       */
-      this.visita = this.visitaForm.value;
-      this.visita.chamadas = this.chamadas;
-      this.visita.produtores = this.produtores;
-      console.log("Visita: " + JSON.stringify(this.visita));
-      //console.log("localDoAtendimento: " + this.visitaForm['localDoAtendimento']);
-      //console.log("dataDaVisita: " + this.visitaForm['dataDaVisita']);
-      this.visitaService.sendVisita(this.visita).subscribe(
-        data=>{
-          console.log(data);
-          this.router.navigate(['login/home']);
+     this.visita = this.visitaForm.value;
+     this.visita.chamadas = this.chamadas;
+     this.visita.produtores = this.produtores;
+     //console.log("Visita: " + JSON.stringify(this.visita));
+     //console.log("localDoAtendimento: " + this.visitaForm['localDoAtendimento']);
+     //console.log("dataDaVisita: " + this.visitaForm['dataDaVisita']);
+     this.visitaService.sendVisita(this.visita).subscribe(
+       data=>{
+         this.router.navigate(['login/home']);
+         this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
         },
         error=>{
-          console.log(error.error.errors);
-
+          this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
         }
       );
   }
