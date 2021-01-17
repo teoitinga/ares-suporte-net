@@ -14,24 +14,22 @@ td, th {
 }
 
 .data-prevista{
-  width: 15%;
+  width: 10%;
 }
 .servico{
   width: 20%;;
 }
-.status-call{
-  width: 10%;
+.propriedade-rural{
+  width: 15%;
 }
-.propriedade{
+
+.produtor{
   width: 20%;
 }
-.produtor{
-  width: 35%;
-}
 .acoes{
-  width: 50%;
+  width: 10%;
 }
 .pesquisa-input{
-  width: 15%;
+  width: 25%;
 
 }

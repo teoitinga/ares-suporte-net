@@ -12,7 +12,6 @@ import { MascaraDirective } from './diretives/mascara.directive';
   declarations: [
     SearchMunicipioComponent,
     MascaraDirective,
-    
   ],
   imports: [
     CommonModule,

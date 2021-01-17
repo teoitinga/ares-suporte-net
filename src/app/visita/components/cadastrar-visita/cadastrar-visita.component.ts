@@ -1,14 +1,16 @@
-import { VisitaService } from 'src/app/visita/services/visita.service';
-
-import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { Component, OnInit } from '@angular/core';
-import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
-import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
-import { MessageService } from 'src/app/shared/service/responses-messages.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { MessageService } from 'src/app/shared/service/responses-messages.service';
+import { VisitaService } from 'src/app/visita/services/visita.service';
+import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
+import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.service';
+import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
+import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
+import { CpfValidator } from './../../../shared/validators/cpf-validator';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-cadastrar-visita',
@@ -58,13 +60,13 @@ export class CadastrarVisitaComponent implements OnInit {
 
   private visitaLoadForm() {
     this.visitaForm = new FormGroup({
-      createFolder: new FormControl('', [Validators.required]),
+      createFolder: new FormControl('true', [Validators.required]),
       localDoAtendimeno: new FormControl('', [Validators.required, Validators.minLength(6)]),
       dataDaVisita: new FormControl('', [Validators.required]),
       situacaoAtual: new FormControl('O produtor solicitou apoio pois necessita da prestação deste serviço', [Validators.required]),
-      orientacao: new FormControl(''),
-      recomendacao: new FormControl(''),
-      municipio: new FormControl('')
+      orientacao: new FormControl('***'),
+      recomendacao: new FormControl('***'),
+      municipio: new FormControl('***')
     });
   }
 
@@ -78,10 +80,11 @@ export class CadastrarVisitaComponent implements OnInit {
   }
 
   private produtorLoadForm() {
-    this.produtoresForm = new FormGroup({
-      cpf: new FormControl('', [Validators.required]),
-      nome: new FormControl('', [Validators.required])
+    this.produtoresForm = this.fb.group({
+      cpf: ['', [Validators.required, CpfValidator]],
+      nome: ['', [Validators.required, Validators.minLength(6)]]
     });
+
   }
 
   loadMunicipios(){
@@ -106,12 +109,20 @@ export class CadastrarVisitaComponent implements OnInit {
 
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
+    this.produtoresFormClean();
   }
   produtoresFormClean() {
     this.produtor = null;
-    this.produtoresForm.reset();
+    this.produtoresForm = this.fb.group({
+      cpf: ['', [Validators.required, CpfValidator]],
+      nome: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
-  
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  }
   incluirServico(event){
     const component = this;
     event.preventDefault();
@@ -123,10 +134,16 @@ export class CadastrarVisitaComponent implements OnInit {
     }else{
       this.messageService.sendError(this._snackBar, "Erro",  "Já existe este serviço!");
     }
-
+    this.servicosFormClean();
   }
   servicosFormClean() {
-    this.servicosForm.reset();
+    this.chamada = null;
+    this.servicosForm = new FormGroup({
+      serviceProvidedCode: new FormControl('', [Validators.required]),
+      servicoPrestado: new FormControl('', [Validators.required]),
+      ocorrencia: new FormControl(''),
+      valor: new FormControl('', [Validators.required])
+    });
   }
   removerChamada(value, event){
     event.preventDefault();

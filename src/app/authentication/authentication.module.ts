@@ -16,7 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     LoginComponent, 
@@ -36,6 +36,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     ReactiveFormsModule
   ],
   exports:[

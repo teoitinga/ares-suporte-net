@@ -7,15 +7,25 @@ import { environment as env } from './../../../environments/environment.prod';
   providedIn: 'root'
 })
 export class ChamadaService {
-  
   private readonly PATH: string = 'chamadas';
-
+  
   constructor(
     private http: HttpClient
-  ) { }
+    ) { }
 
-  loadCalls(pageSizeOptions): Observable<any>{
-    return this.http.get(`${env.BASE_API_URL}${this.PATH}?${pageSizeOptions}`)
+    finalizeCall(call: any): Observable<any>{
+      return this.http.put(`${env.BASE_API_URL}${this.PATH}/finalize/${call['codigo']}`, call['codigo']);
+      ;
+    }
+    cancelCall(call: any): Observable<any>{
+      return this.http.put(`${env.BASE_API_URL}${this.PATH}/cancel/${call['codigo']}`, call['codigo']);
+      ;
+    }
+    
+
+  loadCalls(pageSize, length): Observable<any>{
+    console.log(`${env.BASE_API_URL}${this.PATH}?size=${pageSize}&Number=${length}`);
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}?size=${pageSize}&Number=${length}`)
     ;
   }
   countCalls(): Observable<any>{
