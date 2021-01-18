@@ -1,5 +1,7 @@
 table {
-  width: 80%;
+  width: 100%;
+  align-items: center;
+  padding: 5%;
 }
 
 .mat-form-field {
@@ -17,19 +19,17 @@ td, th {
 .servico{
   width: 20%;;
 }
-.status-call{
-  width: 10%;
+.propriedade-rural{
+  width: 15%;
 }
-.propriedade{
+
+.produtor{
   width: 20%;
 }
-.produtor{
-  width: 40%;
-}
 .acoes{
-  width: 60%;
+  width: 10%;
 }
 .pesquisa-input{
-  width: 15%;
+  width: 25%;
 
 }

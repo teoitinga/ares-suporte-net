@@ -63,4 +63,8 @@ return this.authService.callNumber;
     
     this.router.navigate(['/login/chamadas']);
   }
+  home(){
+    this.router.navigate(['/login/home']);
+
+  }
 }

@@ -1,6 +1,7 @@
 import { VisitaService } from './../../services/visita.service';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'src/app/shared/service/responses-errors.service';
+import { MessageService } from 'src/app/shared/service/responses-messages.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lista-visitas',
@@ -16,12 +17,14 @@ export class ListaVisitasComponent implements OnInit {
   constructor(
     private visitaService: VisitaService,
     private mesageService: MessageService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.visitas = this.loadVisitas();
   }
   loadVisitas(): any {
+    const component = this;
     this.visitaService.loadVisitas().subscribe(
       data=>{
         this.visitas = data.content;
@@ -29,7 +32,7 @@ export class ListaVisitasComponent implements OnInit {
         
       },
       error=>{
-        this.mesageService.sendError(error);
+        this.mesageService.sendError(this._snackBar, "Erro ao carregar dados!", error);
       }
     );
   }

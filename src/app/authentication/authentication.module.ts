@@ -1,3 +1,4 @@
+import { RegistarRendaComponent } from './../info-renda/components/registar-renda/registar-renda.component';
 import { HeaderAuthenticationComponent } from './components/header-auth/header-auth.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,13 +14,19 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { InfoRendaComponent } from '../info-renda/components/info-renda/info-renda.component';
 @NgModule({
   declarations: [
     LoginComponent, 
     LogarComponent, 
     HeaderAuthenticationComponent,
     ListaAcoesComponent,
+    InfoRendaComponent,
+    RegistarRendaComponent,
     HomeComponent
   ],
   imports: [
@@ -30,6 +37,10 @@ import {MatInputModule} from '@angular/material/input';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
     ReactiveFormsModule
   ],
   exports:[

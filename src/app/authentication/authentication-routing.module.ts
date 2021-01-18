@@ -1,3 +1,5 @@
+import { RegistarRendaComponent } from './../info-renda/components/registar-renda/registar-renda.component';
+import { InfoRendaComponent } from './../info-renda/components/info-renda/info-renda.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogarComponent } from './components/logar/logar.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +24,17 @@ export const routes: Routes = [
       {
         path: 'chamadas',
         component: ListaAcoesComponent
+      },
+      {
+        path: 'renda',
+        component: InfoRendaComponent,
+        children: [
+          {
+            path: '',
+            component: RegistarRendaComponent
+          }
+        ]
+          
       }
     ]
   }

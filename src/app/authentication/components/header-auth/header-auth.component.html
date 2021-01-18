@@ -3,17 +3,26 @@
 
     </div>
     <div>
-        <h5 class="mt-1">JP - Agrodata</h5>
-        <small>V02.2021</small>
+        <div class="row">
+            <div class="agro-header text-white">
+              <div class="row">
+                <div class="col-3">
+                  <h1 class="moon">JP-Agrodata</h1>
+                </div>
+                <small class="sky">Sistema de monitoramento de atividades e projetos</small>
+              </div>
+            </div>
+          </div>
     </div>
     <div class="row d-flex justify-content-sm-around align-items-baseline">
         <!-- Dados do usuario -->
             <div class="col-11 align-items-baseline">
                 {{ nome }}
-                <button type="button" class="btn " (click)="conferirChamadas()" *ngIf="callNumber >= 0"  >
-                    <span class="badge badge-pill text-danger bg-warning badge-warning">{{ callNumber }}</span>
-                </button>
-            </div>
+                <button  data-toggle="tooltip"
+                class="btn " (click)="conferirChamadas()" *ngIf="callNumber > 0"  >
+                <span class="badge badge-pill text-danger bg-warning badge-warning">{{ callNumber }}</span>
+            </button>
+        </div>
     
             <div class="col-1 d-flex justify-content-start">
                 <button type="button" class="col-1 btn " (click)="logout()">
@@ -23,4 +32,18 @@
                 </button>
             </div>
     </div>
+    <div class="row border-top rounded-pill">
+      <div class="col-1 d-flex justify-content-start">
+        <button type="button" matTooltip="Ir para tela inicial" class="col-1 btn " (click)="home()">
+            <span class="d-flex justify-content-start">
+              <mat-icon aria-hidden="false" class="text-light" >home</mat-icon>
+            </span>
+        </button>
+    </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+        </script>
 </div>

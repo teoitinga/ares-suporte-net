@@ -17,3 +17,20 @@ body{
 @media(min-width: 1200px){
 
 }
+::ng-deep  .error-snackbar{
+    color: #ffffff !important;
+    background-color: #cc3333 !important;
+}
+::ng-deep  .error-snackbar button{
+    color: #ffffff !important;
+    background-color: #cc3333 !important;
+}
+::ng-deep  .success-snackbar {
+    color: #ffffff !important;
+    background-color: #198754 !important;
+}
+::ng-deep  .success-snackbar button{
+    color: #ffffff !important;
+    background-color: #198754 !important;
+}
+
