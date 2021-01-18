@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,14 +12,14 @@ import { VisitaService } from 'src/app/visita/services/visita.service';
 import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.service';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
-import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
+import { Chamada, Produtore, VisitaPostModel } from './../../../visita/models/visita-post.model';
 
 @Component({
-  selector: 'app-cadastrar-visita',
-  templateUrl: './cadastrar-visita.component.html',
-  styleUrls: ['./cadastrar-visita.component.css']
+  selector: 'app-registar-renda',
+  templateUrl: './registar-renda.component.html',
+  styleUrls: ['./registar-renda.component.css']
 })
-export class CadastrarVisitaComponent implements OnInit {
+export class RegistarRendaComponent implements OnInit {
 
   produtores: Produtore[] = [];
   produtor: Produtore;
@@ -64,7 +65,7 @@ export class CadastrarVisitaComponent implements OnInit {
       createFolder: new FormControl('true', [Validators.required]),
       localDoAtendimeno: new FormControl('', [Validators.required, Validators.minLength(6)]),
       dataDaVisita: new FormControl('', [Validators.required]),
-      situacaoAtual: new FormControl('O produtor solicitou apoio pois necessita da prestação deste serviço', [Validators.required]),
+      situacaoAtual: new FormControl('Venda de Bezerros 8@', [Validators.required]),
       orientacao: new FormControl('***'),
       recomendacao: new FormControl('***'),
       municipio: new FormControl('***')

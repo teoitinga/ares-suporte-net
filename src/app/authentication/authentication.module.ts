@@ -1,3 +1,4 @@
+import { RegistarRendaComponent } from './../info-renda/components/registar-renda/registar-renda.component';
 import { HeaderAuthenticationComponent } from './components/header-auth/header-auth.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,12 +18,15 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import { InfoRendaComponent } from '../info-renda/components/info-renda/info-renda.component';
 @NgModule({
   declarations: [
     LoginComponent, 
     LogarComponent, 
     HeaderAuthenticationComponent,
     ListaAcoesComponent,
+    InfoRendaComponent,
+    RegistarRendaComponent,
     HomeComponent
   ],
   imports: [
