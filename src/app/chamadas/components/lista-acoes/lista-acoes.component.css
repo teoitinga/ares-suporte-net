@@ -28,8 +28,13 @@ td, th {
 }
 .acoes{
   width: 10%;
+
 }
 .pesquisa-input{
   width: 25%;
+
+}
+.btn-acoes{
+  background-color: transparent;
 
 }
