@@ -80,6 +80,7 @@ export class AuthenticationService {
   public getUsuarioLogado(): UserToken{
     return this.usuarioLogado;
   }
+
   private setSession(authResult) {
     const token = authResult.token;
     const payload = this.parseJwt(token);
@@ -155,12 +156,11 @@ export class AuthenticationService {
     return moment(expiresAt);
   }
   public getUserName() {
-    const userName = localStorage.getItem(this.NAME_DATA);
-    return userName;
+    
+    return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.USERNAME_DATA];
   }
   public getRoleUser() {
-    const roleData = localStorage.getItem(this.ROLE_DATA);
-    return roleData;
+    return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.ROLE_DATA];
   }
 
   isLoggedIn() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../authentication.service';
 
 @Component({
   selector: 'home',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  role: string =  '';
+
+  isTecnico: boolean = false;
+  isPrefeitura: boolean = false;
+  isCedido: boolean = false;
+
+  constructor(
+    private authService: AuthenticationService,
+  ) { }
 
   ngOnInit(): void {
+    this.role =  this.authService.getRoleUser();
+    this.updateView();
+  }
+  updateView(){
+    if(this.role==='TECNICO'){
+      this.isTecnico = true;
+    }
+    if(this.role==='PREFEITURA'){
+      this.isPrefeitura = true;
+    }
+    if(this.role==='CEDIDO'){
+      this.isTecnico = true;
+    }
+
   }
 
 }

@@ -29,10 +29,10 @@ export class HeaderAuthenticationComponent implements OnInit {
   ngOnInit(): void {
 
   }
-get callNumber(): number{
-return this.authService.callNumber;
-}
-  logout(){
+  get callNumber(): number {
+    return this.authService.callNumber;
+  }
+  logout() {
     this.authService.logout();
   }
   get title(): string {
@@ -56,14 +56,14 @@ return this.authService.callNumber;
     return this.authService.headerData.route;
   }
 
-  private normalizeString(texto: string):string{
-    return  texto.replace(/Ã£/g,"ã");
+  private normalizeString(texto: string): string {
+    return texto.replace(/Ã£/g, "ã");
   }
-  conferirChamadas(){
-    
+  conferirChamadas() {
+
     this.router.navigate(['/login/chamadas']);
   }
-  home(){
+  home() {
     this.router.navigate(['/login/home']);
 
   }
