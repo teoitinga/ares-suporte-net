@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       this.isPrefeitura = true;
     }
     if(this.role==='CEDIDO'){
-      this.isTecnico = true;
+      this.isCedido = true;
     }
 
   }
