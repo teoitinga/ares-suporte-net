@@ -29,7 +29,7 @@ export class TemplateComponent implements OnInit {
   produtores: Produtore[] = [];
   produtor: Produtore;
 
-  @Input() chamadas: Chamada[] = [];
+  @Input() chamadas;//: Chamada[] = [];
   chamada: Chamada;
 
   municipios: string[] = [];
