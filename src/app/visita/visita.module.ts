@@ -26,6 +26,8 @@ import { SearchTecnicoAutoCompleteComponent } from '../shared/components/search-
 import { CarEmissaoComponent } from './components/servicos/car-emissao/car-emissao.component';
 import { CarRetificarComponent } from './components/servicos/car-retificar/car-retificar.component';
 import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car-segundavia.component';
+import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
+import { TemplateComponent } from './components/servicos/template/template.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car
     CarEmissaoComponent,
     CarRetificarComponent,
     CarSegundaviaComponent,
+    ConvUmEmaterComponent,
+    TemplateComponent,
     
     
   ],

@@ -3,31 +3,33 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
-import { Produtore } from 'src/app/info-renda/models/info-renda.model';
 import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
 import { MessageService } from 'src/app/shared/service/responses-messages.service';
 import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.service';
 import { CpfValidator } from 'src/app/shared/validators/cpf-validator';
-import { Chamada, VisitaPostModel } from 'src/app/visita/models/visita-post.model';
+import { Chamada, Produtore, VisitaPostModel } from 'src/app/visita/models/visita-post.model';
 import { VisitaService } from 'src/app/visita/services/visita.service';
 
 @Component({
-  selector: 'app-car-emissao',
-  templateUrl: './car-emissao.component.html',
-  styleUrls: ['./car-emissao.component.css']
+  selector: 'services-template',
+  templateUrl: './template.component.html',
+  styleUrls: ['./template.component.css']
 })
-export class CarEmissaoComponent implements OnInit {
+export class TemplateComponent implements OnInit {
 
-  SERVICO_COD: string = 'ATERMACAR';
-  SERVICO_TEXTO: string = 'Elaboração de Cadastro ambiental rural a produtor beneficiário';
-  SITUACAO_TEXT: string = 'O beneficiário procurou apoio neste escritório pois necessita da emissão deste documento para atender a legislação vigente.';
-  ORIENTACAO_TEXT: string = 'Obter do órgão competente a devida autorização antes de implantar qualquer atividade em sua propriedade.';
-  RECOMENDACAO_TEXT: string = '***';
+  //@Input() SERVICO_COD: string;
+  //@Input() SERVICO_TEXTO: string;
+  @Input() SITUACAO_TEXT: string;
+  @Input() ORIENTACAO_TEXT: string;
+  @Input() RECOMENDACAO_TEXT: string;
+  //@Input() SERVICO_OCORRENCIA: string;
+  @Input() TEMPLATE_TITTLE: string;
+
   produtores: Produtore[] = [];
   produtor: Produtore;
 
-  chamadas: Chamada[] = [];
+  @Input() chamadas: Chamada[] = [];
   chamada: Chamada;
 
   municipios: string[] = [];
@@ -91,7 +93,7 @@ export class CarEmissaoComponent implements OnInit {
       municipio: new FormControl('***', [Validators.required])
     });
   }
-
+/*
   private incluirServico() {
 
     //this.chamada = this.servicosForm.value;
@@ -104,17 +106,18 @@ export class CarEmissaoComponent implements OnInit {
     };
 
     if (!this.chamadas.includes(this.chamada)) {
-      this.chamada.ocorrencia = '***';
+      this.chamada.ocorrencia = this.SERVICO_OCORRENCIA;
       this.chamada.serviceProvidedCode = this.SERVICO_COD;
       this.chamada.servicoPrestado = this.SERVICO_TEXTO;
       this.chamada.cpfReponsavel = this.usuario;
+
       this.chamadas.push(this.chamada);
     } else {
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este serviço!");
     }
 
   }
-
+*/
   incluirProdutor(event) {
     const component = this;
     this.produtor = this.produtoresForm.value;
@@ -142,7 +145,7 @@ export class CarEmissaoComponent implements OnInit {
       return;
     }
 
-    this.incluirServico();
+    //this.incluirServico();
 
 
     //Configurando visita com os dados do form
@@ -155,7 +158,7 @@ export class CarEmissaoComponent implements OnInit {
     this.visita.produtores = this.produtores;
     console.log(JSON.stringify(this.visita));
 
-    
+    /*
     this.visitaService.sendVisita(this.visita).subscribe(
       data=>{
         this.router.navigate(['login/home']);
@@ -165,6 +168,6 @@ export class CarEmissaoComponent implements OnInit {
          this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
        }
      );
-    
+    */
   }
 }

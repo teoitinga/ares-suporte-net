@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CarEmissaoComponent } from './components/servicos/car-emissao/car-emissao.component';
 import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car-segundavia.component';
 import { CarRetificarComponent } from './components/servicos/car-retificar/car-retificar.component';
+import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
     {
       path: 'cadastrar-car-retificar',
       component: CarRetificarComponent
+    },
+    {
+      path: 'conv-um-emater',
+      component: ConvUmEmaterComponent
     },
   ]
   }
