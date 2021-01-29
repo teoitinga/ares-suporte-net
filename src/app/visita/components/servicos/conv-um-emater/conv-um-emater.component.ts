@@ -8,7 +8,7 @@ import { Chamada } from 'src/app/visita/models/visita-post.model';
 })
 export class ConvUmEmaterComponent implements OnInit {
 
-  @Output() chamadas: Chamada[] = [];  
+  chamadas: Chamada[] = [];  
   
   constructor() { }
 
