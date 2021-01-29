@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Chamada } from 'src/app/visita/models/visita-post.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Chamada } from 'src/app/visita/models/visita-post.model';
 })
 export class ConvUmEmaterComponent implements OnInit {
 
-  @Input() chamadas: Chamada[] = [];  
+  @Output() chamadas: Chamada[] = [];  
   
   constructor() { }
 
