@@ -22,4 +22,4 @@ describe('TemplateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+}); 
