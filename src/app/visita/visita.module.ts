@@ -23,6 +23,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SharedModule } from '../shared/shared.module';
 import { PesquisaServicosComponent } from './components/search-servicos/search-servicos.component';
 import { SearchTecnicoAutoCompleteComponent } from '../shared/components/search-tecnico-auto-complete/search-tecnico-auto-complete.component';
+import { CarEmissaoComponent } from './components/servicos/car-emissao/car-emissao.component';
+import { CarRetificarComponent } from './components/servicos/car-retificar/car-retificar.component';
+import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car-segundavia.component';
+import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
+import { TemplateComponent } from './components/servicos/template/template.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +36,11 @@ import { SearchTecnicoAutoCompleteComponent } from '../shared/components/search-
     CadastrarVisitaComponent,
     PesquisaServicosComponent,
     SearchTecnicoAutoCompleteComponent,
+    CarEmissaoComponent,
+    CarRetificarComponent,
+    CarSegundaviaComponent,
+    ConvUmEmaterComponent,
+    TemplateComponent,
     
     
   ],

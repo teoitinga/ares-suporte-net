@@ -19,7 +19,7 @@ import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.mo
   styleUrls: ['./cadastrar-visita.component.css']
 })
 export class CadastrarVisitaComponent implements OnInit {
-
+ 
   produtores: Produtore[] = [];
   produtor: Produtore;
 
@@ -112,6 +112,11 @@ export class CadastrarVisitaComponent implements OnInit {
     }
     this.produtoresFormClean();
   }
+  removerProdutor(value, event){
+    event.preventDefault();
+    this.produtores = this.produtores.filter(item => item != value);
+    
+  }
   produtoresFormClean() {
     this.produtor = null;
     this.produtoresForm = this.fb.group({
@@ -151,11 +156,7 @@ export class CadastrarVisitaComponent implements OnInit {
     this.chamadas = this.chamadas.filter(item => item != value);
     
   }
-  removerProdutor(value, event){
-    event.preventDefault();
-    this.produtores = this.produtores.filter(item => item != value);
-    
-  }
+
   registrarVisita(){
 
     //Configurando visita com os dados do form
