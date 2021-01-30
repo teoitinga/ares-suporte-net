@@ -6,3 +6,31 @@ img{
     width: 16rem;
     height: 175px;
 }
+.container-prefeitura{
+
+}
+
+.card{
+    margin-top: 20%;
+    opacity: 0.3;
+
+}
+.card:hover{
+    opacity: 0.8;
+}
+.card-body{
+
+}
+.card-title{
+
+}
+.card-text{
+
+}
+.panel-car{
+    background: #FFFFFF url("../../../../assets/car-page.png") no-repeat right top;
+    background-clip: content-box;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}

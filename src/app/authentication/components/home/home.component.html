@@ -1,5 +1,5 @@
 <header-auth></header-auth>
-<div class="container panelUser">
+<div class="container panelUser" *ngIf="isTecnico">
     <div class="row m-2 d-flex justify-content-around">
         <div class="card">
             <img src="../../../../assets/320x200/producao-pec.png" class="card-img-top m-1" alt="...">
@@ -7,6 +7,30 @@
                 <h5 class="card-title">Registro de visitas</h5>
                 <p class="card-text">Registro de visitas e atendimentos.</p>
                 <a href="/visitas/cadastrar" class="btn btn-primary">Registrar visita</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../../../assets/320x200/car.png" class="card-img-top m-1" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Emissão de CAR</h5>
+                <p class="card-text">Emissão de Cadastro ambiental rural</p>
+                <a href="/visitas/cadastrar-car-emissao" class="btn btn-primary">Registrar</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../../../assets/320x200/car.png" class="card-img-top m-1" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Retificação de CAR</h5>
+                <p class="card-text">Refificar registro de Cadastro ambiental rural</p>
+                <a href="/visitas/cadastrar-car-retificar" class="btn btn-primary">Registrar</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../../../assets/320x200/car.png" class="card-img-top m-1" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">2º Via de CAR</h5>
+                <p class="card-text">Emissão 2ª via de Cadastro ambiental rural</p>
+                <a href="/visitas/cadastrar-car-segundavia" class="btn btn-primary">Registrar</a>
             </div>
         </div>
         <div class="card">
@@ -25,6 +49,7 @@
                 <a href="#" class="btn btn-primary">registrar produção</a>
             </div>
         </div>
+
         <div class="card">
             <img src="../../../../assets/320x200/configs.png" class="card-img-top m-1" alt="...">
             <div class="card-body">
@@ -49,5 +74,40 @@
                 <a href="#" class="btn btn-primary">Abrir relatórios</a>
             </div>
         </div>
+    </div>
+</div>
+
+<!--Painel para usuarios prefeitura-->
+<div class="container panelUser container-prefeitura"  *ngIf="isCedido">
+        <div class="panel-car">
+            <div class="row m-2 d-flex justify-content-around">
+                <div class="card">
+                    <img src="../../../../assets/320x200/car.png" class="card-img-top m-1" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Emissão de CAR</h5>
+                        <p class="card-text">Emissão de Cadastro ambiental rural</p>
+                        <a href="/visitas/cadastrar-car-emissao" class="btn btn-primary">Registrar</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../../../../assets/320x200/car.png" class="card-img-top m-1" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Retificação de CAR</h5>
+                        <p class="card-text">Refificar registro de Cadastro ambiental rural</p>
+                        <a href="/visitas/cadastrar-car-retificar" class="btn btn-primary">Registrar</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../../../../assets/320x200/car.png" class="card-img-top m-1" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">2º Via de CAR</h5>
+                        <p class="card-text">Emissão 2ª via de Cadastro ambiental rural</p>
+                        <a href="/visitas/cadastrar-car-segundavia" class="btn btn-primary">Registrar</a>
+                    </div>
+                </div>
+        </div>
+
+
+
     </div>
 </div>

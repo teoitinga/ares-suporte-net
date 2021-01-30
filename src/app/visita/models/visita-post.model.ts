@@ -2,9 +2,9 @@ import { ProdutoresMin } from './../../produtores/models/produtores-min.model';
 import { ChamadasPost } from './../../chamadas/models/chamadas-post.model';
 
     export interface Chamada {
-        codigo: string;
-        codigoDaVisita: string;
-        cpfReponsavel: string;
+        codigo?: string;
+        codigoDaVisita?: string;
+        cpfReponsavel?: string;
         ocorrencia: string;
         serviceProvidedCode: string;
         servicoPrestado: string;

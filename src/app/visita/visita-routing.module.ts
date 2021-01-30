@@ -3,6 +3,10 @@ import { VisitaComponent } from './components/visita/visita.component';
 import { ListaVisitasComponent } from './components/lista-visitas/lista-visitas.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CarEmissaoComponent } from './components/servicos/car-emissao/car-emissao.component';
+import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car-segundavia.component';
+import { CarRetificarComponent } from './components/servicos/car-retificar/car-retificar.component';
+import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
 
 
 const routes: Routes = [
@@ -17,6 +21,22 @@ const routes: Routes = [
     {
       path: 'cadastrar',
       component: CadastrarVisitaComponent
+    },
+    {
+      path: 'cadastrar-car-emissao',
+      component: CarEmissaoComponent
+    },
+    {
+      path: 'cadastrar-car-segundavia',
+      component: CarSegundaviaComponent
+    },
+    {
+      path: 'cadastrar-car-retificar',
+      component: CarRetificarComponent
+    },
+    {
+      path: 'conv-um-emater',
+      component: ConvUmEmaterComponent
     },
   ]
   }
