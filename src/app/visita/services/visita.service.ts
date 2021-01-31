@@ -20,6 +20,10 @@ export class VisitaService {
     return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
     ;
   }
+  loadVisitasManager(): Observable<any>{
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}/manager`)
+    ;
+  }
   sendVisita(visita: VisitaPostModel): Observable<any>{
     return this.http.post(`${env.BASE_API_URL}${this.PATH}`, visita);
   }

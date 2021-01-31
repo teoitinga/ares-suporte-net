@@ -32,6 +32,7 @@ import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/
 import { ConvTresEmaterComponent } from './components/servicos/conv-tres-emater/conv-tres-emater.component';
 import { EmissaoDapComponent } from './components/servicos/emissao-dap/emissao-dap.component';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/d
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,

@@ -32,6 +32,12 @@ const routes: Routes = [
       data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
+      path: 'lista-visitas',
+      component: ListaVisitasComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO']},
+    },
+    {
       path: 'cadastrar-car-emissao',
       component: CarEmissaoComponent,
       canActivate: [AuthGuard],
