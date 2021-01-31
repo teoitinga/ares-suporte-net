@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
@@ -18,18 +19,17 @@ import { VisitaService } from 'src/app/visita/services/visita.service';
 })
 export class TemplateComponent implements OnInit {
 
-  //@Input() SERVICO_COD: string;
-  //@Input() SERVICO_TEXTO: string;
   @Input() SITUACAO_TEXT: string;
   @Input() ORIENTACAO_TEXT: string;
   @Input() RECOMENDACAO_TEXT: string;
-  //@Input() SERVICO_OCORRENCIA: string;
-  @Input() TEMPLATE_TITTLE: string;
+  //@Input() TEMPLATE_TITLE: BehaviorSubject<string>;
+  @Input() TEMPLATE_TITLE: string;
+  @Input() TEMPLATE_SUB: string;
+  @Input() chamadas: Chamada[];
 
   produtores: Produtore[] = [];
   produtor: Produtore;
 
-  @Input() chamadas;//: Chamada[] = [];
   chamada: Chamada;
 
   municipios: string[] = [];
@@ -57,8 +57,9 @@ export class TemplateComponent implements OnInit {
     this.loadMunicipios();
   }
 
+
   ngOnInit(): void {
-    
+
     //Carrega usuario logado
     this.usuario = this.authService.getUserName();
     //Carrega o formulário de produtores
@@ -93,31 +94,7 @@ export class TemplateComponent implements OnInit {
       municipio: new FormControl('***', [Validators.required])
     });
   }
-/*
-  private incluirServico() {
 
-    //this.chamada = this.servicosForm.value;
-    this.chamada = {
-      ocorrencia: '***',
-      serviceProvidedCode: this.SERVICO_COD,
-      servicoPrestado: this.SERVICO_TEXTO,
-      cpfReponsavel: this.usuario,
-      valor: 0
-    };
-
-    if (!this.chamadas.includes(this.chamada)) {
-      this.chamada.ocorrencia = this.SERVICO_OCORRENCIA;
-      this.chamada.serviceProvidedCode = this.SERVICO_COD;
-      this.chamada.servicoPrestado = this.SERVICO_TEXTO;
-      this.chamada.cpfReponsavel = this.usuario;
-
-      this.chamadas.push(this.chamada);
-    } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este serviço!");
-    }
-
-  }
-*/
   incluirProdutor(event) {
     const component = this;
     this.produtor = this.produtoresForm.value;
@@ -129,24 +106,21 @@ export class TemplateComponent implements OnInit {
     }
 
   }
-  
-  removerProdutor(value, event){
+
+  removerProdutor(value, event) {
     event.preventDefault();
     this.produtores = this.produtores.filter(item => item != value);
-    
+
   }
   registrarServico(event) {
     //Configura a chamada
     const component = this;
     event.preventDefault();
 
-    if(!(this.produtores.length>0)){
+    if (!(this.produtores.length > 0)) {
       this.messageService.sendError(this._snackBar, "Erro", "Deve haver pelo menos um beneficiário!");
       return;
     }
-
-    //this.incluirServico();
-
 
     //Configurando visita com os dados do form
 
@@ -156,18 +130,16 @@ export class TemplateComponent implements OnInit {
     this.visita.recomendacao = this.RECOMENDACAO_TEXT;
     this.visita.chamadas = this.chamadas;
     this.visita.produtores = this.produtores;
-    console.log(JSON.stringify(this.visita));
+//    console.log((this.visita));
 
-    
     this.visitaService.sendVisita(this.visita).subscribe(
-      data=>{
+      data => {
         this.router.navigate(['login/home']);
         this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
-       },
-       error=>{
-         this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
-       }
-     );
-    
+      },
+      error => {
+        this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
+      }
+    );
   }
 }

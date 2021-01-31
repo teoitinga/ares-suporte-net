@@ -1,22 +1,21 @@
-import { AuthenticationService } from './../../../../authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { Chamada } from 'src/app/visita/models/visita-post.model';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-conv-um-emater',
-  templateUrl: './conv-um-emater.component.html',
-  styleUrls: ['./conv-um-emater.component.css']
+  selector: 'app-desbloqueio-dap',
+  templateUrl: './desbloqueio-dap.component.html',
+  styleUrls: ['./desbloqueio-dap.component.css']
 })
-export class ConvUmEmaterComponent implements OnInit {
+export class DesbloqueioDapComponent implements OnInit {
 
   chamadas: Chamada[] = [];  
   
   SITUACAO_TEXT: string = 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.';
   ORIENTACAO_TEXT: string = 'Escolha da área: Evitar solos arenosos por apresentarem baixa capacidade de retenção de água, bem como os sujeitos a encharcamento. Solos profundos, sem problemas de drenagem e com pequena declividade são os mais indicados.Semeadura: Recomenda-se o plantio em linha, usando 6 a 7 sementes/m de sulco e espaçamento entre linhas de 0,90m, totalizando cerca de 55.555 plantas/ha. Caso o produtor opte pelo plantio em covas, semear 2 a 3 sementes/cova e usar 0,40m entre covas e 0,90m entre linhas, deixando 2 plantas/cova após a germinação. O ideal é ser realizada conforme os resultados da análise de solo. Para produções médias, pode-se aplicar 20kg de N, 70kg de P2O5 e 40kg de K2O/ha (equivalente a 500kg de 04-14-08/ha) - Adubação de cobertura: Para sistemas não irrigados, recomendam-se de 40 a 70kg/ha de nitrogênio, quando as plantas apresentarem de 8 a 10 folhas totalmente expandidas. Em sistemas de produção irrigados, utilizar doses mais elevadas (100 a 120kg/ha), parceladas em duas épocas (com 6 a 8 folhas e com 10 a 12 folhas).';
   RECOMENDACAO_TEXT: string = 'Secagem e armazenamento: O milho em espiga ou debulhado deve ser seco em torno de 13% de umidade, obtido na prática quando os grãos apresentarem-se firmes e resistentes à pressão com a unha. Para sementes, tratar com produtos específicos (polvilhamento e/ou expurgo), sempre com orientação técnica. O armazenamento deve ser feito em local seco, fresco e livre de roedores.';
-  TEMPLATE_TITLE: string = 'Kit Horta';
-  TEMPLATE_SUB: string = 'Registros Entregas de Kit Horta - Emenda Parlamentar Convênio 891349/2019 ';
+  TEMPLATE_TITLE: string = 'Desbloqueio de DAP';
+  TEMPLATE_SUB: string = 'Registrar Atendimento em desbloqueio de Declaração de aptidão ao PRONAF';
 
   usuario: string = '';
 
@@ -66,3 +65,4 @@ export class ConvUmEmaterComponent implements OnInit {
   }
 
 }
+

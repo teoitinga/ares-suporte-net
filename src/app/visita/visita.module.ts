@@ -29,6 +29,9 @@ import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car
 import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
 import { TemplateComponent } from './components/servicos/template/template.component';
 import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/conv-dois-emater.component';
+import { ConvTresEmaterComponent } from './components/servicos/conv-tres-emater/conv-tres-emater.component';
+import { EmissaoDapComponent } from './components/servicos/emissao-dap/emissao-dap.component';
+import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/
     ConvUmEmaterComponent,
     TemplateComponent,
     ConvDoisEmaterComponent,
+    ConvTresEmaterComponent,
+    EmissaoDapComponent,
+    DesbloqueioDapComponent,
     
     
   ],
