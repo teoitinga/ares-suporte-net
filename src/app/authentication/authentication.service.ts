@@ -19,8 +19,8 @@ import { EventEmitter } from 'protractor';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-
+  
+  
   private readonly PATH: string = 'auth';
   private readonly TOKEN_DATA: string = 'token';
   private readonly EXPIRES_DATA: string = 'expiration';
@@ -28,11 +28,11 @@ export class AuthenticationService {
   private readonly CREATED_DATA: string = 'created';
   private readonly NAME_DATA: string = 'name';
   private readonly USERNAME_DATA: string = 'sub';
-
+  
   usuarioLogado: UserToken = new UserToken('','','','');
   //private callsNumber$: EventEmitter<number> = new EventEmitter<0>();
   private callsNumber: number=0;
-
+  
   private _headerData = new BehaviorSubject<LoginModel>({
     nome: '',
     route: 'login/home',
@@ -41,21 +41,24 @@ export class AuthenticationService {
     title: '',
     expires: moment().format('LLL'),
   });
-
-
+  
+  
   constructor(
     private http: HttpClient,
     private router: Router,
     private chamadaService: ChamadaService
-  ) { 
-
-  }
-  get callNumber(): number{
-    return this.callsNumber;
-  }
-  set callNumber(value){
-    this.callsNumber = value; 
-  }
+    ) { 
+      
+    }
+    get callNumber(): number{
+      return this.callsNumber;
+    }
+    set callNumber(value){
+      this.callsNumber = value; 
+    }
+    isExpired(): boolean {
+     return this.getExpiration().isBefore();
+    }
   countCalls()  {
     this.chamadaService.countCalls().subscribe(
       data=>{

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../authentication/auth-guard ';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
 import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/conv-dois-emater.component';
 import { ConvTresEmaterComponent } from './components/servicos/conv-tres-emater/conv-tres-emater.component';
@@ -17,6 +18,8 @@ const routes: Routes = [
   {
     path: 'visitas',
     component: VisitaComponent,
+    canActivate: [AuthGuard],
+    data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
     children: [
       {
       path: '',
@@ -24,11 +27,15 @@ const routes: Routes = [
     },
     {
       path: 'cadastrar',
-      component: CadastrarVisitaComponent
+      component: CadastrarVisitaComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
       path: 'cadastrar-car-emissao',
-      component: CarEmissaoComponent
+      component: CarEmissaoComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
     },
     {
       path: 'cadastrar-car-segundavia',
@@ -36,27 +43,39 @@ const routes: Routes = [
     },
     {
       path: 'cadastrar-car-retificar',
-      component: CarRetificarComponent
+      component: CarRetificarComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
     },
     {
       path: 'conv-um-emater',
-      component: ConvUmEmaterComponent
+      component: ConvUmEmaterComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
       path: 'conv-dois-emater',
-      component: ConvDoisEmaterComponent
+      component: ConvDoisEmaterComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
       path: 'conv-tres-emater',
-      component: ConvTresEmaterComponent
+      component: ConvTresEmaterComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
       path: 'dap-emissao',
-      component: EmissaoDapComponent
+      component: EmissaoDapComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
       path: 'dap-dbl',
-      component: DesbloqueioDapComponent
+      component: DesbloqueioDapComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
   ]
   }
