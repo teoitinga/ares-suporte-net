@@ -158,7 +158,7 @@ export class TemplateComponent implements OnInit {
     this.visita.produtores = this.produtores;
     console.log(JSON.stringify(this.visita));
 
-    /*
+    
     this.visitaService.sendVisita(this.visita).subscribe(
       data=>{
         this.router.navigate(['login/home']);
@@ -168,6 +168,6 @@ export class TemplateComponent implements OnInit {
          this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
        }
      );
-    */
+    
   }
 }

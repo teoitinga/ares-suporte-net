@@ -28,6 +28,7 @@ import { CarRetificarComponent } from './components/servicos/car-retificar/car-r
 import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car-segundavia.component';
 import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
 import { TemplateComponent } from './components/servicos/template/template.component';
+import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/conv-dois-emater.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TemplateComponent } from './components/servicos/template/template.compo
     CarSegundaviaComponent,
     ConvUmEmaterComponent,
     TemplateComponent,
+    ConvDoisEmaterComponent,
     
     
   ],

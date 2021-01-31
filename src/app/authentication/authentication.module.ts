@@ -19,6 +19,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { InfoRendaComponent } from '../info-renda/components/info-renda/info-renda.component';
+import { PrefeituraViewsComponent } from './components/prefeitura-views/prefeitura-views.component';
+import { CedidoViewsComponent } from './components/cedido-views/cedido-views.component';
+import { TecnicoViewsComponent } from './components/tecnico-views/tecnico-views.component';
+import { AdministradorViewsComponent } from './components/administrador-views/administrador-views.component';
+import { CoordenadorViewsComponent } from './components/coordenador-views/coordenador-views.component';
+import { GerenteViewsComponent } from './components/gerente-views/gerente-views.component';
+import { ClienteViewsComponent } from './components/cliente-views/cliente-views.component';
 @NgModule({
   declarations: [
     LoginComponent, 
@@ -27,7 +34,14 @@ import { InfoRendaComponent } from '../info-renda/components/info-renda/info-ren
     ListaAcoesComponent,
     InfoRendaComponent,
     RegistarRendaComponent,
-    HomeComponent
+    HomeComponent,
+    PrefeituraViewsComponent,
+    CedidoViewsComponent,
+    TecnicoViewsComponent,
+    AdministradorViewsComponent,
+    CoordenadorViewsComponent,
+    GerenteViewsComponent,
+    ClienteViewsComponent
   ],
   imports: [
     CommonModule,

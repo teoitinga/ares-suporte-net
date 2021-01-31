@@ -1,0 +1,53 @@
+.card{
+    margin-top: 5px;
+    opacity: 0.3;
+ 
+}
+div .card:hover{
+    opacity: 0.8;
+}
+div .card{
+    width: 18rem;
+}
+.container-prefeitura{
+
+}
+
+.container-prefeitura .card{
+    margin-top: 20%;
+    opacity: 0.4;
+}
+
+.card-body{
+
+}
+.card-title{
+
+}
+.card-text{
+
+}
+
+.panel-car{
+    background: #FFFFFF url("../../../../assets/car-page.png") no-repeat right top;
+    background-clip: content-box;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.container-prefeitura  div .card{
+    width: 18rem;
+    margin-bottom: 1rem;
+}
+img{
+    width: 16rem;
+    height: 175px;
+}
+.container-prefeitura .card{
+    margin-top: 20%;
+    opacity: 0.3;
+}
+
+div .card{
+    width: 18rem;
+}
