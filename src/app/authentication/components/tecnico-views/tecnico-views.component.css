@@ -1,7 +1,7 @@
 .card{
     margin-top: 5px;
     opacity: 0.3;
-    background-color: chartreuse;
+    background-color: rgb(195, 230, 250);
 }
 .card:hover{
     opacity: 0.8;
