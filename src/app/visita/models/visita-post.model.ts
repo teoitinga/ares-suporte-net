@@ -1,6 +1,3 @@
-import { ProdutoresMin } from './../../produtores/models/produtores-min.model';
-import { ChamadasPost } from './../../chamadas/models/chamadas-post.model';
-
     export interface Chamada {
         codigo?: string;
         codigoDaVisita?: string;

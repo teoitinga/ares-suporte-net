@@ -22,11 +22,11 @@ export class TemplateComponent implements OnInit {
   @Input() SITUACAO_TEXT: string;
   @Input() ORIENTACAO_TEXT: string;
   @Input() RECOMENDACAO_TEXT: string;
-  //@Input() TEMPLATE_TITLE: BehaviorSubject<string>;
   @Input() TEMPLATE_TITLE: string;
   @Input() TEMPLATE_SUB: string;
   @Input() chamadas: Chamada[];
-
+  @Input() CRIAR_PASTA: boolean = true;
+  
   produtores: Produtore[] = [];
   produtor: Produtore;
 
@@ -130,7 +130,7 @@ export class TemplateComponent implements OnInit {
     this.visita.recomendacao = this.RECOMENDACAO_TEXT;
     this.visita.chamadas = this.chamadas;
     this.visita.produtores = this.produtores;
-//    console.log((this.visita));
+    this.visita.createFolder = this.CRIAR_PASTA;
 
     this.visitaService.sendVisita(this.visita).subscribe(
       data => {
