@@ -33,38 +33,56 @@ export class ConvDoisEmaterComponent implements OnInit {
     let servico01: Chamada = {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
-      serviceProvidedCode: 'PRGDKTHT2019',
+      serviceProvidedCode: 'PRPRGDSMM2020',
       servicoPrestado: 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.',
       valor: 0
     }
     this.chamadas.push(servico01);
 
     let servico02: Chamada = {
-      cpfReponsavel: this.usuario,
+      cpfReponsavel: '04459471604',
       ocorrencia: '***',
-      serviceProvidedCode: 'PRGDKTHT2019V1',
-      servicoPrestado: 'Assistência técnica a beneficiário  Convênio 891349/2019 no ano de 2021.',
+      serviceProvidedCode: 'PRGDSMM2020V1',
+      servicoPrestado: 'Assistencia técnica em produção de Milho - Visita de acompanhamento 01',
       valor: 0
     }
     this.chamadas.push(servico02);
 
     let servico03: Chamada = {
-      cpfReponsavel: this.usuario,
+      cpfReponsavel: '04459471604',
       ocorrencia: '***',
-      serviceProvidedCode: 'ATERCULTHORTA',
-      servicoPrestado: 'Assistencia técnica em produção de hortaliças',
+      serviceProvidedCode: 'PRGDSMM2020V2',
+      servicoPrestado: 'Assistencia técnica em produção de Milho - Visita de acompanhamento 02',
       valor: 0
     }
     this.chamadas.push(servico03);
 
     let servico04: Chamada = {
-      cpfReponsavel: this.usuario,
+      cpfReponsavel: '04459471604',
+      ocorrencia: '***',
+      serviceProvidedCode: 'PRGDSMM2020V3',
+      servicoPrestado: 'Assistencia técnica em produção de Milho - Visita de acompanhamento 03',
+      valor: 0
+    }
+    this.chamadas.push(servico04);
+
+    let servico05: Chamada = {
+      cpfReponsavel: '04459471604',
+      ocorrencia: '***',
+      serviceProvidedCode: 'ATERCULTMILHO',
+      servicoPrestado: 'Assistencia técnica em produção de Milho',
+      valor: 0
+    }
+    this.chamadas.push(servico05);
+
+    let servico06: Chamada = {
+      cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'AGREC',
       servicoPrestado: 'Assistencia técnica em produção agroecológia com o uso de caldas no combate a pragas',
       valor: 0
     }
-    this.chamadas.push(servico04);
+    this.chamadas.push(servico06);
   }
 
 }

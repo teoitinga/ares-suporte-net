@@ -11,9 +11,9 @@ export class DesbloqueioDapComponent implements OnInit {
 
   chamadas: Chamada[] = [];  
   
-  SITUACAO_TEXT: string = 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.';
-  ORIENTACAO_TEXT: string = 'Escolha da área: Evitar solos arenosos por apresentarem baixa capacidade de retenção de água, bem como os sujeitos a encharcamento. Solos profundos, sem problemas de drenagem e com pequena declividade são os mais indicados.Semeadura: Recomenda-se o plantio em linha, usando 6 a 7 sementes/m de sulco e espaçamento entre linhas de 0,90m, totalizando cerca de 55.555 plantas/ha. Caso o produtor opte pelo plantio em covas, semear 2 a 3 sementes/cova e usar 0,40m entre covas e 0,90m entre linhas, deixando 2 plantas/cova após a germinação. O ideal é ser realizada conforme os resultados da análise de solo. Para produções médias, pode-se aplicar 20kg de N, 70kg de P2O5 e 40kg de K2O/ha (equivalente a 500kg de 04-14-08/ha) - Adubação de cobertura: Para sistemas não irrigados, recomendam-se de 40 a 70kg/ha de nitrogênio, quando as plantas apresentarem de 8 a 10 folhas totalmente expandidas. Em sistemas de produção irrigados, utilizar doses mais elevadas (100 a 120kg/ha), parceladas em duas épocas (com 6 a 8 folhas e com 10 a 12 folhas).';
-  RECOMENDACAO_TEXT: string = 'Secagem e armazenamento: O milho em espiga ou debulhado deve ser seco em torno de 13% de umidade, obtido na prática quando os grãos apresentarem-se firmes e resistentes à pressão com a unha. Para sementes, tratar com produtos específicos (polvilhamento e/ou expurgo), sempre com orientação técnica. O armazenamento deve ser feito em local seco, fresco e livre de roedores.';
+  SITUACAO_TEXT: string = 'O produtor procurou o apoio a este escritório pois necessita da emissão deste documento para beneficiar de programas de governo para a agricultura familiar.';
+  ORIENTACAO_TEXT: string = 'DOCUMENTAÇÃO NECESSÁRIA PARA EMISSÃO OU RENOVAÇÃO DE DAP – DECLARAÇÃO DE APTIDÃO AO PRONAF - CPF e RG de todos os titulares; - Extrato CNIR – Cadastro nacional de imóveis rurais; - Cópia da carteira de trabalho de ambos os titulares, quando for o caso; - Extrato do Cadastro Nacional de Informações Sociais (CNIS) do(s) titular(es)- Retirar em https://www.inss.gov.br/servicos-do-inss/meu-inss/; - Holerite ou comprovante/demonstrativo de rendimentos do(s) titular(es); - Imposto de renda pessoa física; - Imposto de renda pessoa jurídica; ; - Extrato da Relação Anual de Informações Sociais (RAIS) - Retirar em: http://www.rais.gov.br/sitio/consulta_trabalhador_identificacao.jsf; - Contrato de parceria ou meação (assinada pelos dois ou mais agricultores envolvidos); - DASN Declaração anual do simples nacional (MEI Microempreendedor individual ); - DER - Declaração de Resultados do Exercício obtido junto à Junta Comercial (exceto MEI); - GTA Guia de Trânsito Animal; - Cópia de notas de venda da produção (bloo do produtor) ou declaração do comprador informando o produto adquirido, valor pago e a data da transação do(s) titular(es); - Ficha Sanitária do Rebanho; - Escritura, Certidão ou Cópia da Matrícula.; - Certificado de Cadastro de Imóvel Rural (CCIR); - Declaração do Imposto Territorial Rural (ITR);Documento para preenchimento das declarações abaixo:; - Declaração do empregador constando vínculo e rendimento/salário; - Declaração do(s) beneficiário(s) de que não comercializou produção no âmbito dos programas de compras públicas (PAA, PNAE, Biodiesel); - Declaração de beneficiário de Programas Sociais; - Declaração de recebimento de Benefícios Sociais (exceto Programas Sociais);';
+  RECOMENDACAO_TEXT: string = '';
   TEMPLATE_TITLE: string = 'Desbloqueio de DAP';
   TEMPLATE_SUB: string = 'Registrar Atendimento em desbloqueio de Declaração de aptidão ao PRONAF';
 
@@ -30,8 +30,8 @@ export class DesbloqueioDapComponent implements OnInit {
     let servico01: Chamada = {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
-      serviceProvidedCode: 'PRGDKTHT2019',
-      servicoPrestado: 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.',
+      serviceProvidedCode: 'DAPDBL',
+      servicoPrestado: 'Levantamento de informações para incíio de processo de desbloqueio de DAP.',
       valor: 0
     }
     this.chamadas.push(servico01);
@@ -39,29 +39,12 @@ export class DesbloqueioDapComponent implements OnInit {
     let servico02: Chamada = {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
-      serviceProvidedCode: 'PRGDKTHT2019V1',
-      servicoPrestado: 'Assistência técnica a beneficiário  Convênio 891349/2019 no ano de 2021.',
+      serviceProvidedCode: 'DAPLEV',
+      servicoPrestado: 'Levantamento de dados e informações sociais para verificar enquadramento e possível debloqueio da DAP.',
       valor: 0
     }
     this.chamadas.push(servico02);
 
-    let servico03: Chamada = {
-      cpfReponsavel: this.usuario,
-      ocorrencia: '***',
-      serviceProvidedCode: 'ATERCULTHORTA',
-      servicoPrestado: 'Assistencia técnica em produção de hortaliças',
-      valor: 0
-    }
-    this.chamadas.push(servico03);
-
-    let servico04: Chamada = {
-      cpfReponsavel: this.usuario,
-      ocorrencia: '***',
-      serviceProvidedCode: 'AGREC',
-      servicoPrestado: 'Assistencia técnica em produção agroecológia com o uso de caldas no combate a pragas',
-      valor: 0
-    }
-    this.chamadas.push(servico04);
   }
 
 }
