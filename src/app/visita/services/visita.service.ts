@@ -15,13 +15,14 @@ export class VisitaService {
   tecnico: BehaviorSubject<TecnicoModel>;
   
   private readonly PATH: string = 'visitas';
+  private readonly PATH_CALL: string = 'chamadas';
   
   loadVisitas(): Observable<any>{
     return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
     ;
   }
   loadVisitasManager(): Observable<any>{
-    return this.http.get(`${env.BASE_API_URL}${this.PATH}/manager`)
+    return this.http.get(`${env.BASE_API_URL}${this.PATH_CALL}/gerenciar`)
     ;
   }
   sendVisita(visita: VisitaPostModel): Observable<any>{

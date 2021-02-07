@@ -1,0 +1,13 @@
+.header-servicos{
+    background-color: rgb(220, 250, 250);
+}
+.header-produtor{
+    background-color: rgb(220, 250, 250);
+}
+.spinner {
+
+    /* pura mágica */
+    position: absolute;
+    top: 50%; /* posiciona na metade da tela */
+    margin-top: -25px; /* e retrocede metade da altura */
+  }

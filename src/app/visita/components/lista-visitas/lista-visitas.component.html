@@ -1,24 +1,97 @@
-<h5>Gerenciar visitas</h5>
-<mat-accordion>
-    <div *ngFor="let vs of dataSource">
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        
+<div class="d-flex justify-content-center" *ngIf="viewSpinner==true">
+    <img src="./../../../../assets/Loading.gif" alt="" width="80px" height="80px">
+</div>
+<div class="row">
+    <h5 class="col-12 d-flex justify-content-center">Gerenciar visitas</h5>
+</div>
+<div *ngIf="viewData==false">
+    <h5 class="text-danger d-flex justify-content-center">Não há visitas registradas neste período</h5>
+</div>
+<div *ngIf="viewData==true">
+    <mat-accordion>
+        <div *ngFor="let vs of visitas">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        {{vs.datavisita |  date: 'dd/MM/yyyy'}}
-                        {{vs.localvisita}}
+                        <div class="col-1">
+                            <button mat-button matTooltip="Incluir" class="col-1 btn-acoes text-success"
+                                aria-label="Adicionar uma nova chamada de serviços a esta visita."
+                                (click)="incluirChamada(vs)">
+                                <mat-icon>add_task</mat-icon>
+                            </button>
+                        </div>
+                        <div class="col-1">
+                            {{vs.dataDaVisita | date: 'dd/MM/yyyy'}}
+                        </div>
+                        <div class="col-10">
+                            {{vs.local}}
+
+                        </div>
                     </mat-panel-title>
-                    <mat-panel-description>
-                        {{vs.statusvisita}}
-                        - Resp: {{vs.tecnicoresp}}
-                    </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="row">
-                    <button class="mat-mini-fab col-1" (click) = incluirChamada(vs.codvisita)>
-                        <mat-icon>filter_list</mat-icon>
-                    </button>
-                    <p class="col-11">{{vs.servicoprestado}}</p>
+                    <div class="header-produtor col-12">
+                        <strong>
+                            Produtor
+                        </strong>
+                    </div>
+                    <div *ngFor="let prd of vs.produtores">
+                        <div class="row">
+                            <p class="col-2">{{prd.cpf}}</p>
+                            <p class="col-5">{{prd.nome}}</p>
+                            <p class="col-2">{{prd.endereco}}</p>
+                            <p class="col-2">{{prd.fone}}</p>
+
+                        </div>
+                    </div>
+                    <div class="header-servicos col-12">
+                        <strong>
+                            Serviço
+                        </strong>
+                    </div>
+                    <div *ngFor="let call of vs.acoes">
+                        <div class="row" [style.backgroundColor]="call.status == 'INICIADA'? '#99ff99': ''">
+                            <p class="col-1">{{call.dataDaChamada | date: 'dd/MM/yyyy'}}</p>
+                            <p class="col-4">{{call.servico}}</p>
+                            <p class="col-1">{{call.status}}</p>
+                            <p class="col-2">{{call.tecnico}}</p>
+                            <p class="col-1">{{call.valor}}</p>
+                            <div class="col-3">
+                                <button mat-button matTooltip="Finalizar/Concluir" class="col-1 btn-acoes text-success"
+                                    aria-label="Atribuir status de finalizada a esta tarefa"
+                                    (click)="concluirChamada(call)" 
+                                    [disabled]="call.status=='FINALIZADA'"
+                                    >
+                                    <mat-icon
+                                    [style.opacity]="call.status=='FINALIZADA'? '0.3': ''"
+                                    >
+                                        add_task
+                                    </mat-icon>
+                                </button>
+                                <button mat-button matTooltip="Reiniciar" class="col-1 btn-acoes text-warning"
+                                    aria-label="Atribuir status de iniciada a esta tarefa"
+                                    (click)="reiniciarChamada(call)"
+                                    [disabled]="call.status=='INICIADA'"
+                                    >
+                                    <mat-icon
+                                    [style.opacity]="call.status=='INICIADA'? '0.3': ''"
+                                    >cached</mat-icon>
+                                </button>
+                                <button mat-button matTooltip="Cancelar" class="col-1 btn-acoes text-danger"
+                                [disabled]="call.status=='FINALIZADA' || call.status=='CANCELADA'"
+                                    aria-label="Atribuir status de cancelada a esta tarefa" (click)="cancelar(call)">
+                                    <mat-icon
+                                    [style.opacity]="call.status=='FINALIZADA' || call.status=='CANCELADA'? '0.3': ''"
+                                    >delete_forever</mat-icon>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </mat-expansion-panel>
         </div>
-</mat-accordion>
+    </mat-accordion>
+
+</div>

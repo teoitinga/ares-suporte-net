@@ -33,6 +33,7 @@ import { ConvTresEmaterComponent } from './components/servicos/conv-tres-emater/
 import { EmissaoDapComponent } from './components/servicos/emissao-dap/emissao-dap.component';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { StatusDirective } from '../shared/directives/status.directive';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FormsModule,
     SharedModule,
     AuthenticationModule,
-
+    
     VisitaRoutingModule
   ],
   providers:[

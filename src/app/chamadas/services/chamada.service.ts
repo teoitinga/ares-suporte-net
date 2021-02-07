@@ -7,6 +7,9 @@ import { environment as env } from './../../../environments/environment.prod';
   providedIn: 'root'
 })
 export class ChamadaService {
+  incializarCall(call: any) {
+    return this.http.put(`${env.BASE_API_URL}${this.PATH}/initialize/${call['codigo']}`, call['codigo']);
+  }
   private readonly PATH: string = 'chamadas';
   
   constructor(
