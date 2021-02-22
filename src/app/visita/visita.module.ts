@@ -32,8 +32,9 @@ import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/
 import { ConvTresEmaterComponent } from './components/servicos/conv-tres-emater/conv-tres-emater.component';
 import { EmissaoDapComponent } from './components/servicos/emissao-dap/emissao-dap.component';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { StatusDirective } from '../shared/directives/status.directive';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { PainelServicosComponent } from '../info-view/painel-servicos/painel-servicos.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StatusDirective } from '../shared/directives/status.directive';
     ConvTresEmaterComponent,
     EmissaoDapComponent,
     DesbloqueioDapComponent,
+    PainelServicosComponent
     
     
   ],
@@ -69,6 +71,7 @@ import { StatusDirective } from '../shared/directives/status.directive';
     MatExpansionModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSelectModule,
     SharedModule,
     AuthenticationModule,
     

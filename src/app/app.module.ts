@@ -34,7 +34,7 @@ import { ConfirmDialogComponent } from './chamadas/components/confirm-dialog/con
     MatTooltipModule,
     MatButtonModule,
     MatIconModule,
-
+    
     AppRoutingModule
 ],
   exports: [

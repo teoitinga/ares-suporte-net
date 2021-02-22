@@ -1,7 +1,7 @@
 <header-auth></header-auth>
 <div class="container">
     <tecnico-views *ngIf="isTecnico"></tecnico-views>
-    <cedido-views *ngIf="isCedido"></cedido-views>
+    <cedido-views *ngIf="isCedido || isTecnico"></cedido-views>
     <!--Painel para usuarios prefeitura-->
     <prefeitura-views *ngIf="isPrefeitura"></prefeitura-views>
 </div>

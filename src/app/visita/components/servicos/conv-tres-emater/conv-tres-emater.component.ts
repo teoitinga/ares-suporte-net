@@ -32,7 +32,8 @@ export class ConvTresEmaterComponent implements OnInit {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
       serviceProvidedCode: 'PRGDSMF2020',
-      servicoPrestado: 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.',
+      status: 'FINALIZADA',
+      servicoPrestado: 'Doação de sementes de feijão recebidas por Emenda parlamentar no ano de 2020 - Convênio N° 891349/2019 MC/EMATER-MG',
       valor: 0
     }
     this.chamadas.push(servico01);
@@ -68,6 +69,7 @@ export class ConvTresEmaterComponent implements OnInit {
       cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'ATERCULTFEIJAO',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistencia técnica em produção de Feijção',
       valor: 0
     }
@@ -77,6 +79,7 @@ export class ConvTresEmaterComponent implements OnInit {
       cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'AGREC',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistencia técnica em produção agroecológia com o uso de caldas no combate a pragas',
       valor: 0
     }

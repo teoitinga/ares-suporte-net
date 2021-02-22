@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ListaChamadasModel } from './lista-chamadas.model';
 import { ConfirmDialogComponent } from 'src/app/chamadas/components/confirm-dialog/confirm-dialog.component';
 import { ChamadaService } from 'src/app/chamadas/services/chamada.service';
+import { PesquisaModel } from 'src/app/info-view/painel-servicos/pesquisa.model';
 
 @Component({
   selector: 'app-lista-visitas',
@@ -19,6 +20,7 @@ export class ListaVisitasComponent implements OnInit {
 
   viewData = false;
   viewSpinner = true;
+  pesquisaModel: PesquisaModel;
 
   constructor(
     private visitaService: VisitaService,
@@ -33,10 +35,13 @@ export class ListaVisitasComponent implements OnInit {
   }
   loadVisitas(): any {
     const component = this;
-    this.visitaService.loadVisitasManager().subscribe(
+    this.pesquisaModel = {
+      dataFinal: '30-03-2021',
+      dataInicial: '01-01-2021'
+    }
+    this.visitaService.loadVisitasManager(this.pesquisaModel).subscribe(
       data=>{
         this.visitas = data;
-        console.log(data);
         this.viewData=true;
         this.viewSpinner = false;
       },

@@ -33,8 +33,9 @@ export class ConvDoisEmaterComponent implements OnInit {
     let servico01: Chamada = {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
-      serviceProvidedCode: 'PRPRGDSMM2020',
-      servicoPrestado: 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.',
+      serviceProvidedCode: 'PRGDSMM2020',
+      status: 'FINALIZADA',
+      servicoPrestado: 'Doação de sementes de milho recebidas por Emenda parlamentar no ano de 2020 - Convênio N° 891349/2019 MC/EMATER-MG',
       valor: 0
     }
     this.chamadas.push(servico01);
@@ -43,6 +44,7 @@ export class ConvDoisEmaterComponent implements OnInit {
       cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'PRGDSMM2020V1',
+      status: 'INICIADA',
       servicoPrestado: 'Assistencia técnica em produção de Milho - Visita de acompanhamento 01',
       valor: 0
     }
@@ -53,6 +55,7 @@ export class ConvDoisEmaterComponent implements OnInit {
       ocorrencia: '***',
       serviceProvidedCode: 'PRGDSMM2020V2',
       servicoPrestado: 'Assistencia técnica em produção de Milho - Visita de acompanhamento 02',
+      status: 'INICIADA',
       valor: 0
     }
     this.chamadas.push(servico03);
@@ -61,6 +64,7 @@ export class ConvDoisEmaterComponent implements OnInit {
       cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'PRGDSMM2020V3',
+      status: 'INICIADA',
       servicoPrestado: 'Assistencia técnica em produção de Milho - Visita de acompanhamento 03',
       valor: 0
     }
@@ -70,6 +74,7 @@ export class ConvDoisEmaterComponent implements OnInit {
       cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'ATERCULTMILHO',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistencia técnica em produção de Milho',
       valor: 0
     }
@@ -79,6 +84,7 @@ export class ConvDoisEmaterComponent implements OnInit {
       cpfReponsavel: '04459471604',
       ocorrencia: '***',
       serviceProvidedCode: 'AGREC',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistencia técnica em produção agroecológia com o uso de caldas no combate a pragas',
       valor: 0
     }

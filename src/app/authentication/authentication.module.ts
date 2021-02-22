@@ -56,6 +56,7 @@ import { ClienteViewsComponent } from './components/cliente-views/cliente-views.
     MatButtonModule,
     MatDialogModule,
     ReactiveFormsModule
+    
   ],
   exports:[
     HeaderAuthenticationComponent,

@@ -1,3 +1,4 @@
+import { PainelServicosComponent } from './../info-view/painel-servicos/painel-servicos.component';
 import { RegistarRendaComponent } from './../info-renda/components/registar-renda/registar-renda.component';
 import { InfoRendaComponent } from './../info-renda/components/info-renda/info-renda.component';
 import { HomeComponent } from './components/home/home.component';

@@ -138,7 +138,8 @@ export class TemplateComponent implements OnInit {
         this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
       },
       error => {
-        this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
+        console.error("Intercept error: " + error);
+        this.messageService.sendError(this._snackBar, "Erro", "Erro na requisição!");
       }
     );
   }

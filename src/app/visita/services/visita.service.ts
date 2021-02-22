@@ -1,10 +1,11 @@
 import { VisitaPostModel } from './../models/visita-post.model';
 import { TecnicoModel } from '../../shared/models/tecnico.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { environment as env } from './../../../environments/environment.prod';
+import { PesquisaModel } from 'src/app/info-view/painel-servicos/pesquisa.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,14 @@ export class VisitaService {
     return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
     ;
   }
-  loadVisitasManager(): Observable<any>{
-    return this.http.get(`${env.BASE_API_URL}${this.PATH_CALL}/gerenciar`)
+  loadVisitasManager(pesquisaModel: PesquisaModel): Observable<any>{
+    // Initialize Params Object
+let params = new HttpParams();
+
+// Begin assigning parameters
+params = params.append('dataInicial', pesquisaModel.dataInicial);
+params = params.append('dataFinal', pesquisaModel.dataFinal);
+    return this.http.get(`${env.BASE_API_URL}${this.PATH_CALL}/gerenciar`, {params});
     ;
   }
   sendVisita(visita: VisitaPostModel): Observable<any>{
@@ -44,6 +51,7 @@ export class VisitaService {
       );
     }
   }
+
   getTecnico(): BehaviorSubject<TecnicoModel> {
     if(this.servico){
       return this.tecnico;

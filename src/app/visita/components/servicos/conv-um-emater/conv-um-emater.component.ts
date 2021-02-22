@@ -32,7 +32,8 @@ export class ConvUmEmaterComponent implements OnInit {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
       serviceProvidedCode: 'PRGDKTHT2019',
-      servicoPrestado: 'Critérios de priorização: agricultores já trabalhados pela EMATER, que comercializem no PNAE, PAA e Feira livre. Priorizando agricultores de baixa renda, e que tradicionalmente plantam hortaliças.',
+      status: 'FINALIZADA',
+      servicoPrestado: 'Doação de Kit horta - conforme convênio 891349/2019 no ano de 2021',
       valor: 0
     }
     this.chamadas.push(servico01);
@@ -41,6 +42,7 @@ export class ConvUmEmaterComponent implements OnInit {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
       serviceProvidedCode: 'PRGDKTHT2019V1',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistência técnica a beneficiário  Convênio 891349/2019 no ano de 2021.',
       valor: 0
     }
@@ -50,6 +52,7 @@ export class ConvUmEmaterComponent implements OnInit {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
       serviceProvidedCode: 'ATERCULTHORTA',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistencia técnica em produção de hortaliças',
       valor: 0
     }
@@ -59,6 +62,7 @@ export class ConvUmEmaterComponent implements OnInit {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
       serviceProvidedCode: 'AGREC',
+      status: 'FINALIZADA',
       servicoPrestado: 'Assistencia técnica em produção agroecológia com o uso de caldas no combate a pragas',
       valor: 0
     }

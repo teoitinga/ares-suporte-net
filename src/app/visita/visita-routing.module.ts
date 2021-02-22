@@ -1,3 +1,4 @@
+import { PainelServicosComponent } from './../info-view/painel-servicos/painel-servicos.component';
 import { AuthGuard } from './../authentication/auth-guard ';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
 import { ConvDoisEmaterComponent } from './components/servicos/conv-dois-emater/conv-dois-emater.component';
@@ -80,6 +81,12 @@ const routes: Routes = [
     {
       path: 'dap-dbl',
       component: DesbloqueioDapComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
+    },
+    {
+      path: 'info',
+      component: PainelServicosComponent,
       canActivate: [AuthGuard],
       data: {role_acess: ['TECNICO', 'CEDIDO']},
     },

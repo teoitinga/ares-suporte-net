@@ -2,6 +2,7 @@
         codigo?: string;
         codigoDaVisita?: string;
         cpfReponsavel?: string;
+        status?: string;
         ocorrencia: string;
         serviceProvidedCode: string;
         servicoPrestado: string;
