@@ -1,3 +1,6 @@
+<div class="loading" *ngIf="loading">
+  <img src="../../../../assets/Loading.gif" alt="">
+</div>
 <div class="container-fluid">
   <div class="col-12" [formGroup]="visitaForm">
     <div class="row g-3">
@@ -15,8 +18,8 @@
         </div>
         <div class="col-3">
           <label for="data-da-visita" onclick="this.select()" class="form-label">Data da visita</label>
-          <input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" id="data-da-visita" placeholder="19/06/2020"
-            formControlName="dataDaVisita">
+          <input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" id="data-da-visita"
+            placeholder="19/06/2020" formControlName="dataDaVisita">
         </div>
       </div>
     </div>
@@ -29,7 +32,8 @@
     <div class="border m-2 pb-2 row" [formGroup]="produtoresForm">
       <div class="col-md-3">
         <label for="cpf-do-produtor" class="form-label">CPF</label>
-        <input type="text" onclick="this.select()" class="form-control" id="cpf-do-produtor" formControlName="cpf" mascara="999.999.999-99">
+        <input type="text" (change)="verificarProdutor($event)" onclick="this.select()" class="form-control"
+          id="cpf-do-produtor" formControlName="cpf" mascara="999.999.999-99">
       </div>
       <div class="col-md-5">
         <label for="nome-do-produtor" class="form-label">Nome</label>
@@ -51,18 +55,18 @@
         <search-servicos [servico]="servico" (atualizouServico)="onSelecionaServico($event)"></search-servicos>
       </div>
       <div class="col-4">
-        <search-tecnico-auto-complete [inputObject]="tecnicoResponsavel" (updated)="onSelecionaTecnico($event)"></search-tecnico-auto-complete>
+        <search-tecnico-auto-complete [inputObject]="tecnicoResponsavel" (updated)="onSelecionaTecnico($event)">
+        </search-tecnico-auto-complete>
       </div>
       <div class="col-12">
         <label for="descricao-do-servico" class="form-label">Descrição do serviço</label>
         <input type="text" onclick="this.select()" class="form-control" id="descricao-do-servico"
-          placeholder="Elaboração de laudo de vistoria para acesso a crédito rural"
-          formControlName="servicoPrestado">
+          placeholder="Elaboração de laudo de vistoria para acesso a crédito rural" formControlName="servicoPrestado">
       </div>
       <div class="col-12">
         <label for="ocorrencia" class="form-label">Ocorrência</label>
-        <input type="text" onclick="this.select()" class="form-control" id="ocorrencia" placeholder="***" 
-        formControlName="ocorrencia">
+        <input type="text" onclick="this.select()" class="form-control" id="ocorrencia" placeholder="***"
+          formControlName="ocorrencia">
       </div>
       <div class="row mt-2">
         <div class="col-2">
@@ -80,8 +84,7 @@
     <div class="col-12">
       <label for="situacao-atual" class="form-label">Situação atual</label>
       <textarea type="text" onclick="this.select()" class="form-control texto" id="situacao-atual"
-        placeholder="O produtor reclama que a vaca dá pouco leite" 
-        formControlName="situacaoAtual"></textarea>
+        placeholder="O produtor reclama que a vaca dá pouco leite" formControlName="situacaoAtual"></textarea>
     </div>
     <div class="col-12">
       <label for="orientacoes" class="form-label">Orientações</label>
@@ -90,9 +93,9 @@
         formControlName="orientacao"></textarea>
     </div>
     <div class="col-12">
-      <label for="recomendaoes"  class="form-label">Recomendações</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="recomendaoes" placeholder="Suplementar com ração 18% PB"
-        formControlName="recomendacao"></textarea>
+      <label for="recomendaoes" class="form-label">Recomendações</label>
+      <textarea type="text" onclick="this.select()" class="form-control texto" id="recomendaoes"
+        placeholder="Suplementar com ração 18% PB" formControlName="recomendacao"></textarea>
     </div>
     <div class="col-md-4">
       <label for="municipio" class="form-label">Cidade</label>
@@ -116,9 +119,7 @@
         <tbody>
           <tr *ngFor="let prd of produtores">
             <td>
-              <button type="button" class="btn btn-danger btn-sm btn-custom"
-              (click)="removerProdutor(prd, $event)"
-              >
+              <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerProdutor(prd, $event)">
                 <i class="far fa-calendar-times"></i>
               </button>
             </td>
@@ -140,8 +141,7 @@
         <tbody>
           <tr *ngFor="let call of chamadas">
             <td>
-              <button type="button" class="btn btn-danger btn-sm btn-custom"
-              (click)="removerChamada(call, $event)">
+              <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerChamada(call, $event)">
                 <i class="far fa-calendar-times"></i>
               </button>
             </td>

@@ -12,14 +12,20 @@ import { PesquisaModel } from 'src/app/info-view/painel-servicos/pesquisa.model'
 })
 export class VisitaService {
 
+
   servico: BehaviorSubject<ServicosPrestadosModel>
   tecnico: BehaviorSubject<TecnicoModel>;
   
   private readonly PATH: string = 'visitas';
   private readonly PATH_CALL: string = 'chamadas';
+  private readonly PATH_FIND_PRODUTOR: string = 'produtores/find';
   
   loadVisitas(): Observable<any>{
     return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
+    ;
+  }
+  obterProdutor(cpf: string):Observable<any> {
+    return this.http.get(`${env.BASE_API_URL}${this.PATH_FIND_PRODUTOR}/${cpf}`);
     ;
   }
   loadVisitasManager(pesquisaModel: PesquisaModel): Observable<any>{

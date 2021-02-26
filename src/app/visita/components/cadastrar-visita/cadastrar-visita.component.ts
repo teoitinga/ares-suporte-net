@@ -12,6 +12,7 @@ import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados
 import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.service';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
 import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-cadastrar-visita',
@@ -38,6 +39,8 @@ export class CadastrarVisitaComponent implements OnInit {
   visitaForm: FormGroup;
   tecnicoResponsavel: TecnicoModel;
   
+  loading: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private municipioService: SearchMunicipioService,
@@ -67,7 +70,7 @@ export class CadastrarVisitaComponent implements OnInit {
       situacaoAtual: new FormControl('O produtor solicitou apoio pois necessita da prestação deste serviço', [Validators.required]),
       orientacao: new FormControl('***'),
       recomendacao: new FormControl('***'),
-      municipio: new FormControl('***')
+      municipio: new FormControl('')
     });
   }
 
@@ -83,19 +86,22 @@ export class CadastrarVisitaComponent implements OnInit {
   private produtorLoadForm() {
     this.produtoresForm = this.fb.group({
       cpf: ['', [Validators.required, CpfValidator]],
-      nome: ['', [Validators.required, Validators.minLength(6)]]
+      nome: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]]
     });
 
   }
 
   loadMunicipios(){
+    this.loading = true;
     const component = this;
     this.municipioService.getMunicipios().subscribe(
       data=>{
         this.municipios = data;
+        this.loading = !true;
       },
       error=>{
-        this.messageService.sendError(this._snackBar, "Erro na API IBGE", JSON.stringify(error.message));
+        this.messageService.sendError(this._snackBar, "Erro na API IBGE", 'Não foi possível conectar ao IBGE para obter as cidades.');
+        this.loading = !true;
       }
     );
   }
@@ -116,6 +122,33 @@ export class CadastrarVisitaComponent implements OnInit {
     event.preventDefault();
     this.produtores = this.produtores.filter(item => item != value);
     
+  }
+  verificarProdutor(value:any){
+    const cpf: string = value.target.value.replace(/\.|\-/g, '');
+    console.log(cpf);
+    let nomeProdutor: string = '';
+    this.loading = true;
+    this.visitaService.obterProdutor(cpf).subscribe(
+      data=>{
+        console.log(data);
+        nomeProdutor = data['nome'];
+        this.produtoresForm.controls['nome'].disable();
+        this.produtoresForm.patchValue({
+          nome: nomeProdutor
+        });
+        this.loading = !true;
+      },
+      error=>{
+        this.habilitaInfoNome()
+        this.loading = !true;
+      }
+    );
+
+  }
+  habilitaInfoNome(){
+    this.produtoresForm.controls['nome'].enable();
+    this.produtoresForm.controls['nome'].setValue('');
+    this.produtoresForm.controls['nome'].setValidators([Validators.required, Validators.minLength(6)]);
   }
   produtoresFormClean() {
     this.produtor = null;
@@ -156,35 +189,26 @@ export class CadastrarVisitaComponent implements OnInit {
     this.chamadas = this.chamadas.filter(item => item != value);
     
   }
-
+  formularioValido():boolean{
+    return this.chamadas.length>0?true:false;
+  }
   registrarVisita(){
 
     //Configurando visita com os dados do form
-    /*
-    this.visita = new VisitaPostModel(
-      this.chamadas,//chamadas: ChamadasPost[],
-      this.produtores,//produtores: ProdutoresMin[],
-      this.visitaForm['criarPasta'],
-      this.visitaForm['dataDaVisita'],
-      this.visitaForm['localDoAtendimento'],
-      this.visitaForm['situacaoAtual'],
-      this.visitaForm['orientacoes'],
-      this.visitaForm['recomendaoes'],
-      this.visitaForm['municipio']
-      );
-      */
+
      this.visita = this.visitaForm.value;
      this.visita.chamadas = this.chamadas;
      this.visita.produtores = this.produtores;
-     //console.log("Visita: " + JSON.stringify(this.visita));
-     //console.log("localDoAtendimento: " + this.visitaForm['localDoAtendimento']);
-     //console.log("dataDaVisita: " + this.visitaForm['dataDaVisita']);
+     this.loading = true;
      this.visitaService.sendVisita(this.visita).subscribe(
        data=>{
+         this.loading = !true;
          this.router.navigate(['login/home']);
          this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
         },
         error=>{
+          console.log(error);
+          this.loading = !true;
           this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
         }
       );
@@ -201,7 +225,6 @@ export class CadastrarVisitaComponent implements OnInit {
 
   atualizaFormularioServico() {
     //Atualiza campos do formulário de servicos
-    
     this.servicosForm.patchValue({
       serviceProvidedCode: this.servico.codigo,
       servicoPrestado: this.servico.descricao,
