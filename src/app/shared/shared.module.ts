@@ -8,12 +8,20 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SearchMunicipioComponent } from './components/search-municipio/search-municipio.component';
 import { MascaraDirective } from './diretives/mascara.directive';
 import { StatusDirective } from './directives/status.directive';
+import { TemplateProdutorMinComponent } from './components/template-produtor-min/template-produtor-min.component';
+import { TemplateTableProdutorsComponent } from './components/template-table-produtors/template-table-produtors.component';
+import { TemplateTableServicosComponent } from './components/template-table-servicos/template-table-servicos.component';
+import { TemplateTableProducaoComponent } from './components/template-table-producao/template-table-producao.component';
 
 @NgModule({
   declarations: [
     SearchMunicipioComponent,
     MascaraDirective,
     StatusDirective,
+    TemplateProdutorMinComponent,
+    TemplateTableProdutorsComponent,
+    TemplateTableServicosComponent,
+    TemplateTableProducaoComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +31,10 @@ import { StatusDirective } from './directives/status.directive';
   exports: [
     SearchMunicipioComponent,
     MascaraDirective,
+    TemplateProdutorMinComponent,
+    TemplateTableProdutorsComponent,
+    TemplateTableServicosComponent,
+    TemplateTableProducaoComponent,
     StatusDirective
   ],
   providers:[

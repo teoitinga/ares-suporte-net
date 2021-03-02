@@ -108,49 +108,10 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <table class="col-6 table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>CPF</th>
-            <th>Nome</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let prd of produtores">
-            <td>
-              <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerProdutor(prd, $event)">
-                <i class="far fa-calendar-times"></i>
-              </button>
-            </td>
-            <td>{{prd.cpf}}</td>
-            <td>{{prd.nome}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <template-table-produtors [inputProdutores]="produtores"></template-table-produtors>
     </div>
     <div class="col-6">
-      <table class="col-6 table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Servico</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let call of chamadas">
-            <td>
-              <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerChamada(call, $event)">
-                <i class="far fa-calendar-times"></i>
-              </button>
-            </td>
-            <td>{{call.servicoPrestado}}</td>
-            <td>{{call.valor}}</td>
-          </tr>
-        </tbody>
-      </table>
-
+      <template-table-servicos [inputChamadas]="chamadas"></template-table-servicos>
     </div>
   </div>
 </div>

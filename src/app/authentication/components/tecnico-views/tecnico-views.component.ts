@@ -1,5 +1,8 @@
 import { ReportService } from './../../../shared/services/report.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageService } from 'src/app/shared/service/responses-messages.service';
 
 @Component({
   selector: 'tecnico-views',
@@ -9,13 +12,29 @@ import { Component, OnInit } from '@angular/core';
 export class TecnicoViewsComponent implements OnInit {
 
   constructor(
-    private reportService: ReportService
+    private reportService: ReportService,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
   }
-
+  registraVisitas(){
+    this.router.navigate(['/visitas/cadastrar']);
+  }
+  informaProducao(){
+    this.router.navigate(['/visitas/renda/registro-renda']);
+  }
+  listaVisitas(){
+    this.router.navigate(['/visitas/lista-visitas']);
+  }
+  ferramentasDoTecnico(){
+    console.log('Ferramentas do técnico');
+  }
   relatorio(){
+    this.router.navigate(['/visitas/info']);
+    /*
     alert('Gerando relatório')
     this.reportService.relatorioAtendimentos('2021-01-22', '2021-02-15', 'v', 'publicoAtendido').subscribe(
       data=> {
@@ -36,5 +55,6 @@ export class TecnicoViewsComponent implements OnInit {
 
       }
     );
+    */
     }
 }

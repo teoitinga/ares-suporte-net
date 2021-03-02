@@ -82,7 +82,7 @@ export class CadastrarVisitaComponent implements OnInit {
       valor: new FormControl('', [Validators.required])
     });
   }
-
+ 
   private produtorLoadForm() {
     this.produtoresForm = this.fb.group({
       cpf: ['', [Validators.required, CpfValidator]],
@@ -117,25 +117,27 @@ export class CadastrarVisitaComponent implements OnInit {
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
     this.produtoresFormClean();
-  }
+  } 
+  /*
   removerProdutor(value, event){
     event.preventDefault();
     this.produtores = this.produtores.filter(item => item != value);
     
   }
+  */
   verificarProdutor(value:any){
     const cpf: string = value.target.value.replace(/\.|\-/g, '');
-    console.log(cpf);
     let nomeProdutor: string = '';
     this.loading = true;
     this.visitaService.obterProdutor(cpf).subscribe(
       data=>{
-        console.log(data);
         nomeProdutor = data['nome'];
         this.produtoresForm.controls['nome'].disable();
-        this.produtoresForm.patchValue({
-          nome: nomeProdutor
-        });
+        this.produtoresForm.controls['nome'].setValue(nomeProdutor);
+
+        this.produtor = this.produtoresForm.value;
+
+        this.produtor.nome = this.produtoresForm.controls['nome'].value;
         this.loading = !true;
       },
       error=>{
@@ -157,11 +159,13 @@ export class CadastrarVisitaComponent implements OnInit {
       nome: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
+  /*
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   }
+  */
   incluirServico(event){
     const component = this;
     event.preventDefault();
@@ -184,11 +188,13 @@ export class CadastrarVisitaComponent implements OnInit {
       valor: new FormControl('', [Validators.required])
     });
   }
+  /*
   removerChamada(value, event){
     event.preventDefault();
     this.chamadas = this.chamadas.filter(item => item != value);
     
   }
+  */
   formularioValido():boolean{
     return this.chamadas.length>0?true:false;
   }

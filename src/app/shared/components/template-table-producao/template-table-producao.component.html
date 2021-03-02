@@ -1,0 +1,32 @@
+<p>template-table-producao works!</p>
+<table class="col-6 table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Item produzido</th>
+        <th>Qtd anual</th>
+        <th>Valor unitário</th>
+        <th>Valor total</th>
+      </tr>
+    </thead>
+    <tbody *ngIf = "!inputProducao.length">
+      <th class="text-danger" colspan="5">
+        Não esqueça de informar a fonte de renda!
+      </th>
+    </tbody>
+    <tbody>
+      
+      <tr *ngFor="let rnd of inputProducao">
+        <td>
+          <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerProducao(rnd, $event)">
+            <i class="far fa-calendar-times"></i>
+          </button>
+        </td>
+        <td>aaa{{rnd.quantidade}}</td>
+        <td>{{rnd.quantidade}}</td>
+        <td>{{rnd.valorUnitario}}</td>
+        <td>{{ getTotalProducao(rnd) | currency: 'BRL'  }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>Renda total: {{ getRendaTotal() | currency: 'BRL'  }}</div>

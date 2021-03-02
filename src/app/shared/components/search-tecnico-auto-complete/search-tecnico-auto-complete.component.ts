@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs
 import { ApiServicesService } from 'src/app/visita/services/api-services.service';
 import { VisitaService } from 'src/app/visita/services/visita.service';
 import { TecnicoModel } from '../../models/tecnico.model';
-
+ 
 @Component({
   selector: 'search-tecnico-auto-complete',
   templateUrl: './search-tecnico-auto-complete.component.html',

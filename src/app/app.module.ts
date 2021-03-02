@@ -22,7 +22,7 @@ import { ConfirmDialogComponent } from './chamadas/components/confirm-dialog/con
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import { ConfirmDialogComponent } from './chamadas/components/confirm-dialog/con
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })

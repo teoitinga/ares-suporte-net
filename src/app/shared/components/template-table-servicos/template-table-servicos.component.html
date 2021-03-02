@@ -1,0 +1,26 @@
+<table class="col-6 table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Servico</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody *ngIf = "!inputChamadas.length">
+      <th class="text-danger" colspan="3">
+        Não esqueça de informar os serviços prestados!
+      </th>
+    </tbody>
+    <tbody>
+      
+      <tr *ngFor="let call of inputChamadas">
+        <td>
+          <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerChamada(call, $event)">
+            <i class="far fa-calendar-times"></i>
+          </button>
+        </td>
+        <td>{{call.servicoPrestado}}</td>
+        <td>{{call.valor}}</td>
+      </tr>
+    </tbody>
+  </table>

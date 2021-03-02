@@ -12,7 +12,7 @@ import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados
   styleUrls: ['./search-servicos.component.css']
 })
 export class PesquisaServicosComponent implements OnInit {
- 
+  
   @Input('atendimento') atendimento: string = '';
 
   @Input() servico: ServicosPrestadosModel;

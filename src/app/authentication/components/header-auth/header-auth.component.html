@@ -1,49 +1,46 @@
 <div class="container text-light m-1 bg-primary">
-    <div class="logo">
+  <div class="logo">
 
-    </div>
-    <div>
-        <div class="row">
-            <div class="agro-header text-white">
-              <div class="row">
-                <div class="col-3">
-                  <h1 class="moon">JP-Agrodata</h1>
-                </div>
-                <small class="sky">Sistema de monitoramento de atividades e projetos</small>
-              </div>
-            </div>
-          </div>
-    </div>
-    <div class="row d-flex justify-content-sm-around align-items-baseline">
-        <!-- Dados do usuario -->
-            <div class="col-11 align-items-baseline">
-                {{ nome }}
-                <button  data-toggle="tooltip"
-                class="btn " (click)="conferirChamadas()" *ngIf="callNumber > 0"  >
-                <span class="badge badge-pill text-danger bg-warning badge-warning">{{ callNumber }}</span>
-            </button>
+  </div>
+  <div>
+    <div class="row">
+      <div class="agro-header text-white">
+        <div class="row col-12">
+          <h1 class="moon">DARK-<small><i>deméter</i></small></h1>
+          <small class="sky">Sistema de monitoramento de atividades e projetos</small>
         </div>
-    
-            <div class="col-1 d-flex justify-content-start">
-                <button type="button" class="col-1 btn " (click)="logout()">
-                    <span class="d-flex justify-content-start">
-                        <i class="fas fa-door-open text-light"></i>
-                    </span>
-                </button>
-            </div>
+      </div>
     </div>
-    <div class="row border-top rounded-pill">
-      <div class="col-1 d-flex justify-content-start">
-        <button type="button" matTooltip="Ir para tela inicial" class="col-1 btn " (click)="home()">
-            <span class="d-flex justify-content-start">
-              <mat-icon aria-hidden="false" class="text-light" >home</mat-icon>
-            </span>
-        </button>
+  </div>
+  <div class="row d-flex justify-content-sm-around align-items-baseline">
+    <!-- Dados do usuario -->
+    <div class="col-11 align-items-baseline">
+      {{ nome }}
+      <button data-toggle="tooltip" class="btn " (click)="conferirChamadas()" *ngIf="callNumber > 0">
+        <span class="badge badge-pill text-danger bg-warning badge-warning">{{ callNumber }}</span>
+      </button>
     </div>
+
+    <div class="col-1 d-flex justify-content-start">
+      <button type="button" class="col-1 btn " (click)="logout()">
+        <span class="d-flex justify-content-start">
+          <i class="fas fa-door-open text-light"></i>
+        </span>
+      </button>
     </div>
-    <script>
-        $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();
-        });
-        </script>
+  </div>
+  <div class="row border-top rounded-pill">
+    <div class="col-1 d-flex justify-content-start">
+      <button type="button" matTooltip="Ir para tela inicial" class="col-1 btn " (click)="home()">
+        <span class="d-flex justify-content-start">
+          <mat-icon aria-hidden="false" class="text-light">home</mat-icon>
+        </span>
+      </button>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
 </div>

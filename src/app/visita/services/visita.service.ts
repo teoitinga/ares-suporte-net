@@ -1,3 +1,4 @@
+import { ProducaoModel } from '../../producao/models/producao.model';
 import { VisitaPostModel } from './../models/visita-post.model';
 import { TecnicoModel } from '../../shared/models/tecnico.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -46,6 +47,9 @@ params = params.append('dataFinal', pesquisaModel.dataFinal);
   }
   setTecnico(tecnico: TecnicoModel) {
     //this.tecnico.next(tecnico);
+  }
+  setProducao(producao: ProducaoModel){
+
   }
 
   getServico(): BehaviorSubject<ServicosPrestadosModel> {

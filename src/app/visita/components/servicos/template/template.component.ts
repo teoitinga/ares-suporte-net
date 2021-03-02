@@ -38,6 +38,8 @@ export class TemplateComponent implements OnInit {
 
   visita: VisitaPostModel;
 
+  loading: boolean = false;
+  
   //Forms Utilizados no registro
   produtoresForm: FormGroup;
   servicosForm: FormGroup;
@@ -70,7 +72,7 @@ export class TemplateComponent implements OnInit {
   private produtorLoadForm() {
     this.produtoresForm = this.fb.group({
       cpf: ['', [Validators.required, CpfValidator]],
-      nome: ['', [Validators.required, Validators.minLength(6)]]
+      nome: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]]
     });
 
   }
@@ -111,6 +113,33 @@ export class TemplateComponent implements OnInit {
     event.preventDefault();
     this.produtores = this.produtores.filter(item => item != value);
 
+  }
+  verificarProdutor(value:any){
+    const cpf: string = value.target.value.replace(/\.|\-/g, '');
+    let nomeProdutor: string = '';
+    this.loading = true;
+    this.visitaService.obterProdutor(cpf).subscribe(
+      data=>{
+        nomeProdutor = data['nome'];
+        this.produtoresForm.controls['nome'].disable();
+        this.produtoresForm.controls['nome'].setValue(nomeProdutor);
+
+        this.produtor = this.produtoresForm.value;
+
+        this.produtor.nome = this.produtoresForm.controls['nome'].value;
+        this.loading = !true;
+      },
+      error=>{
+        this.habilitaInfoNome()
+        this.loading = !true;
+      }
+    );
+
+  }
+  habilitaInfoNome(){
+    this.produtoresForm.controls['nome'].enable();
+    this.produtoresForm.controls['nome'].setValue('');
+    this.produtoresForm.controls['nome'].setValidators([Validators.required, Validators.minLength(6)]);
   }
   registrarServico(event) {
     //Configura a chamada

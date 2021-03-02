@@ -1,3 +1,6 @@
+<div class="loading" *ngIf="loading">
+  <img src="../../../../../assets/Loading.gif" alt="">
+</div>
 <div class="col-12 text-muted d-flex flex-column justify-content-center align-items-center b-1 mb-5">
   <h5>{{TEMPLATE_TITLE}}</h5>
   <small>
@@ -21,7 +24,7 @@
       </div>
     </div>
 
-    <div class="col-12 text-muted d-flex justify-content-center">
+    <div class="col-12 text-muted d-flex justify-content-center mt-2">
       <h5>
         <strong>Informações sobre o produtor atendido</strong>
       </h5>
@@ -29,7 +32,7 @@
     <div class="border m-2 pb-2 row" [formGroup]="produtoresForm">
       <div class="col-md-3">
         <label for="cpf-do-produtor" class="form-label">CPF</label>
-        <input type="text" onclick="this.select()" class="form-control" id="cpf-do-produtor" formControlName="cpf"
+        <input type="text" (change)="verificarProdutor($event)" onclick="this.select()" class="form-control" id="cpf-do-produtor" formControlName="cpf"
           mascara="999.999.999-99">
       </div>
       <div class="col-md-5">
@@ -52,22 +55,19 @@
     </div>
   </div>
 </div>
-<table class="col-6 table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th></th>
-      <th>CPF</th>
-      <th>Nome</th>
+      <th class="col-3">CPF</th>
+      <th class="col-9">Nome</th>
     </tr>
   </thead>
   <tbody *ngIf = "!produtores.length">
-    <tr>
-      <td class="text-danger">
-        Não esqueça de informar os produtores atendidos!
-      </td>
-      <td></td>
-      <td></td>
-    </tr>
+    <th id="rio" class="text-danger" colspan="3">
+      Não esqueça de informar os produtores atendidos!
+    </th>
+    
   </tbody>
   <tbody *ngIf = "produtores.length">
     <tr *ngFor="let prd of produtores">

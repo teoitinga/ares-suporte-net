@@ -1,4 +1,4 @@
-import { RegistarRendaComponent } from './../info-renda/components/registar-renda/registar-renda.component';
+import { ProducaoModule } from './../producao/producao.module';
 import { HeaderAuthenticationComponent } from './components/header-auth/header-auth.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-import { InfoRendaComponent } from '../info-renda/components/info-renda/info-renda.component';
 import { PrefeituraViewsComponent } from './components/prefeitura-views/prefeitura-views.component';
 import { CedidoViewsComponent } from './components/cedido-views/cedido-views.component';
 import { TecnicoViewsComponent } from './components/tecnico-views/tecnico-views.component';
@@ -26,14 +25,14 @@ import { AdministradorViewsComponent } from './components/administrador-views/ad
 import { CoordenadorViewsComponent } from './components/coordenador-views/coordenador-views.component';
 import { GerenteViewsComponent } from './components/gerente-views/gerente-views.component';
 import { ClienteViewsComponent } from './components/cliente-views/cliente-views.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 @NgModule({
   declarations: [
     LoginComponent, 
     LogarComponent, 
     HeaderAuthenticationComponent,
     ListaAcoesComponent,
-    InfoRendaComponent,
-    RegistarRendaComponent,
     HomeComponent,
     PrefeituraViewsComponent,
     CedidoViewsComponent,
@@ -55,7 +54,9 @@ import { ClienteViewsComponent } from './components/cliente-views/cliente-views.
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProducaoModule,
+    MatAutocompleteModule
     
   ],
   exports:[

@@ -1,3 +1,4 @@
+import { ProducaoComponent } from './../producao/components/producao/producao.component';
 import { PainelServicosComponent } from './../info-view/painel-servicos/painel-servicos.component';
 import { AuthGuard } from './../authentication/auth-guard ';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
@@ -90,6 +91,10 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
+      {
+        path: 'renda',
+        loadChildren: () => import('../producao/producao.module').then(m => m.ProducaoModule)
+      }
   ]
   }
 

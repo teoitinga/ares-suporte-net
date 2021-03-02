@@ -1,0 +1,26 @@
+<table class="col-6 table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>CPF</th>
+        <th>Nome</th>
+      </tr>
+    </thead>
+    <tbody *ngIf = "!inputProdutores.length">
+      <th class="text-danger" colspan="3">
+        Não esqueça de informar os produtores atendidos!
+      </th>
+      
+    </tbody>
+    <tbody *ngIf = "inputProdutores.length">
+      <tr *ngFor="let prd of inputProdutores">
+        <td>
+          <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerProdutor(prd, $event)">
+            <i class="far fa-calendar-times"></i>
+          </button>
+        </td>
+        <td>{{prd.cpf}}</td>
+        <td>{{prd.nome}}</td>
+      </tr>
+    </tbody>
+  </table>
