@@ -1,20 +1,37 @@
-<p>cadastrar-producao works!</p>
 <template-produtor-min (updated)="onInsereProdutor($event)"></template-produtor-min>
-<pesquisa-producao-autocomplete [inputObject]="producao" (updated)="onSelecionaProducao($event)"></pesquisa-producao-autocomplete>
 <div class="col-12" [formGroup]="producaoForm">
-    <div class="col-12">
-        <label for="descricao-da-renda" class="form-label">Quantidade produzida anualmente</label>
-        <input type="text" onclick="this.select()" class="form-control" id="descricao-da-renda"
-          placeholder="informe a quantidade prodizuda anualmente" formControlName="quantidade">
-      </div>
-    <div class="col-12">
-        <label for="valor-unitario" class="form-label">Valor unitário</label>
-        <input type="text" onclick="this.select()" class="form-control" id="valor-unitario"
-          placeholder="informe o Valor unitário médio" formControlName="valorUnitario">
-      </div>
-</div>
+  <div class="row mb-3">
+    <div class="col-9">
+      <pesquisa-producao-autocomplete [inputObject]="itemProduzido" (updated)="onSelecionaProducao($event)"></pesquisa-producao-autocomplete>
 
-<button class="btn btn-primary" (click)="insereProducao()">Registrar renda</button>
+    </div>
+
+    <div class="col-3">
+        <label for="data-producao" class="form-label">data da Producao</label>
+        <input type="date" onclick="this.select()" class="form-control" id="data-producao"
+          placeholder="informe a data da aquisição da renda" formControlName="dataProducao">
+      </div>
+  </div>
+    <div class="row">
+      <div class="col-5">
+          <label for="descricao" class="form-label">Descrição</label>
+          <input type="text" onclick="this.select()" class="form-control" id="descricao"
+            placeholder="descreva a fonte de renda" formControlName="descricao">
+        </div>
+        <div class="col-3">
+            <label for="quantidade" class="form-label">Quantidade produzida anualmente</label>
+            <input type="number" onclick="this.select()" class="form-control" id="quantidade"
+              placeholder="informe a quantidade" formControlName="quantidade">
+          </div>
+        <div class="col-3">
+            <label for="valor-unitario" class="form-label">Valor unitário</label>
+            <input type="nunber" onclick="this.select()" class="form-control" id="valor-unitario"
+              placeholder="informe o Valor unitário" formControlName="valorUnitario">
+          </div>
+    </div>
+</div>
+<button class="btn btn-primary m-5" (click)="insereItemDeProducao()">Inserir renda</button>
 
 <template-table-produtors  [inputProdutores]="produtores"></template-table-produtors>
 <template-table-producao [inputProducao]="producoes" (updated)="onRemoveProducao($event)"></template-table-producao>
+<button class="btn btn-primary m-5" (click)="insereProducao()">Registrar renda</button>

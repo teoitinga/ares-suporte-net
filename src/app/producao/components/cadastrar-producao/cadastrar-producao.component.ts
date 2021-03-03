@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'src/app/shared/service/responses-messages.service';
 import { Produtore } from 'src/app/visita/models/visita-post.model';
 import { VisitaService } from 'src/app/visita/services/visita.service';
-import { InfoRendaModel, Producao, ProducaoVO } from '../../models/info-renda.model';
+import { InfoRendaModel, ProducaoAnual} from '../../models/info-renda.model';
 import { ProducaoModel } from '../../models/producao.model';
 
 @Component({
@@ -16,14 +16,15 @@ import { ProducaoModel } from '../../models/producao.model';
 export class CadastrarProducaoComponent implements OnInit {
   //Forms Utilizados no registro
   producaoForm: FormGroup;
+  infoRendaForm: FormGroup;
   
   fonteDerenda: InfoRendaModel;
-  producao: ProducaoModel;
   produtores: Produtore[] = [];
   produtor: Produtore;
 
-  rendaProduzida: ProducaoVO;
-  producoes: ProducaoVO[] = [];
+  rendaProduzida: ProducaoAnual;
+  producoes: ProducaoAnual[] = [];
+  itemProduzido: ProducaoModel;
 
   constructor(
     private fb: FormBuilder,
@@ -34,48 +35,63 @@ export class CadastrarProducaoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.producaoLoadForm();
+    this.infoRendaLoadForm();
+    this.producaoAnualLoadForm();
   }
 
-  private producaoLoadForm() {
+  private producaoAnualLoadForm() {
     this.producaoForm = this.fb.group({
+      dataProducao: ['', [Validators.required]],
+      descricao: [{ value: '', disabled: false }, [Validators.required]],
+      quantidade: [{ value: '', disabled: false }, [Validators.required]],
+      valorUnitario: [{ value: '', disabled: false }, [Validators.required]],
+    });
+  }
+
+  private infoRendaLoadForm() {
+    this.infoRendaForm = this.fb.group({
       quantidade: ['', [Validators.required]],
-      valorUnitario: [{ value: '', disabled: false }, [Validators.required]]
+      valorUnitario: [{ value: '', disabled: false }, [Validators.required]],
+      areaExplorada: [{ value: '', disabled: false }, [Validators.required]],
+      areaImovelPrincipal: [{ value: '', disabled: false }, [Validators.required]],
+      dataDaVisita: [{ value: '', disabled: false }, [Validators.required]],
+      localDoAtendimeno: [{ value: '', disabled: false }, [Validators.required]],
+      membrosDaFamilia: [{ value: '', disabled: false }, [Validators.required]],
+      orientacao: [{ value: '', disabled: false }, [Validators.required]],
+      quantidadePropriedades: [{ value: '', disabled: false }, [Validators.required]],
+      recomendacao: [{ value: '', disabled: false }, [Validators.required]],
+      situacaoAtual: [{ value: '', disabled: false }, [Validators.required]],
+      valorCobrado: [{ value: '', disabled: false }, [Validators.required]]
     });
 
   }
 
   onSelecionaProducao($event){
-    console.log($event);
-    this.rendaProduzida = this.toProducaoVO($event);
-    console.log('conferindo');
-    console.log(this.rendaProduzida);
+    this.itemProduzido = $event;
+    this.producaoForm.controls.descricao.setValue(this.itemProduzido['referencia']);
 
   }
-  toProducaoVO(producao): ProducaoVO{
-    console.log('valores');
-    console.log(producao);
-    return {
-      codItemProducao: producao.codigo,
-      descItemProducao: producao.descricao,
-      dataProducao: producao.dataProducao,
-      quantidade: producao.quantidade,
-      valorUnitario: producao.valorUnitario ,    
-      producaoAgropecuaria: producao.producaoAgropecuaria     
-    };
-  }
+
   onRemoveProducao($event){
     this.producoes = $event;
   }
-  insereProducao(){
-    event.preventDefault();
+  insereItemDeProducao(){
     const component = this;
     this.rendaProduzida = this.producaoForm.value;
+    this.rendaProduzida.codItemProducao = this.itemProduzido['codigo'];
+    this.rendaProduzida.producaoAgropecuaria = this.itemProduzido['producaoAgropecuaria'];
+
     if (!this.producoes.includes(this.rendaProduzida)) {
       this.producoes.push(this.rendaProduzida);
     } else {
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
+    console.log('Renda anual');
+    console.log(this.producoes);
+  }
+  insereProducao(){
+    event.preventDefault();
+
 
   }
   onInsereProdutor($event){

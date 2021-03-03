@@ -1,4 +1,21 @@
-<p>template-table-producao works!</p>
+<div class="waitingForConnection text-warning" *ngIf="percentualAgro()<50 && getRendaTotal() > 0">Produtor não enquadra no PRONAF!!!</div>
+<div>
+  <strong>
+    Renda total: {{ getRendaTotal() | currency: 'BRL'  }}
+  </strong>
+</div>
+<div class="row">
+  <div class="col-6">
+    <strong>
+      Renda Agropecuária({{ percentualAgro() | number: '1.0-0' }}%): {{ getRendaAgro() | currency: 'BRL'  }}
+    </strong>
+  </div>
+  <div class="col-6">
+    <strong>
+      Renda Não Agropecuária: {{ getRendaNAgro() | currency: 'BRL'  }}
+    </strong>
+  </div>
+</div>
 <table class="col-6 table">
     <thead>
       <tr>
@@ -22,11 +39,10 @@
             <i class="far fa-calendar-times"></i>
           </button>
         </td>
-        <td>aaa{{rnd.quantidade}}</td>
+        <td>{{rnd.descricao}}</td>
         <td>{{rnd.quantidade}}</td>
         <td>{{rnd.valorUnitario}}</td>
         <td>{{ getTotalProducao(rnd) | currency: 'BRL'  }}</td>
       </tr>
     </tbody>
   </table>
-  <div>Renda total: {{ getRendaTotal() | currency: 'BRL'  }}</div>
