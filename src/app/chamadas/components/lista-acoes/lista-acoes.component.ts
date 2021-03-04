@@ -53,7 +53,7 @@ export class ListaAcoesComponent implements AfterViewInit {
       }
 
     );
-  }
+  } 
   constructor(
     private callService: ChamadaService,
     private dialog: MatDialog,

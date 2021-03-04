@@ -1,0 +1,13 @@
+.social-data{
+
+border-radius: 10px;
+padding: 10px;
+}
+.texto{
+    height: 100px;
+    text-align: justify;
+}
+.social-data textarea{
+margin: 20px;
+width: 90%;
+}

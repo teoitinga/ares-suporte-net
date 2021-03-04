@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { environment as env } from './../../../environments/environment.prod';
 import { PesquisaModel } from 'src/app/info-view/painel-servicos/pesquisa.model';
+import { InfoRendaModel } from 'src/app/producao/models/info-renda.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class VisitaService {
   private readonly PATH: string = 'visitas';
   private readonly PATH_CALL: string = 'chamadas';
   private readonly PATH_FIND_PRODUTOR: string = 'produtores/find';
+  private readonly PATH_INFO_RENDA: string = 'inforenda';
   
   loadVisitas(): Observable<any>{
     return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
@@ -41,6 +43,9 @@ params = params.append('dataFinal', pesquisaModel.dataFinal);
   }
   sendVisita(visita: VisitaPostModel): Observable<any>{
     return this.http.post(`${env.BASE_API_URL}${this.PATH}`, visita);
+  }
+  createInfoRenda(renda: InfoRendaModel): Observable<any>{
+    return this.http.post(`${env.BASE_API_URL}${this.PATH_INFO_RENDA}`, renda);
   }
   setServico(servico: ServicosPrestadosModel) {
     //this.servico.next(servico);
