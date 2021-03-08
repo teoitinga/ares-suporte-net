@@ -1,117 +1,209 @@
-<div class="col-12 text-muted d-flex justify-content-center mt-3">
-  <h5>
-    <strong>Registro de produção e renda de Unidade Familiar</strong>
-  </h5>
-</div>
-<template-produtor-min (updated)="onInsereProdutor($event)"></template-produtor-min>
-<div class="col-12 text-muted d-flex justify-content-center mt-3">
-  <h5>
-    <strong>Informações sobre a fonte de renda</strong>
-  </h5>
-</div>
-<div class="col-12" [formGroup]="producaoForm">
-  <div class="row mb-3">
-    <div class="col-9">
-      <pesquisa-producao-autocomplete [inputObject]="itemProduzido" (updated)="onSelecionaProducao($event)">
-      </pesquisa-producao-autocomplete>
+<div *ngIf="!modeView" class="inputData">
+  <div class="col-12 text-muted d-flex justify-content-center mt-3">
+    <h5>
+      <strong>Registro de produção e renda de Unidade Familiar</strong>
+    </h5>
+  </div>
+  <template-produtor-min (updated)="onInsereProdutor($event)"></template-produtor-min>
+  <div class="col-12 text-muted d-flex justify-content-center mt-3">
+    <h5>
+      <strong>Informações sobre a fonte de renda</strong>
+    </h5>
+  </div>
+  <div class="col-12" [formGroup]="producaoForm">
+    <div class="row mb-3">
+      <div class="col-9">
+        <pesquisa-producao-autocomplete [inputObject]="itemProduzido" (updated)="onSelecionaProducao($event)">
+        </pesquisa-producao-autocomplete>
 
+      </div>
+      <div class="col-3">
+        <label for="data-producao" class="form-label">data da Producao</label>
+        <input type="date" onclick="this.select()" class="form-control" id="data-producao"
+          placeholder="informe a data da aquisição da renda" formControlName="dataProducao">
+      </div>
     </div>
-    <div class="col-3">
-      <label for="data-producao" class="form-label">data da Producao</label>
-      <input type="date" onclick="this.select()" class="form-control" id="data-producao"
-        placeholder="informe a data da aquisição da renda" formControlName="dataProducao">
+    <div class="row">
+      <div class="col-4">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" onclick="this.select()" class="form-control" id="descricao"
+          placeholder="descreva a fonte de renda" formControlName="descricao">
+      </div>
+      <div class="col-2">
+        <label for="quantidade" class="form-label">Quantidade</label>
+        <input type="number" onclick="this.select()" class="form-control" id="quantidade"
+          placeholder="informe a quantidade" formControlName="quantidade">
+      </div>
+      <div class="col-2">
+        <label for="valor-unitario" class="form-label">Valor unitário</label>
+        <input type="nunber" onclick="this.select()" class="form-control" id="valor-unitario"
+          placeholder="informe o Valor unitário" formControlName="valorUnitario">
+      </div>
+      <div class="col-3 d-flex align-items-end">
+        <button class="btn btn-success" [disabled] = "!producaoForm.valid" (click)="insereItemDeProducao()">
+          <span class="fa fa-leaf"></span>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-4">
-      <label for="descricao" class="form-label">Descrição</label>
-      <input type="text" onclick="this.select()" class="form-control" id="descricao"
-        placeholder="descreva a fonte de renda" formControlName="descricao">
-    </div>
-    <div class="col-2">
-      <label for="quantidade" class="form-label">Quantidade</label>
-      <input type="number" onclick="this.select()" class="form-control" id="quantidade"
-        placeholder="informe a quantidade" formControlName="quantidade">
-    </div>
-    <div class="col-2">
-      <label for="valor-unitario" class="form-label">Valor unitário</label>
-      <input type="nunber" onclick="this.select()" class="form-control" id="valor-unitario"
-        placeholder="informe o Valor unitário" formControlName="valorUnitario">
-    </div>
-    <div class="col-3 d-flex align-items-end">
-      <button class="btn btn-success" (click)="insereItemDeProducao()">
-        <span class="fa fa-leaf"></span>
-      </button>
+  <div class="col-12 text-muted d-flex justify-content-center mt-3">
+    <h5>
+      <strong>Informações sociais</strong>
+    </h5>
+  </div>
+  <div [formGroup]="infoRendaForm" class="social-data border">
+    <div class="row mt-1">
+      <div class="col-3">
+        <label for="dataDaVisita" class="form-label">Data da Visita</label>
+        <input type="date" onclick="this.select()" class="form-control" id="dataDaVisita"
+          placeholder="informe a data da visita" formControlName="dataDaVisita">
+      </div>
+      <div class="col-9">
+        <label for="localDoAtendimeno" class="form-label">Propriedade</label>
+        <input type="text" onclick="this.select()" class="form-control" id="localDoAtendimeno"
+          placeholder="descreva o nome da propriedade principal" formControlName="localDoAtendimeno">
+      </div>
+      <div class="row mt-3">
+        <div class="col-3">
+          <label for="quantidadePropriedades" class="form-label">Total de propriedades</label>
+          <input type="number" onclick="this.select()" class="form-control" id="quantidadePropriedades"
+            placeholder="informe o total de propriedades rurais" formControlName="quantidadePropriedades">
+        </div>
+        <div class="col-3">
+          <label for="membrosDaFamilia" class="form-label">Total de membros da Familia</label>
+          <input type="number" onclick="this.select()" class="form-control" id="membrosDaFamilia"
+            placeholder="informe a quantidade de membros da familia principal" formControlName="membrosDaFamilia">
+        </div>
+        <div class="col-3">
+          <label for="areaImovelPrincipal" class="form-label">Área do Imovel Principal</label>
+          <input type="number" onclick="this.select()" class="form-control" id="areaImovelPrincipal"
+            placeholder="informe a área do imóvel principal" formControlName="areaImovelPrincipal">
+        </div>
+        <div class="col-3">
+          <label for="areaExplorada" class="form-label">Área total Explorada</label>
+          <input type="nunber" onclick="this.select()" class="form-control" id="areaExplorada"
+            placeholder="informe a área explorada" formControlName="areaExplorada">
+        </div>
+
+      </div>
+      <div class="row mt-3">
+        <div class="col-3">
+          <label for="valorCobrado" class="form-label">Valor Cobrado</label>
+          <input type="nunber" onclick="this.select()" class="form-control" id="valorCobrado"
+            placeholder="informe o valor a ser cobrado pelo serviço" formControlName="valorCobrado">
+        </div>
+
+      </div>
+      <div class="row mt-3">
+        <label for="situacaoAtual" class="form-label">Situação Atual</label>
+        <textarea type="text" onclick="this.select()" class="form-control texto" id="situacaoAtual"
+          placeholder="Descreva a situação atual" formControlName="situacaoAtual"></textarea>
+      </div>
+      <div class="row mt-3">
+        <label for="orientacao" class="form-label">Orientações</label>
+        <textarea type="text" onclick="this.select()" class="form-control texto" id="orientacao"
+          placeholder="Descreva uma orientação ao produtor" formControlName="orientacao"></textarea>
+      </div>
+
+      <div class="row mt-3">
+        <label for="recomendacao" class="form-label">Recomendações</label>
+        <textarea type="text" onclick="this.select()" class="form-control texto" id="recomendacao"
+          placeholder="Descreva uma recomendação ao produtor" formControlName="recomendacao"></textarea>
+      </div>
     </div>
   </div>
+
+  <template-table-produtors [inputProdutores]="produtores"></template-table-produtors>
+  <template-table-producao [inputProducao]="producoes" (updated)="onRemoveProducao($event)"></template-table-producao>
+  <button class="btn btn-primary m-5" [disabled] = "!formRendaOk()" (click)="insereProducao()">Registrar renda</button>
 </div>
-<div class="col-12 text-muted d-flex justify-content-center mt-3">
-  <h5>
-    <strong>Informações sociais</strong>
-  </h5>
-</div>
-<div [formGroup]="infoRendaForm" class="social-data border">
-  <div class="row mt-1">
-    <div class="col-3">
-      <label for="dataDaVisita" class="form-label">Data da Visita</label>
-      <input type="date" onclick="this.select()" class="form-control" id="dataDaVisita"
-        placeholder="informe a data da visita" formControlName="dataDaVisita">
-    </div>
-    <div class="col-9">
-      <label for="localDoAtendimeno" class="form-label">Propriedade</label>
-      <input type="text" onclick="this.select()" class="form-control" id="localDoAtendimeno"
-        placeholder="descreva o nome da propriedade principal" formControlName="localDoAtendimeno">
-    </div>
-    <div class="row mt-3">
-      <div class="col-3">
-        <label for="quantidadePropriedades" class="form-label">Total de propriedades</label>
-        <input type="number" onclick="this.select()" class="form-control" id="quantidadePropriedades"
-          placeholder="informe o total de propriedades rurais" formControlName="quantidadePropriedades">
+<div *ngIf="modeView" class="view-data" id="documento">
+  <!--Aqui é o corpo do relatório a ser impresso-->
+  <div class="cabecalho border">
+    <div class="row align-bottom">
+      <div class="col-12 d-flex justify-content-center ">
+        <h3>
+          <strong>Declaração do Produtor</strong>
+        </h3>
       </div>
-      <div class="col-3">
-        <label for="membrosDaFamilia" class="form-label">Total de membros da Familia</label>
-        <input type="number" onclick="this.select()" class="form-control" id="membrosDaFamilia"
-          placeholder="informe a quantidade de membros da familia principal" formControlName="membrosDaFamilia">
-      </div>
-      <div class="col-3">
-        <label for="areaImovelPrincipal" class="form-label">Área do Imovel Principal</label>
-        <input type="number" onclick="this.select()" class="form-control" id="areaImovelPrincipal"
-          placeholder="informe a área do imóvel principal" formControlName="areaImovelPrincipal">
-      </div>
-      <div class="col-3">
-        <label for="areaExplorada" class="form-label">Área total Explorada</label>
-        <input type="nunber" onclick="this.select()" class="form-control" id="areaExplorada"
-          placeholder="informe a área explorada" formControlName="areaExplorada">
-      </div>
-
-    </div>
-    <div class="row mt-3">
-      <div class="col-3">
-        <label for="valorCobrado" class="form-label">Valor Cobrado</label>
-        <input type="nunber" onclick="this.select()" class="form-control" id="valorCobrado"
-          placeholder="informe o valor a ser cobrado pelo serviço" formControlName="valorCobrado">
-      </div>
-
-    </div>
-    <div class="row mt-3">
-      <label for="situacaoAtual" class="form-label">Situação Atual</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="situacaoAtual"
-        placeholder="Descreva a situação atual" formControlName="situacaoAtual"></textarea>
-    </div>
-    <div class="row mt-3">
-      <label for="orientacao" class="form-label">Orientações</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="orientacao"
-        placeholder="Descreva uma orientação ao produtor" formControlName="orientacao"></textarea>
-    </div>
-
-    <div class="row mt-3">
-      <label for="recomendacao" class="form-label">Recomendações</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="recomendacao"
-        placeholder="Descreva uma recomendação ao produtor" formControlName="recomendacao"></textarea>
     </div>
   </div>
+  <fieldset>
+    <legend>Titular(es)</legend>
+    <div class="produtores" *ngFor="let prd of produtores">
+      <div class="row">
+        <div class="col-2">{{prd.cpf}}</div>
+        <div class="col-10">{{prd.nome}}</div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="border">
+    <legend>Outras Informações</legend>
+    <div class="outras-informacoes">
+      <div class="row">
+        <div class="col-4">Data da visita: {{ fonteDerenda.dataDaVisita | date: 'dd/MM/yyyy' }}</div>
+        <div class="col-8">Local: {{fonteDerenda.localDoAtendimeno}}</div>
+      </div>
+      <div class="row">
+        <div class="col-5">Área total: {{fonteDerenda.areaExplorada}} hectares</div>
+        <div class="col-5">Área do imóvel principal: {{fonteDerenda.areaImovelPrincipal}} hectares</div>
+      </div>
+      <div class="row">
+        <div class="col-5">Total de membros da família: {{fonteDerenda.membrosDaFamilia}}</div>
+        <div class="col-5">Total de propriedades: {{fonteDerenda.quantidadePropriedades}}</div>
+      </div>
+
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Relatório de atendimento</legend>
+    <p><strong>Situação atual</strong></p>
+    <p>{{fonteDerenda.situacaoAtual}}</p>
+    <p><strong>Orientação</strong> </p>
+    <p>{{fonteDerenda.situacaoAtual}}</p>
+    <p><strong>Recomendação</strong></p>
+    <p>{{fonteDerenda.recomendacao}}</p>
+  </fieldset>
+  <fieldset>
+    <legend>Renda/Produção</legend>
+    <div class="row">
+      <div class="col-5">Item produzido</div>
+      <div class="col-1">Quantidade</div>
+      <div class="col-1">Valor/Unid.</div>
+      <div class="col-2">Valor Total</div>
+    </div>
+    <div class="row renda" *ngFor="let rnd of producoes">
+      <div class="row">
+        <div class="col-5">{{rnd.descricao}}</div>
+        <div class="col-1">{{rnd.quantidade}}</div>
+        <div class="col-1">{{rnd.valorUnitario}}</div>
+        <div class="col-2">{{getValorItem(rnd) | currency:'BRL':true:'1.2-2'}}</div>
+      </div>
+    </div>
+    <div class="row bg-ligth">
+      <div class="col-10">Renda total anual</div>
+      <div class="col-2">{{getRendaAnual() | currency:'BRL':true:'1.2-2'}}</div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Assinatura</legend>
+    <p>DECLARO, para os devidos fins de direito, sob as penas da lei, que as informações prestadas e documentos que
+      apresento, são verdadeiros e autênticos (fieis a verdade e condizentes com a realidade dos fatos à época).</p>
+      <p>
+        <strong>
+          Tarumirim/MG, {{ fonteDerenda.dataDaVisita | date: 'dd/MM/yyyy' }}
+        </strong>
+      </p>
+    <div class="produtores" *ngFor="let prd of produtores">
+      <div class="row">
+        <div class="col-5 bt-1 m-3">{{prd.nome}} - CPF: {{prd.cpf}}</div>
+      </div>
+    </div>
+  </fieldset>
 </div>
 
-<template-table-produtors [inputProdutores]="produtores"></template-table-produtors>
-<template-table-producao [inputProducao]="producoes" (updated)="onRemoveProducao($event)"></template-table-producao>
-<button class="btn btn-primary m-5" (click)="insereProducao()">Registrar renda</button>
+<div class="" *ngIf="modeView">
+  <button class="btn btn-success m-5" (click)="print()">Imprimir documento</button>
+  <button class="btn btn-warning m-5" (click)="cancelaInformacao()">Não concorda</button>
+  <button class="btn btn-primary m-5" [disabled]="!impressoOk" (click)="registraInformacao()">concorda</button>
+</div>

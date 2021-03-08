@@ -1,5 +1,23 @@
-<h5 mat-dialog-title>Declaração de Renda<h5>
-
+<div class="flex-container">
+    <button  type="button" (click)="print()">
+        <img id="print-button" src="../../../../assets/imprimir.png" alt="" title="Imprimir declaração">
+    </button>
+</div>
+<div>
+    <div class="declaracao" id="declaracao-de-producao">
+        <div class="row d-flex justify-content-start border">
+            <div class="col-2">
+                <img src="../../../../assets/DAP-Pronaf.jpg" alt="">
+            </div>
+            <div class="col-10 d-flex justify-content-center align-items-center border">
+                <h3>
+                    <strong>
+                        Declaração de Renda
+                    </strong>
+                </h3>
+            </div>
+        </div>
+    
         <div mat-dialog-content>
             <p>
                 <strong>
@@ -7,8 +25,8 @@
                 </strong>
             </p>
             <p>Declaro para fins de emissão de laudo as informações prestadas são verdadeiras e comprovadas.</p>
-
-            <div *ngFor="let prd of data.produtores" class="mt-5">
+    
+            <div *ngFor="let prd of data.produtores" class="">
                 <p>
                     {{prd.nome}} - CPF: {{prd.cpf}}
                 </p>
@@ -24,37 +42,37 @@
             <div class="row mt-5">
                 <div class="col-3">
                     Área total explorada: {{data.areaExplorada}} hectares
-
+    
                 </div>
                 <div class="col-3">
                     total de propriedades exploradas: {{data.quantidadePropriedades}} propriedades.
-
+    
                 </div>
                 <div class="col-3">
                     Área do imóvel principal: {{data.areaImovelPrincipal}} hectares
-
+    
                 </div>
                 <div class="col-3">
                     Total de membros da unidade familiar: {{data.membrosDaFamilia}}
-
+    
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col-12">
                     Relatório de assitência técnica
-
+    
                 </div>
                 <div class="col-12">
                     Situação atual: {{data.situacaoAtual}}
-
+    
                 </div>
                 <div class="col-12">
-
+    
                     Orientações: {{data.orientacao}}
                 </div>
                 <div class="col-12">
                     Recomendações: {{data.recomendacao}}
-
+    
                 </div>
             </div>
             <p class="mt-5">E que durante o último ano obtivemos a renda confrme descrita abaixo:</p>
@@ -78,17 +96,21 @@
                     </tbody>
                 </table>
             </div>
-
-        </div>
-        <div class="m-5">
-            <p class="mt-5">Por ser verdade, firmo o presente.</p>
-            <div *ngFor="let prd of data.produtores" class="mt-5">
-                <span class="ass mb-6">
-                    {{prd.nome}} - CPF: {{prd.cpf}}
-                </span>
+            <div class="m-5">
+                <p class="mt-5">Por ser verdade, firmo o presente.</p>
+                <div *ngFor="let prd of data.produtores" class="mt-5">
+                    <span class="ass mb-6">
+                        {{prd.nome}} - CPF: {{prd.cpf}}
+                    </span>
+                </div>
             </div>
         </div>
-        <div mat-dialog-actions class="mt-5">
-            <button mat-button mat-dialog-close="true" (click)="confirm()" tabindex="2">Confirma</button>
-            <button mat-button mat-dialog-close="false" (click)="close()" tabindex="-1">Não confirma</button>
-        </div>
+    </div>
+
+</div>
+<div>
+    <div mat-dialog-actions class="mt-5">
+        <button mat-button mat-dialog-close="true" [disabled]="!rendaOk" (click)="confirm()" tabindex="2">Confirma</button>
+        <button mat-button mat-dialog-close="false" (click)="close()" tabindex="-1">Não confirma</button>
+    </div>
+</div>

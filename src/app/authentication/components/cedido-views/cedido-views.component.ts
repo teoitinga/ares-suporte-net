@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cedido-views',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CedidoViewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
-
+  informaProducao(){
+    this.router.navigate(['/visitas/renda/registro-renda']);
+  }
 }

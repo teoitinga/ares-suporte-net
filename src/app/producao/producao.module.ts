@@ -13,12 +13,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { TemplateRendaSheetComponent } from './components/template-renda-sheet/template-renda-sheet.component';
+import { InfoRendaComponent } from './components/info-renda/info-renda.component';
 
 @NgModule({
   declarations: [
     CadastrarProducaoComponent, 
     PesquisaProducaoAutocompleteComponent, 
-    ProducaoComponent],
+    ProducaoComponent, TemplateRendaSheetComponent, InfoRendaComponent],
   exports: [
     CadastrarProducaoComponent, 
     PesquisaProducaoAutocompleteComponent, 

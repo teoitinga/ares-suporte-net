@@ -1,3 +1,4 @@
+import { InfoRendaComponent } from './components/info-renda/info-renda.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastrarProducaoComponent } from './components/cadastrar-producao/cadastrar-producao.component';
@@ -10,6 +11,10 @@ export const routes: Routes = [
         {
           path: '',
           component: CadastrarProducaoComponent
+        },
+        {
+          path:'info',
+          component: InfoRendaComponent
         }
       ]
     }

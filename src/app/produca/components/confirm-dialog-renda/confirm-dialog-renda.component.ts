@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-confirm-dialog-renda',
@@ -8,9 +10,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ConfirmDialogRendaComponent{
 
+  rendaOk:boolean = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ConfirmDialogRendaComponent>
+    public dialogRef: MatDialogRef<ConfirmDialogRendaComponent>,
+    private router: Router
   ) {
     console.log(data);
    }
@@ -19,6 +24,9 @@ export class ConfirmDialogRendaComponent{
   }
   confirm() {
     this.dialogRef.close(true);
-  }
 
+  }
+  print(){
+    this.rendaOk = true;
+  }
 }

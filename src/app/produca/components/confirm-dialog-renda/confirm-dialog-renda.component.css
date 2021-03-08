@@ -1,7 +1,11 @@
-*{
-font-size: medium;
-
+#print-button{
+    width: 80px;
+    height: 80px;
 }
-.ass{
-    border-top: solid;
+.declaracao >div>div>img{
+    width: 80px;
+    height: 80px;
+}
+.declaracao{
+    display: none;
 }
