@@ -76,7 +76,7 @@ export class CadastrarProducaoComponent implements OnInit {
 
   onSelecionaProducao($event) {
     this.itemProduzido = $event;
-    this.producaoForm.controls.descricao.setValue(this.itemProduzido['referencia']);
+    this.producaoForm.controls.descricao.setValue(this.itemProduzido['descricao']);
 
   }
 

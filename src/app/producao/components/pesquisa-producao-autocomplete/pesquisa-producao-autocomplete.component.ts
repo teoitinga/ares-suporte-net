@@ -47,7 +47,7 @@ export class PesquisaProducaoAutocompleteComponent implements OnInit {
         );
   }
   displayfn(value){
-    return value?value.descricao:value;
+    return value?value.referencia:value;
   }
   
   seleciona(value){
