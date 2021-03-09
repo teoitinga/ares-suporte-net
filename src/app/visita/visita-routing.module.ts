@@ -1,3 +1,4 @@
+import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
 import { ProducaoComponent } from './../producao/components/producao/producao.component';
 import { PainelServicosComponent } from './../info-view/painel-servicos/painel-servicos.component';
 import { AuthGuard } from './../authentication/auth-guard ';
@@ -42,6 +43,12 @@ const routes: Routes = [
     {
       path: 'cadastrar-car-emissao',
       component: CarEmissaoComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
+    },
+    {
+      path: 'cadastrar-boa-horta',
+      component: PrgHortaComponent,
       canActivate: [AuthGuard],
       data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
     },

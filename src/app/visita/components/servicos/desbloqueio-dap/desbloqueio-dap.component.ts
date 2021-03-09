@@ -31,7 +31,7 @@ export class DesbloqueioDapComponent implements OnInit {
       cpfReponsavel: this.usuario,
       ocorrencia: '***',
       serviceProvidedCode: 'DAPDBL',
-      servicoPrestado: 'Levantamento de informações para incíio de processo de desbloqueio de DAP.',
+      servicoPrestado: 'Levantamento de informações para início de processo de desbloqueio de DAP.',
       valor: 0
     }
     this.chamadas.push(servico01);

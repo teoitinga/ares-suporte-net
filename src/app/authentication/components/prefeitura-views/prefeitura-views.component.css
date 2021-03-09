@@ -3,14 +3,6 @@
 
 }
 
-.card{
-    margin-top: 20%;
-    opacity: 0.4;
-
-}
-.card:hover{
-    opacity: 0.8;
-}
 .card-body{
 
 }
@@ -22,11 +14,7 @@
 }
 
 .panel-car{
-    background: #FFFFFF url("../../../../assets/car-page.png") no-repeat right top;
-    background-clip: content-box;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+
 }
 div .card{
     width: 18rem;
@@ -37,11 +25,11 @@ img{
     height: 175px;
 }
 .card{
-    margin-top: 20%;
-    opacity: 0.3;
+
 }
 .card:hover{
-    opacity: 0.8;
+    
+    box-shadow: 5px 10px #888888;
 }
 div .card{
     width: 18rem;

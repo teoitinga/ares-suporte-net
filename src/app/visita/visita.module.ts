@@ -40,6 +40,7 @@ import { PainelServicosComponent } from '../info-view/painel-servicos/painel-ser
 import {MatSelectModule} from '@angular/material/select';
 import { ProducaoComponent } from '../producao/components/producao/producao.component';
 import { PesquisaProducaoAutocompleteComponent } from '../producao/components/pesquisa-producao-autocomplete/pesquisa-producao-autocomplete.component';
+import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { PesquisaProducaoAutocompleteComponent } from '../producao/components/pe
     EmissaoDapComponent,
     DesbloqueioDapComponent,
     PainelServicosComponent,
+    PrgHortaComponent,
   ],
   imports: [
     CommonModule,
