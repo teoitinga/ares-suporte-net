@@ -1,5 +1,6 @@
 {
     "/api/v1":{
+
         "target": "http://192.168.15.29:8080",
         "secure": false
     }

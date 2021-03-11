@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { Chamada } from 'src/app/visita/models/visita-post.model';
 
 @Component({
@@ -22,7 +23,11 @@ export class PrgHortaComponent implements OnInit {
   TEMPLATE_SUB: string = 'Registros de beneficiários do programa de distribuição de sementes de hortaliças';
 
   usuario: string = '';
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { 
+    this.usuario = this.authenticationService.getUserName();
+  }
 
   ngOnInit(): void {
     let servico01: Chamada = {
