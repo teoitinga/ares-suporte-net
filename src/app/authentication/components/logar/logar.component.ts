@@ -57,13 +57,16 @@ export class LogarComponent implements OnInit {
 
       },
       error=>{
-        if(error.error.status==0){
-          this.mesageService.sendError(this._snackBar, "Erro", "Ocorreu um erro desconhecido.");
+        console.error(error);
+        if( error.status===0 ){
+          this.mesageService.sendError(this._snackBar, "Erro", error.message);
+
+        }else{
+          this.mesageService.sendError(this._snackBar, "Erro", error.message);
+          this.status = error.status;
+          this.loginmessage = error.message;
 
         }
-       this.mesageService.sendError(this._snackBar, "Erro", error.error.message);
-       this.status = error.error.status;
-       this.loginmessage = error.error.message;
       }
     )
 

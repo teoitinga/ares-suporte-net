@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ListaAcoesComponent } from '../chamadas/components/lista-acoes/lista-acoes.component';
+import { AuthGuard } from './auth-guard ';
 
 
 export const routes: Routes = [
@@ -18,11 +19,15 @@ export const routes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
       },
       {
         path: 'chamadas',
-        component: ListaAcoesComponent
+        component: ListaAcoesComponent,
+        canActivate: [AuthGuard],
+        data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
       }
     ]
   }

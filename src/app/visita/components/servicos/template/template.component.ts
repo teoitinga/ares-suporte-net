@@ -93,7 +93,7 @@ export class TemplateComponent implements OnInit {
     this.visitaForm = new FormGroup({
       localDoAtendimeno: new FormControl('', [Validators.required, Validators.minLength(6)]),
       dataDaVisita: new FormControl('', [Validators.required]),
-      municipio: new FormControl('***', [Validators.required])
+      municipio: new FormControl('Tarumirim', [Validators.required])
     });
   }
 

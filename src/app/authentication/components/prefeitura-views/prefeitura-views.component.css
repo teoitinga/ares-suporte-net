@@ -1,36 +1,15 @@
-
-.container-prefeitura{
-
-}
-
-.card-body{
-
-}
-.card-title{
-
-}
-.card-text{
-
-}
-
-.panel-car{
-
-}
-div .card{
-    width: 18rem;
-    margin-bottom: 1rem;
-}
 img{
-    width: 16rem;
-    height: 175px;
+    width: 150px;
 }
 .card{
-
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 15px;
 }
 .card:hover{
-    
-    box-shadow: 5px 10px #888888;
-}
-div .card{
-    width: 18rem;
+    border: 1px solid #BFBFBF;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }

@@ -1,42 +1,71 @@
-<div class="container-fluid col-12">
-  <div class="row agro-header text-white">
+<header>
+  <div class="container agro-header text-white">
     <div class="row">
-      <h1 class="moon">DARK-<small><i>deméter</i></small></h1>
+      <h1 class="moon dark-text">DARK<small class="moon demeter-text"><i> - deméter</i></small></h1>
     </div>
     <div class="row">
       <small class="sky">Sistema de monitoramento de atividades e projetos</small>
     </div>
   </div>
-  <div class="row d-flex flex-sm-row-reverse justify-content-center align-items-center">
-    <img src="../../../../assets/320x200/pastagem-preparo-de-solo.png">
-    <img src="../../../../assets/320x200/progenetica.png">
-    <img src="../../../../assets/320x200/producao-pec.png">
-    <div class="form d-flex justify-content-center align-items-center">
-      <form [formGroup]="form"  class="login-form p-3  border"  novalidate>
-        <div class="form-group" >
-          <div>
+</header>
+<main class="container">
+  <div class="row">
+    <div class="col-12 col-md-3 order-md-4">
+      <div class="d-flex justify-content-center align-items-center">
+        <form [formGroup]="form" class="login-form p-3  border" novalidate>
+          <div class="form-group">
             <div>
-              <label class="text-light">
-                Usuário:
-              </label>
-              <input class="form-control" type="text" formControlName="login">
+              <div>
+                <label class="text-light">
+                  Usuário:
+                </label>
+                <input class="form-control" type="text" formControlName="login">
+              </div>
+            </div>
+            <div>
+              <div>
+                <label class="text-light">
+                  Senha:
+                </label>
+                <input class="form-control" type="password" formControlName="senha">
+              </div>
             </div>
           </div>
           <div>
-            <div>
-              <label class="text-light">
-                Senha:
-              </label>
-              <input class="form-control" type="password" formControlName="senha">
+            <div class="d-flex justify-content-center align-items-center">
+              <button mat-raised-button class="text-light mt-3" color="primary" type="button" (click)="logar()"
+                [disabled]="!form.valid">acessar</button>
             </div>
           </div>
-        </div>
-        <div>
-          <div class="d-flex justify-content-center align-items-center">
-            <button mat-raised-button color="primary" class="text-light mt-3" type="button" (click)="logar()"
-              [disabled]="!form.valid">acessar</button>
-          </div>
-        </div>
-      </form>     
-    </div>   
+        </form>
+      </div>
+    </div>
+    <picture class="col-12 col-md-3 order-md-1">
+      <img class="img-fluid" src="../../../../assets/320x200/pastagem-preparo-de-solo.png">
+    </picture>
+    <picture class="col-12 col-md-3 order-md-1">
+      <img class="img-fluid" src="../../../../assets/320x200/progenetica.png">
+    </picture>
+    <picture class="col-12 col-md-3 order-md-1">
+      <img class="img-fluid" src="../../../../assets/320x200/producao-pec.png">
+    </picture>
   </div>
+</main>
+<footer class="d-flex flex-column justify-content-between align-items-center text-light p-2">
+      Desenvolvido por João Paulo
+      <nav>
+        <ul>
+          <li>
+            <i class="col fa fa-envelope mr-3" aria-hidden="true"></i>teo.itinga@gmail.com
+          </li>
+          <li>
+            <i class="col fa fa-whatsapp mr-3" aria-hidden="true"></i>(33) 9 9906-5029
+          </li>
+          <li>
+            <i class="col fa fa-phone mr-3" aria-hidden="true"></i>(33) 9 9906-5029 / (33) 3233-1530
+          </li>
+        </ul>
+      </nav>
+
+
+</footer>

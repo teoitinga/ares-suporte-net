@@ -50,7 +50,7 @@
     <div class="col-md-4">
       <label for="municipio" class="form-label">Cidade</label>
       <select id="municipio" class="form-select mb-2" formControlName="municipio">
-        <option *ngFor="let mn of municipios">{{mn.nome}}</option>
+        <option *ngFor="let mn of municipios" value="{{mn.nome}}">{{mn.nome}}</option>
       </select>
     </div>
   </div>

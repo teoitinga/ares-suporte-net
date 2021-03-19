@@ -70,7 +70,7 @@ export class CadastrarVisitaComponent implements OnInit {
       situacaoAtual: new FormControl('O produtor solicitou apoio pois necessita da prestação deste serviço', [Validators.required]),
       orientacao: new FormControl('***'),
       recomendacao: new FormControl('***'),
-      municipio: new FormControl('')
+      municipio: new FormControl('Tarumirim')
     });
   }
 
@@ -113,7 +113,6 @@ export class CadastrarVisitaComponent implements OnInit {
     if(!this.produtores.includes(this.produtor)){
       this.produtores.push(this.produtor);
     }else{
-
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
     this.produtoresFormClean();
@@ -152,6 +151,7 @@ export class CadastrarVisitaComponent implements OnInit {
     this.produtoresForm.controls['nome'].setValue('');
     this.produtoresForm.controls['nome'].setValidators([Validators.required, Validators.minLength(6)]);
   }
+
   produtoresFormClean() {
     this.produtor = null;
     this.produtoresForm = this.fb.group({
@@ -159,13 +159,7 @@ export class CadastrarVisitaComponent implements OnInit {
       nome: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-  /*
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
-  }
-  */
+
   incluirServico(event){
     const component = this;
     event.preventDefault();
@@ -188,16 +182,11 @@ export class CadastrarVisitaComponent implements OnInit {
       valor: new FormControl('', [Validators.required])
     });
   }
-  /*
-  removerChamada(value, event){
-    event.preventDefault();
-    this.chamadas = this.chamadas.filter(item => item != value);
-    
-  }
-  */
+
   formularioValido():boolean{
     return this.chamadas.length>0?true:false;
   }
+  
   registrarVisita(){
 
     //Configurando visita com os dados do form

@@ -35,7 +35,7 @@ export class PrgHortaComponent implements OnInit {
       ocorrencia: '***',
       serviceProvidedCode: 'PRGMDSMH',
       status: 'FINALIZADA',
-      servicoPrestado: 'Doação de sementes de hostaliças a beneficiário',
+      servicoPrestado: 'Doação de sementes de hortaliças a beneficiário',
       valor: 0
     }
     this.chamadas.push(servico01);
