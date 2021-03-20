@@ -30,7 +30,7 @@ export class TecnicoViewsComponent implements OnInit {
     this.router.navigate(['/visitas/lista-visitas']);
   }
   ferramentasDoTecnico(){
-    console.log('Ferramentas do técnico');
+    this.router.navigate(['/login/tools']);
   }
   relatorio(){
     this.router.navigate(['/visitas/info']);

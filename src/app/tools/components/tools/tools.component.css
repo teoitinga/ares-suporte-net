@@ -1,0 +1,15 @@
+img{
+    width: 150px;
+}
+.card{
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 15px;
+}
+.card:hover{
+    border: 1px solid #BFBFBF;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}

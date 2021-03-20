@@ -1,3 +1,4 @@
+import { ModalPerdaDeCargaComponent } from './tools/components/perda-de-carga.modal/perda-de-carga.modal.component';
 import { VisitaModule } from './visita/visita.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { ConfirmDialogComponent } from './chamadas/components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogRendaComponent } from './produca/components/confirm-dialog-renda/confirm-dialog-renda.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { ConfirmDialogRendaComponent } from './produca/components/confirm-dialog
     MatButtonModule,
     MatIconModule,
     
-    AppRoutingModule
+    AppRoutingModule,
 ],
   exports: [
     RouterModule

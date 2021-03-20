@@ -1,3 +1,4 @@
+import { ToolsComponent } from './../tools/components/tools/tools.component';
 import { ProducaoModule } from './../producao/producao.module';
 import { HeaderAuthenticationComponent } from './components/header-auth/header-auth.component';
 import { NgModule } from '@angular/core';
@@ -26,6 +27,8 @@ import { CoordenadorViewsComponent } from './components/coordenador-views/coorde
 import { GerenteViewsComponent } from './components/gerente-views/gerente-views.component';
 import { ClienteViewsComponent } from './components/cliente-views/cliente-views.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PerdaDeCargaComponent } from '../tools/components/perda-de-carga/perda-de-carga.component';
+import { ModalPerdaDeCargaComponent } from '../tools/components/perda-de-carga.modal/perda-de-carga.modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     AdministradorViewsComponent,
     CoordenadorViewsComponent,
     GerenteViewsComponent,
-    ClienteViewsComponent
+    ClienteViewsComponent,
+    ToolsComponent,
+    PerdaDeCargaComponent,
+    ModalPerdaDeCargaComponent
+    
   ],
   imports: [
     CommonModule,
@@ -56,7 +63,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDialogModule,
     ReactiveFormsModule,
     ProducaoModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    
     
   ],
   exports:[

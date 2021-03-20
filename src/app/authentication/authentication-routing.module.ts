@@ -1,4 +1,5 @@
-import { CadastrarProducaoComponent } from './../producao/components/cadastrar-producao/cadastrar-producao.component';
+import { PerdaDeCargaComponent } from './../tools/components/perda-de-carga/perda-de-carga.component';
+import { ToolsComponent } from './../tools/components/tools/tools.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogarComponent } from './components/logar/logar.component';
 import { NgModule } from '@angular/core';
@@ -28,6 +29,18 @@ export const routes: Routes = [
         component: ListaAcoesComponent,
         canActivate: [AuthGuard],
         data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
+      },
+      {
+        path: 'tools',
+        component: ToolsComponent,
+        canActivate: [AuthGuard],
+        data: {role_acess: ['TECNICO', 'CEDIDO']},
+      },
+      {
+        path: 'hman',
+        component: PerdaDeCargaComponent,
+        canActivate: [AuthGuard],
+        data: {role_acess: ['TECNICO', 'CEDIDO']},
       }
     ]
   }
