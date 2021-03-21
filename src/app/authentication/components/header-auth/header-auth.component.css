@@ -30,6 +30,7 @@ picture>img{
 header{
     background-color: #87f;
 }
+
 main{
     min-height: calc(100vh - 90px - 50px - 30px);
     background-color: rgb(182, 215, 238);
