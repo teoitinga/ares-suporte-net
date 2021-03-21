@@ -1,11 +1,12 @@
 import { tbl_conversao, tubulacao } from "./tubulacao.model";
 
 export const TUBOS: tubulacao[] = [
-    {descricao: 'Tubo PVC soldável DN 25 PN 60', dn: 25, di: 22.4, material: 'PVC', k: 140},
-    {descricao: 'Tubo PVC soldável DN 32 PN 60', dn: 32, di: 27.8, material: 'PVC', k: 140},
-    {descricao: 'Tubo PVC soldável DN 40 PN 60', dn: 40, di: 38.08, material: 'PVC', k: 140},
-    {descricao: 'Tubo PVC soldável DN 50 PN 60', dn: 50, di: 44.0, material: 'PVC', k: 140},
-    {descricao: 'Tubo PVC soldável DN 75 PN 60', dn: 75, di: 70.04, material: 'PVC', k: 140},
+    {descricao: 'PVC soldável DN 20 PN 60', dn: 20, di: 17.0, material: 'PVC', k: 140},
+    {descricao: 'PVC soldável DN 25 PN 60', dn: 25, di: 21.6, material: 'PVC', k: 140},
+    {descricao: 'PVC soldável DN 32 PN 60', dn: 32, di: 27.8, material: 'PVC', k: 140},
+    {descricao: 'PVC soldável DN 40 PN 60', dn: 40, di: 35.2, material: 'PVC', k: 140},
+    {descricao: 'PVC soldável DN 50 PN 60', dn: 50, di: 44.0, material: 'PVC', k: 140},
+    {descricao: 'PVC soldável DN 75 PN 60', dn: 75, di: 66.6, material: 'PVC', k: 140},
 ]
 export const TBL_CONV: tbl_conversao[] = [
     {numSaidas: 1, fator: 1},

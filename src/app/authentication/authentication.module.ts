@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { ToolsComponent } from './../tools/components/tools/tools.component';
 import { ProducaoModule } from './../producao/producao.module';
 import { HeaderAuthenticationComponent } from './components/header-auth/header-auth.component';
@@ -27,8 +28,7 @@ import { CoordenadorViewsComponent } from './components/coordenador-views/coorde
 import { GerenteViewsComponent } from './components/gerente-views/gerente-views.component';
 import { ClienteViewsComponent } from './components/cliente-views/cliente-views.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { PerdaDeCargaComponent } from '../tools/components/perda-de-carga/perda-de-carga.component';
-import { ModalPerdaDeCargaComponent } from '../tools/components/perda-de-carga.modal/perda-de-carga.modal.component';
+import { DialogViewData, PerdaDeCargaComponent } from '../tools/components/perda-de-carga/perda-de-carga.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { ModalPerdaDeCargaComponent } from '../tools/components/perda-de-carga.m
     ClienteViewsComponent,
     ToolsComponent,
     PerdaDeCargaComponent,
-    ModalPerdaDeCargaComponent
+    DialogViewData,
     
   ],
   imports: [
@@ -64,7 +64,7 @@ import { ModalPerdaDeCargaComponent } from '../tools/components/perda-de-carga.m
     ReactiveFormsModule,
     ProducaoModule,
     MatAutocompleteModule,
-    
+    SharedModule   
     
   ],
   exports:[

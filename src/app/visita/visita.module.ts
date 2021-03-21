@@ -1,7 +1,5 @@
-import { CadastrarProducaoComponent } from './../producao/components/cadastrar-producao/cadastrar-producao.component';
 import { ProducaoRoutingModule } from './../producao/producao-routing.module';
 import { ProducaoModule } from './../producao/producao.module';
-import { HeaderAuthenticationComponent } from './../authentication/components/header-auth/header-auth.component';
 import { AuthenticationModule } from './../authentication/authentication.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -38,8 +36,6 @@ import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/d
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PainelServicosComponent } from '../info-view/painel-servicos/painel-servicos.component';
 import {MatSelectModule} from '@angular/material/select';
-import { ProducaoComponent } from '../producao/components/producao/producao.component';
-import { PesquisaProducaoAutocompleteComponent } from '../producao/components/pesquisa-producao-autocomplete/pesquisa-producao-autocomplete.component';
 import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
 
 @NgModule({

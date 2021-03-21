@@ -1,26 +1,48 @@
 <header-auth></header-auth>
-Cálculo da perda de carga com a equação de Hazen–Williams
-<main class="d-flex-stretch justify-content-center align-items-center">
+<p class="d-flex justify-content-center m-3">
+    <strong>
+        Cálculo da perda de carga com a equação de Hazen–Williams
+    </strong>
+</p>
+<main class="d-flex-stretch justify-content-center  border align-items-center p-2">
     <section>
         <form class="form-horizontal" role="form" [formGroup]="formCalc">
-            <label for="tubulacao">Tubulacao</label>
-            <select id="tubulacao" class="form-control" formControlName="tubo">
-                <option *ngFor='let tb of tubos' [ngValue]="tb">{{tb.descricao}}</option>
-            </select>
-
-            <label class="form-label" for="vazao">Vazão (m<sup>3</sup>/h)</label>
-            <input type="number" min="1" class="form-control" id="vazao" formControlName="vazao">
-            <label class="form-label" for="distancia">Comprimento (m)</label>
-            <input type="number" min="1" class="form-control" id="distancia" formControlName="comprimento">
-            <label for="saidas">Num. saídas (qtd)</label>
-            <input type="number" min="1" max="100" class="form-control" id="saidas" formControlName="qtdSaida">
-
-            <div class="row m-3">
-                <button id="calcular" (click)='calcular()' class="btn btn-primary btn-block">Calcular perda de carga</button>
+            <div class="row m-2">
+                <div class="col-12 col-sm-1">
+                    <label for="tubulacao">Tubulacao</label>
+                </div>
+                <div class="col-12 col-sm-10">
+                    <select id="tubulacao" class="form-control" formControlName="tubo" style="width: 250px;">
+                        <option *ngFor='let tb of tubos' [ngValue]="tb">{{tb.descricao}}</option>
+                    </select>
+                </div>
             </div>
-            <div id="hman"></div>
+            <div class="row m-2 align-items-center justify-content-start">
+                <div class="col-12 col-sm-1">
+                    <label class="form-label" for="vazao">Vazão (m<sup>3</sup>/h)</label>
+                </div>
+                <div class="col-12 col-sm-2">
+                    <input type="number" min="1" class="form-control" id="vazao"  formControlName="vazao">
+                </div>
+                <div class="col-12 col-sm-2">
+                    <label class="form-label" for="distancia">Comprimento (m)</label>
+                </div>
+                <div class="col-12 col-sm-2">
+                    <input type="number" min="1" class="form-control" id="distancia" formControlName="comprimento">
+                </div>
+                <div class="col-12 col-sm-2">
+                    <label for="saidas">Num. saídas (qtd)</label>
+                </div>
+                <div class="col-12 col-sm-2">
+                    <input type="number" min="1" max="100" class="form-control" id="saidas" formControlName="qtdSaida">
+                </div>
+            </div>
+
+            <div class="row m-5">
+                <button id="calcular" (click)='calcular()' class="btn btn-primary">Calcular perda de
+                    carga</button>
+            </div>
         </form>
     </section>
-    Perda de Carga: {{_hman | number:'0.2-2'}} mca
-    Velocidade: {{_vms | number:'0.2-2'}} m/s
+
 </main>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as moment from 'moment';
 
 import { CpfValidator } from './../../../shared/validators/cpf-validator';
 import { MessageService } from 'src/app/shared/service/responses-messages.service';
@@ -12,7 +11,6 @@ import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados
 import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.service';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
 import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-cadastrar-visita',
@@ -117,13 +115,7 @@ export class CadastrarVisitaComponent implements OnInit {
     }
     this.produtoresFormClean();
   } 
-  /*
-  removerProdutor(value, event){
-    event.preventDefault();
-    this.produtores = this.produtores.filter(item => item != value);
-    
-  }
-  */
+
   verificarProdutor(value:any){
     const cpf: string = value.target.value.replace(/\.|\-/g, '');
     let nomeProdutor: string = '';

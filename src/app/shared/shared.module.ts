@@ -12,6 +12,7 @@ import { TemplateProdutorMinComponent } from './components/template-produtor-min
 import { TemplateTableProdutorsComponent } from './components/template-table-produtors/template-table-produtors.component';
 import { TemplateTableServicosComponent } from './components/template-table-servicos/template-table-servicos.component';
 import { TemplateTableProducaoComponent } from './components/template-table-producao/template-table-producao.component';
+import { ValoresDecimaisDirective } from './directives/valores.decimais.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TemplateTableProducaoComponent } from './components/template-table-prod
     TemplateTableProdutorsComponent,
     TemplateTableServicosComponent,
     TemplateTableProducaoComponent,
+    ValoresDecimaisDirective,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { TemplateTableProducaoComponent } from './components/template-table-prod
     TemplateTableProdutorsComponent,
     TemplateTableServicosComponent,
     TemplateTableProducaoComponent,
-    StatusDirective
+    StatusDirective,
+    ValoresDecimaisDirective
   ],
   providers:[
     ApiServicesService,
