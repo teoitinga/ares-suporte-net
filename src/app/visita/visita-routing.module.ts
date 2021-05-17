@@ -1,5 +1,6 @@
+import { GeoimaComponent } from './components/servicos/geoima/geoima.component';
 import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
-import { ProducaoComponent } from './../producao/components/producao/producao.component';
+
 import { PainelServicosComponent } from './../info-view/painel-servicos/painel-servicos.component';
 import { AuthGuard } from './../authentication/auth-guard ';
 import { DesbloqueioDapComponent } from './components/servicos/desbloqueio-dap/desbloqueio-dap.component';
@@ -38,7 +39,7 @@ const routes: Routes = [
       path: 'lista-visitas',
       component: ListaVisitasComponent,
       canActivate: [AuthGuard],
-      data: {role_acess: ['TECNICO']},
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
       path: 'cadastrar-car-emissao',
@@ -54,11 +55,19 @@ const routes: Routes = [
     },
     {
       path: 'cadastrar-car-segundavia',
-      component: CarSegundaviaComponent
+      component: CarSegundaviaComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
     },
     {
       path: 'cadastrar-car-retificar',
       component: CarRetificarComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
+    },
+    {
+      path: 'geo-ima',
+      component: GeoimaComponent,
       canActivate: [AuthGuard],
       data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
     },

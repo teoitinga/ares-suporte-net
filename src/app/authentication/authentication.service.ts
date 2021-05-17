@@ -25,11 +25,13 @@ export class AuthenticationService {
   private readonly TOKEN_DATA: string = 'token';
   private readonly EXPIRES_DATA: string = 'expiration';
   private readonly ROLE_DATA: string = 'role';
+  private readonly MUNICIPIO_TECNICO_DATA: string = 'municipio';
+  private readonly COD_ESLOC_DATA: string = 'esloc';
   private readonly CREATED_DATA: string = 'created';
   private readonly NAME_DATA: string = 'name';
   private readonly USERNAME_DATA: string = 'sub';
   
-  usuarioLogado: UserToken = new UserToken('','','','');
+  usuarioLogado: UserToken = new UserToken('','','','','','');
   //private callsNumber$: EventEmitter<number> = new EventEmitter<0>();
   private callsNumber: number=0;
   
@@ -40,6 +42,7 @@ export class AuthenticationService {
     role: '',
     title: '',
     expires: moment().format('LLL'),
+    
   });
   
   
@@ -92,7 +95,8 @@ export class AuthenticationService {
     this.usuarioLogado.login = payload.sub;
     this.usuarioLogado.name = payload.name;
     this.usuarioLogado.role = payload.role;
-
+    this.usuarioLogado.esloc = payload.esloc;
+    this.usuarioLogado.municipio = payload.municipio;
 
     localStorage.setItem(this.TOKEN_DATA, token);
     localStorage.setItem(this.EXPIRES_DATA, JSON.stringify(payload.expiration));
@@ -104,7 +108,7 @@ export class AuthenticationService {
       role: '',
       title: '',
       expires: moment().format('LLL'),
-      
+            
     };
     this.headerData = header;
 
@@ -164,6 +168,13 @@ export class AuthenticationService {
   }
   public getRoleUser() {
     return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.ROLE_DATA];
+  }
+  public getCodEsloc() {
+    return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.COD_ESLOC_DATA];
+  }
+  public getMunicipioDoTecnico() {
+    const municipio = (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.MUNICIPIO_TECNICO_DATA];
+    return municipio;
   }
 
   isLoggedIn() {

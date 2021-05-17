@@ -29,6 +29,10 @@ import { GerenteViewsComponent } from './components/gerente-views/gerente-views.
 import { ClienteViewsComponent } from './components/cliente-views/cliente-views.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DialogViewData, PerdaDeCargaComponent } from '../tools/components/perda-de-carga/perda-de-carga.component';
+import { DashboardPanelComponent } from './components/reports/dashboard-panel/dashboard-panel.component';
+
+///
+//charts mdbbootstrap
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import { DialogViewData, PerdaDeCargaComponent } from '../tools/components/perda
     ToolsComponent,
     PerdaDeCargaComponent,
     DialogViewData,
+    DashboardPanelComponent,
     
   ],
   imports: [

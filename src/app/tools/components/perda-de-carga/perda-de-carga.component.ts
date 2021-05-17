@@ -140,7 +140,7 @@ export class PerdaDeCargaComponent implements OnInit {
         </div>
       </div>
       <mat-dialog-actions align="end">
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirma</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
       </mat-dialog-actions>
   </div>
   `,

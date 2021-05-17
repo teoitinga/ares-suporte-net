@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ServicosPrestadosModel } from 'src/app/shared/models/servicos-prestados.model';
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
@@ -26,26 +26,30 @@ export class TemplateComponent implements OnInit {
   @Input() TEMPLATE_SUB: string;
   @Input() chamadas: Chamada[];
   @Input() CRIAR_PASTA: boolean = true;
-  
+
+  @Output() removed = new EventEmitter();
+
   produtores: Produtore[] = [];
   produtor: Produtore;
 
   chamada: Chamada;
 
-  municipios: string[] = [];
+  //municipios: string[] = [];
+  municipios$ = new Observable<string>();
 
   servico: ServicosPrestadosModel;
 
   visita: VisitaPostModel;
 
   loading: boolean = false;
-  
+
   //Forms Utilizados no registro
   produtoresForm: FormGroup;
   servicosForm: FormGroup;
   visitaForm: FormGroup;
   tecnicoResponsavel: TecnicoModel;
   usuario: string;
+  municipioTecnico: any;
 
   constructor(
     private fb: FormBuilder,
@@ -64,46 +68,52 @@ export class TemplateComponent implements OnInit {
 
     //Carrega usuario logado
     this.usuario = this.authService.getUserName();
+    
+    //Carrega municipio do tecnico
+    this.municipioTecnico = this.authService.getMunicipioDoTecnico();
+
     //Carrega o formulário de produtores
     this.produtorLoadForm();
     //Carrega o formulário de visita
     this.visitaLoadForm();
+  }
+  hasProdutores():boolean{
+    let response = false;
+    if(this.produtores.length>0){
+      return true;
+    }
   }
   private produtorLoadForm() {
     this.produtoresForm = this.fb.group({
       cpf: ['', [Validators.required, CpfValidator]],
       nome: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]]
     });
-
+    console.log('ok...form')
   }
 
   loadMunicipios() {
-    const component = this;
-    this.municipioService.getMunicipios().subscribe(
-      data => {
-        this.municipios = data;
-      },
-      error => {
-        this.messageService.sendError(this._snackBar, "Erro na API IBGE", JSON.stringify(error.message));
-      }
-    );
+    this.municipios$ = this.municipioService.getMunicipios();
   }
 
   private visitaLoadForm() {
     this.visitaForm = new FormGroup({
       localDoAtendimeno: new FormControl('', [Validators.required, Validators.minLength(6)]),
       dataDaVisita: new FormControl('', [Validators.required]),
-      municipio: new FormControl('Tarumirim', [Validators.required])
+      municipio: new FormControl(this.municipioTecnico, [Validators.required])
     });
   }
 
   incluirProdutor(event) {
-    const component = this;
-    this.produtor = this.produtoresForm.value;
-    if (!this.produtores.includes(this.produtor)) {
+    event.preventDefault();
+
+    const prd: Produtore = this.produtoresForm.value;
+
+    //verifica se existe o produtor na lista
+    const containing = this.produtores.find(pr=>pr.cpf == prd.cpf);
+    
+    if (!containing) {
       this.produtores.push(this.produtor);
     } else {
-
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
 
@@ -111,15 +121,18 @@ export class TemplateComponent implements OnInit {
 
   removerProdutor(value, event) {
     event.preventDefault();
-    this.produtores = this.produtores.filter(item => item != value);
+    this.produtores = this.produtores.filter(item => item !== value);
+
+    //emitindo notificação para atualização de serviço
+    this.removed.emit(this.produtores)
 
   }
-  verificarProdutor(value:any){
+  verificarProdutor(value: any) {
     const cpf: string = value.target.value.replace(/\.|\-/g, '');
     let nomeProdutor: string = '';
     this.loading = true;
     this.visitaService.obterProdutor(cpf).subscribe(
-      data=>{
+      data => {
         nomeProdutor = data['nome'];
         this.produtoresForm.controls['nome'].disable();
         this.produtoresForm.controls['nome'].setValue(nomeProdutor);
@@ -129,14 +142,14 @@ export class TemplateComponent implements OnInit {
         this.produtor.nome = this.produtoresForm.controls['nome'].value;
         this.loading = !true;
       },
-      error=>{
+      error => {
         this.habilitaInfoNome()
         this.loading = !true;
       }
     );
 
   }
-  habilitaInfoNome(){
+  habilitaInfoNome() {
     this.produtoresForm.controls['nome'].enable();
     this.produtoresForm.controls['nome'].setValue('');
     this.produtoresForm.controls['nome'].setValidators([Validators.required, Validators.minLength(6)]);

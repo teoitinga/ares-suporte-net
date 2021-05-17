@@ -5,6 +5,7 @@ export class TecnicoModel {
         public municipio?: string,
         public name?: string,
         public password?: string,
-        public role?: string
+        public role?: string,
+        public esloc?: string
     ){}
 }

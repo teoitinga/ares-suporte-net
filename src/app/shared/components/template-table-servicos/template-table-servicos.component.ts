@@ -1,5 +1,5 @@
 import { Chamada } from './../../../visita/models/visita-post.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'template-table-servicos',
@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TemplateTableServicosComponent implements OnInit {
   @Input('inputChamadas') inputChamadas: Chamada[] = [];
+  @Output() removed = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -15,6 +16,9 @@ export class TemplateTableServicosComponent implements OnInit {
   removerChamada(value, event){
     event.preventDefault();
     this.inputChamadas = this.inputChamadas.filter(item => item != value);
-    
+
+    //emitindo notificação para atualização de serviço
+    this.removed.emit(this.inputChamadas)
+
   }
 }

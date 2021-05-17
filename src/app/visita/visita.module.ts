@@ -37,6 +37,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { PainelServicosComponent } from '../info-view/painel-servicos/painel-servicos.component';
 import {MatSelectModule} from '@angular/material/select';
 import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
+import { GeoimaComponent } from './components/servicos/geoima/geoima.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.com
     DesbloqueioDapComponent,
     PainelServicosComponent,
     PrgHortaComponent,
+    GeoimaComponent,
   ],
   imports: [
     CommonModule,

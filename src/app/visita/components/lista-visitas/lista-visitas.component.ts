@@ -7,6 +7,7 @@ import { ListaChamadasModel } from './lista-chamadas.model';
 import { ConfirmDialogComponent } from 'src/app/chamadas/components/confirm-dialog/confirm-dialog.component';
 import { ChamadaService } from 'src/app/chamadas/services/chamada.service';
 import { PesquisaModel } from 'src/app/info-view/painel-servicos/pesquisa.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lista-visitas',
@@ -35,10 +36,18 @@ export class ListaVisitasComponent implements OnInit {
   }
   loadVisitas(): any {
     const component = this;
+
+    //obtem a data de dois meses atras que será considerada a data inicial para exibir os registros
+    const atual = moment().subtract(2, 'M');
+
+    let inicio: string = atual.format('01-MM-YYYY');
+    let fim: string = moment().format('DD-MM-YYYY');
+
     this.pesquisaModel = {
-      dataFinal: '30-03-2021',
-      dataInicial: '01-01-2021'
+      dataFinal: fim,
+      dataInicial:  inicio
     }
+    console.log(this.pesquisaModel);
     this.visitaService.loadVisitasManager(this.pesquisaModel).subscribe(
       data=>{
         this.visitas = data;

@@ -3,7 +3,9 @@ export class UserToken {
         public login: string,
         public role: string,
         public token: string,
-        public name: string
+        public name: string,
+        public municipio: string,
+        public esloc: string,
     ){}
 
 }

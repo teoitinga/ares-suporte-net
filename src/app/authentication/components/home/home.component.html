@@ -1,9 +1,16 @@
 <header-auth></header-auth>
 <div class="container">
-    <!--Painel para usuarios tecnicos-->
-    <tecnico-views *ngIf="isTecnico"></tecnico-views>
-    <!--Painel para usuarios cedidos-->
-    <cedido-views *ngIf="isCedido"></cedido-views>
-    <!--Painel para usuarios prefeitura-->
-    <prefeitura-views *ngIf="isPrefeitura"></prefeitura-views>
+    <div class="row">
+        <div class="d-flex justify-content-center mt-2">
+            <dashboard-panel></dashboard-panel>
+        </div>
+    </div>
+    <div class="row">
+        <!--Painel para usuarios tecnicos-->
+        <tecnico-views *ngIf="isTecnico"></tecnico-views>
+        <!--Painel para usuarios cedidos-->
+        <cedido-views *ngIf="isCedido"></cedido-views>
+        <!--Painel para usuarios prefeitura-->
+        <prefeitura-views *ngIf="isPrefeitura"></prefeitura-views>
+    </div>
 </div>
