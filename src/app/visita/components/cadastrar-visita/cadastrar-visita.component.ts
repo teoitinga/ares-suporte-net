@@ -45,8 +45,8 @@ export class CadastrarVisitaComponent implements OnInit {
     private municipioService: SearchMunicipioService,
     private authenticationService: AuthenticationService,
     private visitaService: VisitaService,
-    private messageService: MessageService,
     private router: Router,
+    private messageService: MessageService,
     private _snackBar: MatSnackBar
   ) {
     this.loadMunicipios();
@@ -125,7 +125,7 @@ export class CadastrarVisitaComponent implements OnInit {
     const containing = this.produtores.find(pr => pr.cpf == prd.cpf);
 
     if (!containing) {
-      this.produtores.push(this.produtor);
+      this.produtores.push(prd);
     } else {
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
@@ -137,36 +137,47 @@ export class CadastrarVisitaComponent implements OnInit {
     this.chamada = this.servicosForm.value;
 
     //verifica se existe o produtor na lista
-    const containing = this.chamadas.find(ch => ch.serviceProvidedCode == ch.serviceProvidedCode);
+    const containing = this.chamadas.find(ch => ch.serviceProvidedCode == this.chamada.serviceProvidedCode);
 
     if (!containing) {
-      //this.chamada.cpfReponsavel = this.tecnicoResponsavel.login;
+      //Configura a chamada
+      this.chamada.cpfReponsavel = this.tecnicoResponsavel.login;
+
+      //imprime os dados para auditoria
+      console.log('Chamadas atual');
+      console.log(this.chamada);
+
       this.chamadas.push(this.chamada);
     } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
+      this.messageService.sendError(this._snackBar, "Erro", "Você já registrou este atendimento!");
     }
 
     this.servicosFormClean();
   }
   verificarProdutor(value: any) {
-    const cpf: string = value.target.value.replace(/\.|\-/g, '');
-    let nomeProdutor: string = '';
     this.loading = true;
+
+    const cpf: string = value.target.value.replace(/\.|\-/g, '');
+    
+    let nomeProdutor: string = '';
+    
     this.visitaService.obterProdutor(cpf).subscribe(
       data => {
-        nomeProdutor = data['nome'];
-        this.produtoresForm.controls['nome'].disable();
-        this.produtoresForm.controls['nome'].setValue(nomeProdutor);
-
-        this.produtor = this.produtoresForm.value;
-
-        this.produtor.nome = this.produtoresForm.controls['nome'].value;
-        this.loading = !true;
+        if(data!=null){
+          nomeProdutor = data['nome'];
+          this.produtoresForm.controls['nome'].disable();
+          this.produtoresForm.controls['nome'].setValue(nomeProdutor);
+  
+          this.produtor = this.produtoresForm.value;
+  
+          this.produtor.nome = this.produtoresForm.controls['nome'].value;
+          this.loading = !true;
+        }else{
+          this.habilitaInfoNome()
+          this.loading = !true;
+        }
       },
       error => {
-        this.habilitaInfoNome()
-        this.loading = !true;
-        console.error(error);
       }
     );
 
@@ -176,13 +187,14 @@ export class CadastrarVisitaComponent implements OnInit {
     this.produtoresForm.controls['nome'].setValue('');
     this.produtoresForm.controls['nome'].setValidators([Validators.required, Validators.minLength(6)]);
   }
-
+  
   produtoresFormClean() {
     this.produtor = null;
     this.produtoresForm = this.fb.group({
       cpf: ['', [Validators.required, CpfValidator]],
       nome: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.produtoresForm.controls['nome'].disable();
   }
 
 
@@ -208,6 +220,10 @@ export class CadastrarVisitaComponent implements OnInit {
     this.visita.chamadas = this.chamadas;
     this.visita.produtores = this.produtores;
     this.loading = true;
+
+    console.log('>>> Registrando visita');
+    console.log(this.visita);
+    
     this.visitaService.sendVisita(this.visita).subscribe(
       data => {
         this.loading = !true;

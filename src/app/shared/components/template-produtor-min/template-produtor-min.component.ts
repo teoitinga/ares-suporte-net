@@ -43,9 +43,22 @@ export class TemplateProdutorMinComponent implements OnInit {
 
   }
   incluirProdutor(event) {
+    
     event.preventDefault();
-    const component = this;
-    this.produtor = this.produtoresForm.value;
+    const prd: Produtore = this.produtoresForm.value;
+        
+    console.log('Produtor iserido...');
+    console.log(this.produtoresForm.value);
+    //verifica se existe o produtor na lista
+    const containing = this.produtores.find(pr => pr == prd);
+
+    if (!containing) {
+      this.produtores.push(prd);
+    } else {
+      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
+    }
+
+
     if (!this.produtores.includes(this.produtor)) {
       this.produtores.push(this.produtor);
     } else {

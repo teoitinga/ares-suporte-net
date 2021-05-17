@@ -78,17 +78,20 @@ export class TemplateComponent implements OnInit {
     this.visitaLoadForm();
   }
   hasProdutores():boolean{
-    let response = false;
+
     if(this.produtores.length>0){
       return true;
+    }else{
+      return !true;
     }
+    
   }
+
   private produtorLoadForm() {
     this.produtoresForm = this.fb.group({
       cpf: ['', [Validators.required, CpfValidator]],
       nome: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]]
     });
-    console.log('ok...form')
   }
 
   loadMunicipios() {
@@ -110,9 +113,9 @@ export class TemplateComponent implements OnInit {
 
     //verifica se existe o produtor na lista
     const containing = this.produtores.find(pr=>pr.cpf == prd.cpf);
-    
+
     if (!containing) {
-      this.produtores.push(this.produtor);
+      this.produtores.push(prd);
     } else {
       this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
     }
@@ -128,23 +131,29 @@ export class TemplateComponent implements OnInit {
 
   }
   verificarProdutor(value: any) {
-    const cpf: string = value.target.value.replace(/\.|\-/g, '');
-    let nomeProdutor: string = '';
     this.loading = true;
+
+    const cpf: string = value.target.value.replace(/\.|\-/g, '');
+    
+    let nomeProdutor: string = '';
+    
     this.visitaService.obterProdutor(cpf).subscribe(
       data => {
-        nomeProdutor = data['nome'];
-        this.produtoresForm.controls['nome'].disable();
-        this.produtoresForm.controls['nome'].setValue(nomeProdutor);
-
-        this.produtor = this.produtoresForm.value;
-
-        this.produtor.nome = this.produtoresForm.controls['nome'].value;
-        this.loading = !true;
+        if(data!=null){
+          nomeProdutor = data['nome'];
+          this.produtoresForm.controls['nome'].disable();
+          this.produtoresForm.controls['nome'].setValue(nomeProdutor);
+  
+          this.produtor = this.produtoresForm.value;
+  
+          this.produtor.nome = this.produtoresForm.controls['nome'].value;
+          this.loading = !true;
+        }else{
+          this.habilitaInfoNome()
+          this.loading = !true;
+        }
       },
       error => {
-        this.habilitaInfoNome()
-        this.loading = !true;
       }
     );
 
