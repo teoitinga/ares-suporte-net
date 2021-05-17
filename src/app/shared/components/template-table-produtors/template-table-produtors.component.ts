@@ -16,6 +16,7 @@ export class TemplateTableProdutorsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   removerProdutor(value, event){
     event.preventDefault();
     

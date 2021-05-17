@@ -7,12 +7,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./template-table-servicos.component.css']
 })
 export class TemplateTableServicosComponent implements OnInit {
+
   @Input('inputChamadas') inputChamadas: Chamada[] = [];
   @Output() removed = new EventEmitter();
-  constructor() { }
+  
+  constructor() { } 
 
   ngOnInit(): void {
-  }
+  } 
+  
   removerChamada(value, event){
     event.preventDefault();
     this.inputChamadas = this.inputChamadas.filter(item => item != value);

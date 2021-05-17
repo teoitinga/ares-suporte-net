@@ -74,12 +74,12 @@ export class CadastrarVisitaComponent implements OnInit {
       municipio: new FormControl(municipioDoTecnico)
     });
   }
-  
+
   onRemoveProdutor(array) {
     this.produtores = array;
   }
 
-  onRemoveServico(array){
+  onRemoveServico(array) {
     this.chamadas = array;
   }
 
@@ -122,8 +122,8 @@ export class CadastrarVisitaComponent implements OnInit {
     const prd: Produtore = this.produtoresForm.value;
 
     //verifica se existe o produtor na lista
-    const containing = this.produtores.find(pr=>pr.cpf == prd.cpf);
-    
+    const containing = this.produtores.find(pr => pr.cpf == prd.cpf);
+
     if (!containing) {
       this.produtores.push(this.produtor);
     } else {
@@ -132,7 +132,22 @@ export class CadastrarVisitaComponent implements OnInit {
 
     this.produtoresFormClean();
   }
+  incluirServico(event) {
+    event.preventDefault();
+    this.chamada = this.servicosForm.value;
 
+    //verifica se existe o produtor na lista
+    const containing = this.chamadas.find(ch => ch.serviceProvidedCode == ch.serviceProvidedCode);
+
+    if (!containing) {
+      //this.chamada.cpfReponsavel = this.tecnicoResponsavel.login;
+      this.chamadas.push(this.chamada);
+    } else {
+      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
+    }
+
+    this.servicosFormClean();
+  }
   verificarProdutor(value: any) {
     const cpf: string = value.target.value.replace(/\.|\-/g, '');
     let nomeProdutor: string = '';
@@ -170,19 +185,7 @@ export class CadastrarVisitaComponent implements OnInit {
     });
   }
 
-  incluirServico(event) {
-    const component = this;
-    event.preventDefault();
-    this.chamada = this.servicosForm.value;
 
-    if (!this.chamadas.includes(this.chamada)) {
-      this.chamada.cpfReponsavel = this.tecnicoResponsavel.login;
-      this.chamadas.push(this.chamada);
-    } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este serviço!");
-    }
-    this.servicosFormClean();
-  }
   servicosFormClean() {
     this.chamada = null;
     this.servicosForm = new FormGroup({
