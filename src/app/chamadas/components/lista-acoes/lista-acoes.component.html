@@ -44,6 +44,12 @@
         (click)="cancelar(row)">
           <mat-icon>delete_forever</mat-icon>
         </button>  
+        <button mat-button  matTooltip="Expirar" class="btn-acoes text-danger" aria-label="Atribuir status de expirado a esta tarefa"
+        (click)="expirar(row)">
+          <mat-icon>
+            hourglass_bottom
+          </mat-icon>
+        </button>  
       </td>
     </ng-container>
 

@@ -104,6 +104,25 @@ export class ListaAcoesComponent implements AfterViewInit {
       }
     });
   }
+  expirar(call) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      restoreFocus: false,
+      data: { title: "Chamada antiga e sem retorno", info: "Tem certeza que você deseja deixar esta chamada como expirada?" }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.callService.expireCall(call).subscribe(
+          success => {
+            this.loadCallsStart();
+          },
+          error => {
+            this.messageService.sendError(this.snackBar, "Erro", "Você não pode definir esta chamada como expirada!");
+          }
+        );
+      }
+    });
+  }
   openDialog() {
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(ConfirmDialogComponent, dialogConfig);

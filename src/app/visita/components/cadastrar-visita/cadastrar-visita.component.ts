@@ -12,6 +12,8 @@ import { SearchMunicipioService } from 'src/app/shared/service/search-municipio.
 import { TecnicoModel } from 'src/app/shared/models/tecnico.model';
 import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.model';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { ConfirmDialogComponent } from 'src/app/chamadas/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cadastrar-visita',
@@ -50,6 +52,7 @@ export class CadastrarVisitaComponent implements OnInit {
     private visitaService: VisitaService,
     private router: Router,
     private messageService: MessageService,
+    private dialog: MatDialog,
     private _snackBar: MatSnackBar
   ) {
     this.loadMunicipios();
@@ -251,19 +254,56 @@ export class CadastrarVisitaComponent implements OnInit {
 
     console.log('>>> Registrando visita');
     console.log(this.visita);
+    //Verifica se pretende cria pasta de atendimento
+    let hasCreateFolder: boolean = false;
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      restoreFocus: false,
+      data: { title: "Criando pasta de atendimento", info: "É necessário criar uma pasta para este atendimento?" }
+    });
     
-    this.visitaService.sendVisita(this.visita).subscribe(
-      data => {
-        this.loading = !true;
-        this.router.navigate(['login/home']);
-        this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
-      },
-      error => {
-        console.log(error);
-        this.loading = !true;
-        this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        hasCreateFolder = true;
+        this.visita.createFolder = hasCreateFolder;
+        
+        this.visitaService.sendVisita(this.visita).subscribe(
+          data => {
+            this.loading = !true;
+            this.router.navigate(['login/home']);
+            this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
+            console.log('Create folder?');
+            console.log(this.visita.createFolder);
+          },
+          error => {
+            console.log(error);
+            this.loading = !true;
+            this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
+          }
+        );
+      }else{
+        hasCreateFolder = false;
+        this.visita.createFolder = hasCreateFolder;
+        
+        this.visitaService.sendVisita(this.visita).subscribe(
+          data => {
+            this.loading = !true;
+            this.router.navigate(['login/home']);
+            this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
+            console.log('Create folder?');
+            console.log(this.visita.createFolder);
+          },
+          error => {
+            console.log(error);
+            this.loading = !true;
+            this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
+          }
+        );
+
       }
-    );
+    });
+  
+    ///////////////////////////////////////////////////
   }
 
   onSelecionaServico(servicoInf) {

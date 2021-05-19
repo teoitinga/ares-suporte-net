@@ -7,6 +7,9 @@ import { environment as env } from './../../../environments/environment.prod';
   providedIn: 'root'
 })
 export class ChamadaService {
+  expireCall(call: any) {
+    return this.http.put(`${env.BASE_API_URL}${this.PATH}/expirated/${call['codigo']}`, call['codigo']);
+  }
   incializarCall(call: any) {
     return this.http.put(`${env.BASE_API_URL}${this.PATH}/initialize/${call['codigo']}`, call['codigo']);
   }
