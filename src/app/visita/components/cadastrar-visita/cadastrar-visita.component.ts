@@ -118,6 +118,12 @@ export class CadastrarVisitaComponent implements OnInit {
       }
     );
   }
+  
+  private clearFormProdutor() {
+    this.produtoresForm.controls['nome'].disable();
+    this.produtoresForm.controls['nome'].setValue('');
+    this.produtoresForm.controls['cpf'].setValue('');
+  }
 
   incluirProdutor(event) {
     event.preventDefault();
@@ -128,9 +134,12 @@ export class CadastrarVisitaComponent implements OnInit {
     const containing = this.produtores.find(pr => pr.cpf == prd.cpf);
 
     if (!containing) {
+
       this.produtores.push(prd);
+      this.clearFormProdutor();
+
     } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
+      this.messageService.sendError(this._snackBar, "Erro", "Este beneficiário já é atendido!");
     }
 
     this.produtoresFormClean();

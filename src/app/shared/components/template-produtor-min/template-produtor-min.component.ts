@@ -23,6 +23,10 @@ export class TemplateProdutorMinComponent implements OnInit {
 
   @Output() updated = new EventEmitter();
 
+  //FIELDS of form
+  FIELD_NAME_PRODUTOR: string = 'nome';
+
+
   constructor(
     private fb: FormBuilder,
     private visitaService: VisitaService,
@@ -42,6 +46,12 @@ export class TemplateProdutorMinComponent implements OnInit {
     });
 
   }
+  private clearFormProdutor() {
+    this.produtoresForm.controls['nome'].disable();
+    this.produtoresForm.controls['nome'].setValue('');
+    this.produtoresForm.controls['cpf'].setValue('');
+  }
+
   incluirProdutor(event) {
     
     event.preventDefault();
@@ -53,26 +63,41 @@ export class TemplateProdutorMinComponent implements OnInit {
     const containing = this.produtores.find(pr => pr == prd);
 
     if (!containing) {
+
       this.produtores.push(prd);
+      this.clearFormProdutor();
+
     } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
+      this.messageService.sendError(this._snackBar, "Erro", "Este beneficiário já é atendido!");
     }
 
-
-    if (!this.produtores.includes(this.produtor)) {
-      this.produtores.push(this.produtor);
-    } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
-    }
     //emitindo notificação para atualização de serviço
     this.updated.emit(this.produtores)
     this.produtoresFormClean();
   }
+
+  verificarNomeProdutor(value: any){
+
+    const prd: Produtore = this.produtoresForm.value;
+    try{
+      
+      prd.nome = prd.nome.replace(/[^a-zA-Z -]/g, "");
+      //Remove espaços ni inicio ou final do nome
+      prd.nome = prd.nome.trim();
+      this.produtoresForm[this.FIELD_NAME_PRODUTOR] = prd.nome;
+
+    }catch{
+      
+    }
+
+  }
+
   removerProdutor(value, event) {
     event.preventDefault();
     this.produtores = this.produtores.filter(item => item != value);
 
   }
+
   verificarProdutor(value: any) {
     const cpf: string = value.target.value.replace(/\.|\-/g, '');
     let nomeProdutor: string = '';

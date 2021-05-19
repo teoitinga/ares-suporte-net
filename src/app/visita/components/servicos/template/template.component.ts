@@ -51,6 +51,9 @@ export class TemplateComponent implements OnInit {
   usuario: string;
   municipioTecnico: any;
 
+  //FIELDS of form
+  FIELD_NAME_PRODUTOR: string = 'nome';
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
@@ -115,9 +118,27 @@ export class TemplateComponent implements OnInit {
     const containing = this.produtores.find(pr=>pr.cpf == prd.cpf);
 
     if (!containing) {
+
       this.produtores.push(prd);
+      this.clearFormProdutor();
+
     } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Já existe este elemento!");
+      this.messageService.sendError(this._snackBar, "Erro", "Este beneficiário já é atendido!");
+    }
+
+  }
+  verificarNomeProdutor(value: any){
+
+    const prd: Produtore = this.produtoresForm.value;
+    try{
+      
+      prd.nome = prd.nome.replace(/[^a-zA-Z -]/g, "");
+      //Remove espaços ni inicio ou final do nome
+      prd.nome = prd.nome.trim();
+      this.produtoresForm[this.FIELD_NAME_PRODUTOR] = prd.nome;
+
+    }catch{
+      
     }
 
   }
@@ -129,6 +150,11 @@ export class TemplateComponent implements OnInit {
     //emitindo notificação para atualização de serviço
     this.removed.emit(this.produtores)
 
+  }
+  private clearFormProdutor() {
+    this.produtoresForm.controls['nome'].disable();
+    this.produtoresForm.controls['nome'].setValue('');
+    this.produtoresForm.controls['cpf'].setValue('');
   }
   verificarProdutor(value: any) {
     this.loading = true;
@@ -195,3 +221,5 @@ export class TemplateComponent implements OnInit {
     );
   }
 }
+
+
