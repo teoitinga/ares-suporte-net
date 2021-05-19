@@ -40,6 +40,9 @@ export class CadastrarVisitaComponent implements OnInit {
 
   loading: boolean = false;
 
+  //FIELDS of form
+  FIELD_NAME_PRODUTOR: string = 'nome';
+
   constructor(
     private fb: FormBuilder,
     private municipioService: SearchMunicipioService,
@@ -132,12 +135,28 @@ export class CadastrarVisitaComponent implements OnInit {
 
     this.produtoresFormClean();
   }
+
+  verificarNomeProdutor(value: any){
+
+    const prd: Produtore = this.produtoresForm.value;
+    try{
+      
+      prd.nome = prd.nome.replace(/[^a-zA-Z -]/g, "");
+      //Remove espaços ni inicio ou final do nome
+      prd.nome = prd.nome.trim();
+      this.produtoresForm[this.FIELD_NAME_PRODUTOR] = prd.nome;
+
+    }catch{
+      
+    }
+
+  }
   incluirServico(event) {
     event.preventDefault();
     this.chamada = this.servicosForm.value;
 
     //verifica se existe o produtor na lista
-    const containing = this.chamadas.find(ch => ch.serviceProvidedCode == this.chamada.serviceProvidedCode);
+    const containing = this.chamadas.find(ch => ch.servicoPrestado == this.chamada.servicoPrestado);
 
     if (!containing) {
       //Configura a chamada
@@ -149,7 +168,7 @@ export class CadastrarVisitaComponent implements OnInit {
 
       this.chamadas.push(this.chamada);
     } else {
-      this.messageService.sendError(this._snackBar, "Erro", "Você já registrou este atendimento!");
+      this.messageService.sendError(this._snackBar, "Erro", "Você já registrou este atendimento, por favor especifique os detalhes deste serviço.");
     }
 
     this.servicosFormClean();
