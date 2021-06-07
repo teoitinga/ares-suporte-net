@@ -30,6 +30,7 @@ import { ClienteViewsComponent } from './components/cliente-views/cliente-views.
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DialogViewData, PerdaDeCargaComponent } from '../tools/components/perda-de-carga/perda-de-carga.component';
 import { DashboardPanelComponent } from './components/reports/dashboard-panel/dashboard-panel.component';
+import { UpdateComponent } from './components/users/update/update.component';
 
 ///
 //charts mdbbootstrap
@@ -52,6 +53,7 @@ import { DashboardPanelComponent } from './components/reports/dashboard-panel/da
     PerdaDeCargaComponent,
     DialogViewData,
     DashboardPanelComponent,
+    UpdateComponent,
     
   ],
   imports: [

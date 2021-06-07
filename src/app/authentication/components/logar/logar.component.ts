@@ -62,7 +62,7 @@ export class LogarComponent implements OnInit {
           this.mesageService.sendError(this._snackBar, "Erro", error.message);
 
         }else{
-          this.mesageService.sendError(this._snackBar, "Erro", error.message);
+          this.mesageService.sendError(this._snackBar, "Acesso negado!", "Login inválido");
           this.status = error.status;
           this.loginmessage = error.message;
 

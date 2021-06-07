@@ -1,3 +1,11 @@
-div{
-    float: left;
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.row{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }

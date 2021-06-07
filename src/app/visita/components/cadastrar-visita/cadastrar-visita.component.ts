@@ -44,7 +44,7 @@ export class CadastrarVisitaComponent implements OnInit {
 
   //FIELDS of form
   FIELD_NAME_PRODUTOR: string = 'nome';
-
+ 
   constructor(
     private fb: FormBuilder,
     private municipioService: SearchMunicipioService,
@@ -272,11 +272,8 @@ export class CadastrarVisitaComponent implements OnInit {
             this.loading = !true;
             this.router.navigate(['login/home']);
             this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
-            console.log('Create folder?');
-            console.log(this.visita.createFolder);
           },
           error => {
-            console.log(error);
             this.loading = !true;
             this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
           }
@@ -290,11 +287,8 @@ export class CadastrarVisitaComponent implements OnInit {
             this.loading = !true;
             this.router.navigate(['login/home']);
             this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Atendimento foi registrado com sucesso")
-            console.log('Create folder?');
-            console.log(this.visita.createFolder);
           },
           error => {
-            console.log(error);
             this.loading = !true;
             this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
           }

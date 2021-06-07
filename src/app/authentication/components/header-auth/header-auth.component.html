@@ -25,10 +25,20 @@
       </div>
     </div>
     <div class="row menu">
-      <div class="col-1 d-flex justify-content-start">
+      <div class="col-6 d-flex justify-content-start">
         <button type="button" matTooltip="Ir para tela inicial" class="col-1 btn " (click)="home()">
           <span class="d-flex justify-content-start">
             <mat-icon aria-hidden="false" class="text-light">home</mat-icon>
+          </span>
+        </button>
+        <button type="button" matTooltip="Alterar meus dados" class="col-1 btn " (click)="updateUser()">
+          <span class="d-flex justify-content-start">
+            <mat-icon aria-hidden="false" class="text-light">people_alt</mat-icon>
+          </span>
+        </button>
+        <button type="button" [disabled]="true" matTooltip="Menu Gerenciar" class="col-1 btn " (click)="updateUser()">
+          <span class="d-flex justify-content-start">
+            <mat-icon aria-hidden="false" class="text-light">home_repair_service</mat-icon>
           </span>
         </button>
       </div>

@@ -1,0 +1,64 @@
+<header-auth></header-auth>
+<div [formGroup]="userForm">
+    <div class="col-md-5">
+        <label for="login-do-usuario" class="form-label">Login</label>
+        <input type="text" onclick="this.select()" class="form-control" id="login-do-produtor" formControlName="login">
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <label for="nome-do-usuario" class="form-label">Nome</label>
+            <input type="text" onclick="this.select()" class="form-control" id="nome-do-produtor" formControlName="name">
+        </div>
+        <div class="col-md-4">
+            <label for="contato-do-usuario" class="form-label">Contato</label>
+            <input type="text" onclick="this.select()" class="form-control" id="contato-do-produtor"
+                formControlName="contato">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="senha-do-usuario" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha-do-produtor"
+                formControlName="password">
+        </div>
+        <div class="col-md-6">
+            <label for="senha-do-usuario" class="form-label">Confirma Senha</label>
+            <input type="password" class="form-control" id="senhacheck-do-produtor"
+                formControlName="passwordcheck">
+        </div>
+        <div class="col-md-6" *ngIf="senhachecked; else senhaError">
+            
+        </div>
+        
+    </div>
+    <div class="row justify-content-between">
+        <div class="col-md-4">
+            <label for="municipio" class="form-label">Cidade</label>
+            <select id="municipio" class="form-select mb-2" formControlName="municipio">
+                <option *ngFor="let mn of municipios" value="{{mn.nome}}">{{mn.nome}}</option>
+            </select>
+        </div>
+        <div class="col-md-5">
+            <label for="perfil-do-usuario" class="form-label">Perfil</label>
+            <select id="perfil-do-produtor" class="form-control form-select mb-2" formControlName="role">
+                <option value="PREFEITURA">PREFEITURA</option>
+                <option value="CEDIDO">CEDIDO</option>
+                <option value="TECNICO">TECNICO</option>
+            </select>
+        </div>
+        
+    </div>
+    <div class="row mt-5">
+        <div class="col-2">
+            <button class="btn btn-primary" (click)="registra()" [disabled]="!formCheck">Registrar</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-warning" (click)="cancela()">Cancelar</button>
+        </div>
+
+    </div>
+    
+</div>
+<ng-template #senhaError>
+    
+</ng-template>

@@ -1,3 +1,4 @@
+import { UpdateComponent } from './components/users/update/update.component';
 import { PerdaDeCargaComponent } from './../tools/components/perda-de-carga/perda-de-carga.component';
 import { ToolsComponent } from './../tools/components/tools/tools.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,6 +28,12 @@ export const routes: Routes = [
       {
         path: 'chamadas',
         component: ListaAcoesComponent,
+        canActivate: [AuthGuard],
+        data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
+      },
+      {
+        path: 'user',
+        component: UpdateComponent,
         canActivate: [AuthGuard],
         data: {role_acess: ['TECNICO', 'CEDIDO', 'PREFEITURA']},
       },

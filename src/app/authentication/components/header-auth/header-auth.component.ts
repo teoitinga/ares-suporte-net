@@ -32,6 +32,9 @@ export class HeaderAuthenticationComponent implements OnInit {
   get callNumber(): number {
     return this.authService.callNumber;
   }
+  updateUser(){
+    this.router.navigate(['/login/user']);
+  }
   logout() {
     this.authService.logout();
   }

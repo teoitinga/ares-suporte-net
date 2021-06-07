@@ -13,7 +13,34 @@ import { environment as env } from './../../../../../environments/environment.pr
 export class DashBoardServiceService {
 
   private readonly PATH: string = 'chamadas';
+  
+  /*
+  GET all servicos for report actual YEAR"
+  @RequestParam String esloc
+  */
+  private readonly PATH_CALL_YEAR: string = 'relatorioReportAnual';
+  
+  /*
+  GET all servicos for report actual month
+  @RequestParam String esloc, 
+  @RequestParam String mes
+  */
+  private readonly PATH_CALL_MONTH: string = 'relatorioReportMensal';
+  /*
+  GET all servicos for report actual month 
+  @RequestParam String esloc, @RequestParam String mes
   private readonly PATH_CALL: string = 'relatorioReport';
+  */
+  /*
+  API de busca de serviços concluidos no dia atual pelo escritório logado
+  GET all servicos for report actual day
+  @RequestParam String esloc
+  */
+  private readonly PATH_CALL_DIARY: string = 'relatorioDiario';
+  /*
+  GET all servicos for report actual day
+  */
+  private readonly PATH_CALL_USER: string = 'relatorioReportUser';//
 
   private _servicos = new BehaviorSubject<TotalServices[]>(
     []
@@ -23,18 +50,18 @@ export class DashBoardServiceService {
     []
   );
 
-  get servicos(): TotalServices[]{
+  get servicos(): TotalServices[] {
     return this._servicos.value;
   }
 
-  get servicosMesais(): TotalServices[]{
+  get servicosMesais(): TotalServices[] {
     return this._servicosMesais.value;
   }
 
-  set servicos(srv: TotalServices[]){
+  set servicos(srv: TotalServices[]) {
     this._servicos.next(srv);
   }
-  set servicosMesais(srv: TotalServices[]){
+  set servicosMesais(srv: TotalServices[]) {
     this._servicosMesais.next(srv);
   }
 
@@ -42,66 +69,45 @@ export class DashBoardServiceService {
     private http: HttpClient,
     private authService: AuthenticationService
   ) { }
+  /*
+  * Retorna os dados de serviços anuais feito pelo escritório no qual o usuário logado
+  * é registrado.
+  */
 
-  loadServicosAnoCorrente(flag: any): Observable<any> {
+  loadDadosDiarios(): Observable<any> {
 
-    if (flag === 'true') {
-      flag = "0";
-    } else {
-      flag = moment().format('D');
-    }
     let params = new HttpParams();
 
     // Begin assigning parameters
-    params = params.append('id', this.authService.getCodEsloc());
-    params = params.append('mes', "0");
+    params = params.append('esloc', this.authService.getCodEsloc());
 
-    return this.http.get(`${env.BASE_API_URL}${this.PATH}/${this.PATH_CALL}`, { params });
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}/${this.PATH_CALL_DIARY}`, { params });
+  }
+  loadDadosMensais(): Observable<any> {
+
+    let params = new HttpParams();
+    const mesAtual = moment().format('MM');
+
+    // Begin assigning parameters
+    params = params.append('esloc', this.authService.getCodEsloc());
+    params = params.append('mes', mesAtual);
+
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}/${this.PATH_CALL_MONTH}`, { params });
+  }
+
+  loadDadosDiaUsuario(): Observable<any> {
+
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}/${this.PATH_CALL_USER}`);
+  }
+
+  loadDadosAnuais(): Observable<any> {
+    let params = new HttpParams();
+
+    // Begin assigning parameters
+    params = params.append('esloc', this.authService.getCodEsloc());
+
+    return this.http.get(`${env.BASE_API_URL}${this.PATH}/${this.PATH_CALL_YEAR}`, { params });
 
   }
-  loadData(): any{
-    this.servicosMesais = this.getServicoAgrupadosMensal(5);
-    this.servicos = this.getServicoAgrupadosMensal(0);
-  }
 
-  getServicoAgrupadosMensal(flag: any): any {
-    let response;
-    this.loadServicosAnoCorrente(flag).subscribe(
-      data => {
-        return this._agrupa(data['servico']);
-      }
-    );
-  }
-  private _agrupa(list: Servico[]): any {
-
-    const total = list.reduce(function (acumulador, servico) {
-
-
-      //achar o indice do objeto no acumulador através do id
-      const indice = acumulador.map(o => o.servicoPrestado).indexOf(servico.servicoPrestado);
-
-      if (indice == -1) { //se não existe no acumulador adiciona o objeto corrente
-        servico['quantidade'] = 1;
-        acumulador.push(servico);
-      }
-      else { //se já existe incrementa 1
-        acumulador[indice]['quantidade'] += 1;
-
-      }
-      
-      return acumulador;
-      
-    }, []); //iniciar o acumulador com array vazio
-    const lista: TotalServices[] = total.map(item => {
-      let response: TotalServices = {
-        'servicoDesc': item.servicoPrestado,
-        'quantidade': item.quantidade
-      };
-      return response;
-    });
-
-    
-    this.servicos = lista;
-    //return lista;
-  }
 }
