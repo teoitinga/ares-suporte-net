@@ -1,3 +1,5 @@
+import { TemplateTableRebanhoComponent } from './../shared/components/template-table-rebanho/template-table-rebanho.component';
+import { TemplateRebanhoComponent } from './../shared/components/template-rebanho/template-rebanho.component';
 import { SharedModule } from './../shared/shared.module';
 import { ToolsComponent } from './../tools/components/tools/tools.component';
 import { ProducaoModule } from './../producao/producao.module';
@@ -31,6 +33,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DialogViewData, PerdaDeCargaComponent } from '../tools/components/perda-de-carga/perda-de-carga.component';
 import { DashboardPanelComponent } from './components/reports/dashboard-panel/dashboard-panel.component';
 import { UpdateComponent } from './components/users/update/update.component';
+import { DmPastagemComponent } from '../tools/components/dm-pastagem/dm-pastagem.component';
 
 ///
 //charts mdbbootstrap
@@ -51,6 +54,7 @@ import { UpdateComponent } from './components/users/update/update.component';
     ClienteViewsComponent,
     ToolsComponent,
     PerdaDeCargaComponent,
+    DmPastagemComponent,
     DialogViewData,
     DashboardPanelComponent,
     UpdateComponent,

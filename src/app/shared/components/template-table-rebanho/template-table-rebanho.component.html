@@ -1,0 +1,31 @@
+<table class="col-6 table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Categoria</th>
+        <th>Quantidade</th>
+        <th>UA categoria</th>
+      </tr>
+    </thead>
+    <tbody *ngIf = "!inputRebanho.length">
+      <th class="text-danger" colspan="3">
+        Para efetuar os cálculos, é necessário informar seu rebanho!
+      </th>
+      
+    </tbody>
+    <tbody *ngIf = "inputRebanho.length">
+      <tr *ngFor="let rb of inputRebanho">
+        <td>
+          <button type="button" class="btn btn-danger btn-sm btn-custom" (click)="removerCategoria(rb, $event)">
+            <i class="far fa-calendar-times"></i>
+          </button>
+        </td>
+        <td>{{rb.categoria.descricao}}</td>
+        <td>{{rb.qtd}}</td>
+        <td>{{totalUa(rb)}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      Total de UA {{uaRebanho()}}
+    </tfoot>
+  </table>

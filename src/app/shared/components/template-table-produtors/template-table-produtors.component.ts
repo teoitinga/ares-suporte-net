@@ -13,7 +13,7 @@ export class TemplateTableProdutorsComponent implements OnInit {
   @Output() removed = new EventEmitter();
 
   constructor() { }
-
+ 
   ngOnInit(): void {
   }
    

@@ -1,0 +1,29 @@
+<main class="d-flex-stretch justify-content-center  border align-items-center p-2">
+    <section>
+        <form [formGroup]="formCalc">
+            <div class="row m-2 justify-content-between">
+                <div class="col-2 col-sm-1">
+                    <label for="categoria">Categoria</label>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <select id="categoria" class="form-control" formControlName="categoria">
+                        <option *ngFor='let ct of categoria' [ngValue]="ct">{{ct.descricao}}</option>
+                    </select>
+                </div>
+                <div class="col-2 col-sm-1">
+                    <label class="form-label" for="quantidade">Quantidade</label>
+                </div>
+                <div class="col-2 col-sm-2">
+                    <input type="number" min="1" class="form-control" id="quantidade" formControlName="quantidade">
+                </div>
+                <div class="col-2 col-sm-2">
+                    <button id="add" (click)='incluir($event)' class="btn btn-primary">+</button>
+                </div>
+            </div>
+            <div class="row m-5">
+                <button id="calcular" (click)='calcular($event)' class="btn btn-primary">Calcular</button>
+            </div>
+        </form>
+    </section>
+
+</main>

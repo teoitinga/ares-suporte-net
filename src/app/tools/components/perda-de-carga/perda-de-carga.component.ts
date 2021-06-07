@@ -77,25 +77,6 @@ export class PerdaDeCargaComponent implements OnInit {
     this._fm = fator;
     this._hman = hman;
     this._vms = velocidade;
-
-    /* exibindo logs */
-    /*
-    console.log('area do tubo');
-    console.log(area_tub);
-
-    console.log('Diam. interno');
-    console.log(di);
-
-    console.log('Vazao');
-    console.log(form_q);
-
-    console.log('Velocidade');
-    console.log(velocidade);
-
-    console.log('fator');
-    console.log(fator);
-
-    */
    
     /* Abrindo modal para exibir os dados */
     this.openDialog();

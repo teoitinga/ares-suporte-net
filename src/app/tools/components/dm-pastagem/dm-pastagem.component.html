@@ -1,0 +1,38 @@
+<header-auth></header-auth>
+<div class="h5 text-center mt-3">
+    Informações da pastagem
+</div>
+<form [formGroup]="form" class="m-3">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="cultura">Cultura/Pastagem</label>
+            <select id="cultura" class="form-control" formControlName="pasto">
+                <option *ngFor='let cult of culturas' [ngValue]="cult">{{cult.cultura}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="form-group col-md-12 mt-3">
+            <div class="row align-items-start">
+                <div class="col">
+                    <label for="aguas">Periodo das águas(dias)</label>
+                </div>
+                <div class="col col-md-2">
+                    <input class="form-control" type="number" formControlName="aguas" id="aguas">
+                </div>
+                <div class="col col">
+                    <label for="ocupacao">Periodo de ocupação do pasto(dias)</label>
+                </div>
+                <div class="col col-md-2">
+                    <input type="number" class="form-control" formControlName="ocupacao" id="ocupacao">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="h5 text-center">
+        Informações do rebanho
+    </div>
+    <template-rebanho [rebanho]="rebanho" (updated)="calcular($event)"></template-rebanho>
+    <template-table-rebanho [inputRebanho]="rebanho" (remove)=remove($event)></template-table-rebanho>
+</form>

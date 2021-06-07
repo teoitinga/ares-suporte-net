@@ -22,6 +22,7 @@ export class ToolsComponent implements OnInit {
     this.router.navigate(['login/hman']);
   }
   piquetesCalc(){
+    this.router.navigate(['login/dm-pastagem']);
   }
   capineiraCalc(){
   }

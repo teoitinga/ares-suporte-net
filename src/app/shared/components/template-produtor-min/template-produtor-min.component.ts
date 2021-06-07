@@ -56,9 +56,7 @@ export class TemplateProdutorMinComponent implements OnInit {
     
     event.preventDefault();
     const prd: Produtore = this.produtoresForm.value;
-        
-    console.log('Produtor iserido...');
-    console.log(this.produtoresForm.value);
+
     //verifica se existe o produtor na lista
     const containing = this.produtores.find(pr => pr == prd);
 

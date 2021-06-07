@@ -1,3 +1,4 @@
+import { DmPastagemComponent } from '../tools/components/dm-pastagem/dm-pastagem.component';
 import { UpdateComponent } from './components/users/update/update.component';
 import { PerdaDeCargaComponent } from './../tools/components/perda-de-carga/perda-de-carga.component';
 import { ToolsComponent } from './../tools/components/tools/tools.component';
@@ -46,6 +47,12 @@ export const routes: Routes = [
       {
         path: 'hman',
         component: PerdaDeCargaComponent,
+        canActivate: [AuthGuard],
+        data: {role_acess: ['TECNICO', 'CEDIDO']},
+      },
+      {
+        path: 'dm-pastagem',
+        component: DmPastagemComponent,
         canActivate: [AuthGuard],
         data: {role_acess: ['TECNICO', 'CEDIDO']},
       }

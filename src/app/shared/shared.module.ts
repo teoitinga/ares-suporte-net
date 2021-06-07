@@ -13,6 +13,10 @@ import { TemplateTableProdutorsComponent } from './components/template-table-pro
 import { TemplateTableServicosComponent } from './components/template-table-servicos/template-table-servicos.component';
 import { TemplateTableProducaoComponent } from './components/template-table-producao/template-table-producao.component';
 import { ValoresDecimaisDirective } from './directives/valores.decimais.directive';
+import { TemplateRebanhoComponent } from './components/template-rebanho/template-rebanho.component';
+import { TemplateTableRebanhoComponent } from './components/template-table-rebanho/template-table-rebanho.component';
+import { TemplatePastagemComponent } from './components/template-pastagem/template-pastagem.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,10 +28,14 @@ import { ValoresDecimaisDirective } from './directives/valores.decimais.directiv
     TemplateTableServicosComponent,
     TemplateTableProducaoComponent,
     ValoresDecimaisDirective,
+    TemplateRebanhoComponent,
+    TemplateTableRebanhoComponent,
+    TemplatePastagemComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatDialogModule,
     MatAutocompleteModule
   ],
   exports: [
@@ -37,6 +45,9 @@ import { ValoresDecimaisDirective } from './directives/valores.decimais.directiv
     TemplateTableProdutorsComponent,
     TemplateTableServicosComponent,
     TemplateTableProducaoComponent,
+    TemplateRebanhoComponent,
+    TemplateTableRebanhoComponent,
+    TemplatePastagemComponent,
     StatusDirective,
     ValoresDecimaisDirective
   ],

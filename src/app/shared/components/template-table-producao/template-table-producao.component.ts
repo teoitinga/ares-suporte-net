@@ -27,7 +27,6 @@ export class TemplateTableProducaoComponent implements OnInit {
     this.updated.emit(this.inputProducao)
   }
   getTotalProducao(prd: ProducaoAnual) {
-    console.log(prd);
     return prd.quantidade * prd.valorUnitario;
   }
   getRendaTotal():number {
