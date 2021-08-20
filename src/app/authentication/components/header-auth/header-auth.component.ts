@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Console } from 'console';
 import { AuthenticationService } from '../../authentication.service';
 
 @Component({
@@ -18,17 +19,19 @@ export class HeaderAuthenticationComponent implements OnInit {
     //carrega o header
     this.authService.headerData = {
       nome: this.authService.getUsuarioLogado().name,
+      esloc: this.authService.getCodEsloc(),
       route: 'login/home',
       icon: 'home',
       role: this.authService.getUsuarioLogado().role,
       title: 'tela  home',
-      expires: this.authService.getExpiration().calendar()
+      expires: this.authService.getExpiration().calendar(),
+      eslocName: this.authService.getEslocName(),
     }
   }
 
   ngOnInit(): void {
-
   }
+
   get callNumber(): number {
     return this.authService.callNumber;
   }
@@ -54,6 +57,9 @@ export class HeaderAuthenticationComponent implements OnInit {
   }
   get role(): string {
     return this.authService.headerData.role;
+  }
+  get esloc(): string{
+    return this.authService.getEslocName();
   }
   get route(): string {
     return this.authService.headerData.route;

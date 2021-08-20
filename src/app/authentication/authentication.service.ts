@@ -19,6 +19,7 @@ import { EventEmitter } from 'protractor';
   providedIn: 'root'
 })
 export class AuthenticationService {
+
   
   
   private readonly PATH: string = 'auth';
@@ -27,11 +28,12 @@ export class AuthenticationService {
   private readonly ROLE_DATA: string = 'role';
   private readonly MUNICIPIO_TECNICO_DATA: string = 'municipio';
   private readonly COD_ESLOC_DATA: string = 'esloc';
+  private readonly COD_ESLOC_NAME: string = 'eslocName';
   private readonly CREATED_DATA: string = 'created';
   private readonly NAME_DATA: string = 'name';
   private readonly USERNAME_DATA: string = 'sub';
   
-  usuarioLogado: UserToken = new UserToken('','','','','','');
+  usuarioLogado: UserToken = new UserToken('','','','','','','');
   //private callsNumber$: EventEmitter<number> = new EventEmitter<0>();
   private callsNumber: number=0;
   
@@ -42,6 +44,8 @@ export class AuthenticationService {
     role: '',
     title: '',
     expires: moment().format('LLL'),
+    esloc:'',
+    eslocName:''
     
   });
   
@@ -82,7 +86,9 @@ export class AuthenticationService {
       );
     ;
   }
-
+  getEslocName(): string {
+    return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.COD_ESLOC_NAME];
+  }
   public getUsuarioLogado(): UserToken{
     return this.usuarioLogado;
   }
@@ -96,6 +102,7 @@ export class AuthenticationService {
     this.usuarioLogado.name = payload.name;
     this.usuarioLogado.role = payload.role;
     this.usuarioLogado.esloc = payload.esloc;
+    this.usuarioLogado.esloc = payload.eslocName;
     this.usuarioLogado.municipio = payload.municipio;
 
     localStorage.setItem(this.TOKEN_DATA, token);
@@ -108,6 +115,8 @@ export class AuthenticationService {
       role: '',
       title: '',
       expires: moment().format('LLL'),
+      esloc:'',
+      eslocName: ''
             
     };
     this.headerData = header;
@@ -166,6 +175,10 @@ export class AuthenticationService {
     
     return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.USERNAME_DATA];
   }
+  public getUserNameDesc() {
+    
+    return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.NAME_DATA];
+  }
   public getRoleUser() {
     return (this.parseJwt((localStorage.getItem(this.TOKEN_DATA))))[this.ROLE_DATA];
   }
@@ -193,6 +206,8 @@ export class AuthenticationService {
     const payload = this.parseJwt(token);
     headerData.nome = payload.name;
     headerData.role = payload.role;
+    headerData.esloc = payload.esloc;
+    headerData.eslocName = payload.eslocName;
 
     this._headerData.next(headerData);
   }

@@ -6,6 +6,7 @@ export class UserToken {
         public name: string,
         public municipio: string,
         public esloc: string,
+        public eslocName: string,
     ){}
 
 }

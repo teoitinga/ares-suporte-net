@@ -21,6 +21,8 @@ export class VisitaComponent implements OnInit {
       role: this.authService.getUsuarioLogado().role,
       title: 'tela  Visitas',
       expires: this.authService.getExpiration().calendar(),
+      esloc: this.authService.getCodEsloc(),
+      eslocName: this.authService.getEslocName()
     }
   }
 

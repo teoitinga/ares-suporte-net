@@ -1,10 +1,7 @@
-import { map } from 'rxjs/operators';
-import { DATA } from './../models/data._test';
-import { from, Observable } from 'rxjs';
-import { ChamadasCustomModel, ChartModel, Servico, TotalServices } from './../models/chamadas-custom-model';
+import { BehaviorSubject } from 'rxjs';
+import { ChamadasCustomModel, Servico, TotalServices } from './../models/chamadas-custom-model';
 import { Component, OnInit } from '@angular/core';
 import { DashBoardServiceService } from '../services/dash-board-service.service';
-import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 import { MessageService } from 'src/app/shared/service/responses-messages.service';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 
@@ -19,21 +16,24 @@ declare var google: any;
 })
 export class DashboardPanelComponent implements OnInit {
 
+  loading$ = new BehaviorSubject<boolean>(undefined);
+
   reportServices: ChamadasCustomModel;
 
   //Estrutura de dados a exibir
   reportDiario: TotalServices[] = [];//Dados de serviços concluidos pelo escritório no DIA atual
+
   chartHeaderDiario: string;
   srvDiaLoading: boolean = true;
-  
+
   reportMensal: TotalServices[] = [];//Dados de serviços concluidos pelo escritório no MÊS atual
   chartHeaderMensal: string;
   srvMesLoading: boolean = true;
-  
+
   reportAnual: TotalServices[] = [];//Dados de serviços concluidos pelo escritório no ANO atual
   chartHeaderAnual: string;
   srvLoading: boolean = true;
-  
+
   reportDiaUsuario: TotalServices[] = [];//Dados de serviços concluidos pelo usuário no dia atual
   chartHeaderDiaUsuario: string;
   srvDiaUsuarioLoading: boolean = true;
@@ -49,28 +49,28 @@ export class DashboardPanelComponent implements OnInit {
     this.loadData();
 
   }
-  async loadData(){
-    
+  async loadData() {
+
     //Recupera dados de todos os serviços prestado no ano corrente
-    const srv = await this.loadDadosAnuais().then(x=>{return x});
-    
+    const srv = await this.loadDadosAnuais().then(x => { return x });
+
     //Recupera registros de todo os serviços executado por este escritório no dia atual
     const srvD = await this.loadDadosDiarios().then(x=>{return x});
-    
+
     //Recupera todos os registros executados no mes corrente pelo escritório no qual o usuario pertence
-    const srvM = await this.loadDadosMensais().then(x=>{return x});
-    
+    const srvM = await this.loadDadosMensais().then(x => { return x });
+
     //Recupera todos os registros executados pelo usuario atual no dia corrente
-    const srvDU = await this.loadDadosDiaUsuario().then(x=>{return x});
-    
+    const srvDU = await this.loadDadosDiaUsuario().then(x => { return x });
+
     this.reportAnual = srv;
-    
+
     this.reportDiario = srvD;
-    
+
     this.reportMensal = srvM;
-    
+
     this.reportDiaUsuario = srvDU;
-    
+
     this.init();
 
   }
@@ -81,6 +81,7 @@ export class DashboardPanelComponent implements OnInit {
 
       setTimeout(() => {
         google.charts.setOnLoadCallback(this.exibirGraficos());
+        this.loading$.next(false);
       }, 1000);
 
     }
@@ -101,16 +102,16 @@ export class DashboardPanelComponent implements OnInit {
       titleTextStyle: {
         bold: true,
         italic: true,
-        },
+      },
       isStacked: true,
       legend: 'none',
       hAxis: { textPosition: 'none', title: 'Serviços prestados', ticks: 'none' },
-      vAxis: { 
-        title: 'quantidade', 
-        textPosition: 'center', 
-        gridlines: { count: 4 }, 
-        viewWindow: { min: 0 }, 
-        format: 0 
+      vAxis: {
+        title: 'quantidade',
+        textPosition: 'center',
+        gridlines: { count: 4 },
+        viewWindow: { min: 0 },
+        format: 0
       },
     }
   }
@@ -120,19 +121,19 @@ export class DashboardPanelComponent implements OnInit {
       titleTextStyle: {
         bold: true,
         italic: true,
-        },
+      },
       isStacked: true,
       legend: 'none',
       hAxis: { textPosition: 'none', title: 'Serviços prestados', ticks: 'none' },
-      vAxis: { 
-        title: 'quantidade', 
-        textPosition: 'center', 
-        gridlines: { count: 4 }, 
-        viewWindow: { min: 0 }, 
-        format: 0 
+      vAxis: {
+        title: 'quantidade',
+        textPosition: 'center',
+        gridlines: { count: 4 },
+        viewWindow: { min: 0 },
+        format: 0
       },
     }
-    
+
   }
   getOpcoesChartDiario(): any {
     return {
@@ -140,19 +141,19 @@ export class DashboardPanelComponent implements OnInit {
       titleTextStyle: {
         bold: true,
         italic: true,
-        },
+      },
       isStacked: true,
       legend: 'none',
       hAxis: { textPosition: 'none', title: 'Serviços prestados', ticks: 'none' },
-      vAxis: { 
-        title: 'quantidade', 
-        textPosition: 'center', 
-        gridlines: { count: 4 }, 
-        viewWindow: { min: 0 }, 
-        format: 0 
+      vAxis: {
+        title: 'quantidade',
+        textPosition: 'center',
+        gridlines: { count: 4 },
+        viewWindow: { min: 0 },
+        format: 0
       },
     }
-    
+
   }
   getOpcoesChartDiarioUsuario(): any {
     return {
@@ -160,16 +161,16 @@ export class DashboardPanelComponent implements OnInit {
       titleTextStyle: {
         bold: true,
         italic: true,
-        },
+      },
       isStacked: true,
       legend: 'none',
       hAxis: { textPosition: 'none', title: 'Serviços prestados', ticks: 'none' },
-      vAxis: { 
-        title: 'quantidade', 
-        textPosition: 'center', 
-        gridlines: { count: 4 }, 
-        viewWindow: { min: 0 }, 
-        format: 0 
+      vAxis: {
+        title: 'quantidade',
+        textPosition: 'center',
+        gridlines: { count: 4 },
+        viewWindow: { min: 0 },
+        format: 0
       },
     }
 
@@ -182,10 +183,10 @@ export class DashboardPanelComponent implements OnInit {
     const el = document.getElementById('ano_chart');
 
     // Instantiate and draw the chart.
-      const chart = new google.visualization.ColumnChart(el);
-      //recupera registros da API
-      //Desenha o gráfico
-      chart.draw(this.getDataTable(this.reportAnual), this.getOpcoesChartAnualEsloc())
+    const chart = new google.visualization.ColumnChart(el);
+    //recupera registros da API
+    //Desenha o gráfico
+    chart.draw(this.getDataTable(this.reportAnual), this.getOpcoesChartAnualEsloc());
   }
   exibirChartDiarioUsuario() {
     const el = document.getElementById('diario_usuario_chart');
@@ -215,36 +216,35 @@ export class DashboardPanelComponent implements OnInit {
 
     chart.draw(this.getDataTable(this.reportDiario), this.getOpcoesChartDiario())
   }
+
   /*
   *
   */
   getDataTable(servicos: any): any {
     // Define the chart to be drawn.
     const data = new google.visualization.DataTable();
-    
+
     data.addColumn('string', 'servicoDesc');
     data.addColumn('number', 'quantidade');
-    data.addColumn({type: 'string', role: 'style'});
-    
-   const arr = servicos.map(srv=>{
-     let item = [srv['servicoDesc'], srv['quantidade'], `color: ${randomColor()}`];
-     return item;
-   });
+    data.addColumn({ type: 'string', role: 'style' });
 
-   //Obtem as cores aleatórias para desenho do gráfico
-    const array = servicos.map(function(obj) {
-      return Object.keys(obj).map(function(key) {
+    const arr = servicos.map(srv => {
+      let item = [srv['servicoDesc'], srv['quantidade'], `color: ${randomColor()}`];
+      return item;
+    });
+
+    //Obtem as cores aleatórias para desenho do gráfico
+    const array = servicos.map(function (obj) {
+      return Object.keys(obj).map(function (key) {
         return obj[key];
       });
-    });    
+    });
 
     data.addRows(arr);
-    
 
     return data;
   }
-  private _agrupa(list: Servico[]): TotalServices[]
-   {
+  private _agrupa(list: Servico[]): TotalServices[] {
 
     const total = list.reduce(function (acumulador, servico) {
 
@@ -260,9 +260,9 @@ export class DashboardPanelComponent implements OnInit {
         acumulador[indice]['quantidade'] += 1;
 
       }
-      
+
       return acumulador;
-      
+
     }, []); //iniciar o acumulador com array vazio
     const lista: TotalServices[] = total.map(item => {
       let response: TotalServices = {
@@ -276,54 +276,54 @@ export class DashboardPanelComponent implements OnInit {
 
   async loadDadosDiarios() {
     const servicos = await this.dashService.loadDadosDiarios().toPromise().then(
-      data=>{
+      data => {
         this.chartHeaderDiario = `${data['relatorio']}`
         return this._agrupa(data['servico']);
       }
     );
     return servicos;
   }
-  
+
   async loadDadosMensais() {
     const servicos = await this.dashService.loadDadosMensais().toPromise().then(
-      data=>{
+      data => {
         this.chartHeaderMensal = `${data['relatorio']} de ${data['dataInicial']} a ${data['dataFinal']}`
         return this._agrupa(data['servico']);
       }
     );
     return servicos;
   }
-  
+
   async loadDadosDiaUsuario() {
     const servicos = await this.dashService.loadDadosDiaUsuario().toPromise().then(
-      data=>{
+      data => {
         this.chartHeaderDiaUsuario = `${data['relatorio']}`
         return this._agrupa(data['servico']);
       }
     );
     return servicos;
   }
-  
+
   async loadDadosAnuais() {
     const servicos = await this.dashService.loadDadosAnuais().toPromise().then(
-      data=>{
+      data => {
         this.chartHeaderAnual = `${data['relatorio']} de ${data['dataInicial']} a ${data['dataFinal']}`
         return this._agrupa(data['servico']);
       }
-      );
+    );
     return servicos;
   }
 }
 function getCores(reportAnual: TotalServices[]) {
   let cores = [];
   const qtdCores = reportAnual;
-  let arrayCores = reportAnual.map(srv=>cores.push(randomColor()));
+  let arrayCores = reportAnual.map(srv => cores.push(randomColor()));
   return cores;
 }
 
-function randomColor(curto = false){
+function randomColor(curto = false) {
   const max_hex = curto ? 0xFFF : 0xFFFFFF;
-  
+
   return '#' + parseInt((Math.random() * max_hex).toString())
     .toString(16)
     .padStart(curto ? 3 : 6, '0');

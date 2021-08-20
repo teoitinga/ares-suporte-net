@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { VisitaModule } from './visita/visita.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +12,7 @@ import { AuthInterceptor } from './authentication/auth-interceptor';
 import { AuthenticationService } from './authentication/authentication.service';
 
 import { MessageService } from './shared/service/responses-messages.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -25,11 +26,13 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-    ConfirmDialogRendaComponent
+    ConfirmDialogRendaComponent,
   ],
   imports: [
+    
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     AuthenticationModule,
     VisitaModule,
     MatSnackBarModule,

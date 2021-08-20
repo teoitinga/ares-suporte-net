@@ -86,10 +86,10 @@ export class UpdateComponent implements OnInit {
       login: [{ value:'', disabled: true }, [Validators.required, CpfValidator]],
       name: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(6)]],
       contato: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]],
-      municipio: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]],
+      municipio: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(6)]],
       password: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]],
       passwordcheck: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]],
-      role: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]]
+      role: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(6)]]
     });
 
   }
@@ -100,7 +100,7 @@ export class UpdateComponent implements OnInit {
       login: [{ value: usuario['login'], disabled: true }, [Validators.required, CpfValidator]],
       name: [{ value: usuario['name'], disabled: true }, [Validators.required, Validators.minLength(6)]],
       contato: [{ value: usuario['contato'], disabled: false }, [Validators.required, Validators.minLength(6)]],
-      municipio: [{ value: usuario['municipio'], disabled: false }, [Validators.required, Validators.minLength(6)]],
+      municipio: [{ value: usuario['municipio'], disabled: true }, [Validators.required, Validators.minLength(6)]],
       password: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]],
       passwordcheck: [{ value: '', disabled: false }, [Validators.required, Validators.minLength(6)]],
       role: [{ value: usuario['role'], disabled: true }, [Validators.required, Validators.minLength(6)]]

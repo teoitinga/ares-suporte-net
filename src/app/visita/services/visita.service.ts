@@ -1,3 +1,4 @@
+import { HttpRequest } from '@angular/common/http';
 import { ProducaoModel } from '../../producao/models/producao.model';
 import { VisitaPostModel } from './../models/visita-post.model';
 import { TecnicoModel } from '../../shared/models/tecnico.model';
@@ -13,15 +14,29 @@ import { InfoRendaModel } from 'src/app/producao/models/info-renda.model';
   providedIn: 'root'
 })
 export class VisitaService {
-
-
+  
+  
   servico: BehaviorSubject<ServicosPrestadosModel>
   tecnico: BehaviorSubject<TecnicoModel>;
-
+  
   private readonly PATH: string = 'visitas';
   private readonly PATH_CALL: string = 'chamadas';
   private readonly PATH_FIND_PRODUTOR: string = 'produtores/find';
   private readonly PATH_INFO_RENDA: string = 'inforenda';
+  private readonly PATH_UPLOAD_REPORT: string = 'upload';
+  
+  uploadReport(arquivos: Set<File>, idChamada: string) {
+        // Initialize Params Object
+        const formData = new FormData();
+        arquivos.forEach(file => formData.append('file', file, file.name));
+        formData.append('codVisita', idChamada);
+
+        let url = `${env.BASE_API_URL}${this.PATH}/${this.PATH_UPLOAD_REPORT}`;
+
+        const request = new HttpRequest('POST', url, formData);
+        return this.http.request(request)
+
+  }
 
   loadVisitas(): Observable<any> {
     return this.http.get(`${env.BASE_API_URL}${this.PATH}`)
@@ -38,7 +53,6 @@ export class VisitaService {
     // Begin assigning parameters
     params = params.append('dataInicial', pesquisaModel.dataInicial);
     params = params.append('dataFinal', pesquisaModel.dataFinal);
-    console.log(`${env.BASE_API_URL}${this.PATH_CALL}/gerenciar?` + params );
     return this.http.get(`${env.BASE_API_URL}${this.PATH_CALL}/gerenciar`, { params });
     ;
   }

@@ -1,13 +1,8 @@
-<div class="d-flex justify-content-center" *ngIf="viewSpinner==true">
-    <img src="./../../../../assets/Loading.gif" alt="" width="80px" height="80px">
-</div>
+
 <div class="row">
     <h5 class="col-12 d-flex justify-content-center">Gerenciar visitas</h5>
 </div>
-<div *ngIf="viewData==false">
-    <h5 class="text-danger d-flex justify-content-center">Não há visitas registradas neste período</h5>
-</div>
-<div *ngIf="viewData==true">
+<div *ngIf="viewData ; else loading">
     <mat-accordion>
         <div *ngFor="let vs of visitas">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -72,18 +67,25 @@
                                 <button mat-button matTooltip="Reiniciar" class="col-1 btn-acoes text-warning"
                                     aria-label="Atribuir status de iniciada a esta tarefa"
                                     (click)="reiniciarChamada(call)"
-                                    [disabled]="call.status=='INICIADA'"
+                                    [disabled]="call.status!='INICIADA'"
                                     >
                                     <mat-icon
                                     [style.opacity]="call.status=='INICIADA'? '0.3': ''"
                                     >cached</mat-icon>
                                 </button>
                                 <button mat-button matTooltip="Cancelar" class="col-1 btn-acoes text-danger"
-                                [disabled]="call.status=='FINALIZADA' || call.status=='CANCELADA'"
+                                [disabled]="call.status!='INICIADA'"
                                     aria-label="Atribuir status de cancelada a esta tarefa" (click)="cancelar(call)">
                                     <mat-icon
                                     [style.opacity]="call.status=='FINALIZADA' || call.status=='CANCELADA'? '0.3': ''"
                                     >delete_forever</mat-icon>
+                                </button>
+                                <button mat-button matTooltip="Cancelar" class="col-1 btn-acoes text-danger"
+                                [disabled]="call.status=='FINALIZADA' || call.status=='CANCELADA' || call.status=='EXPIRADA'"
+                                    aria-label="Atribuir status de cancelada a esta tarefa" (click)="cancelar(call)">
+                                    <mat-icon
+                                    [style.opacity]="call.status=='FINALIZADA' || call.status=='CANCELADA' || call.status=='EXPIRADA'? '0.3': ''"
+                                    >hourglass_bottom</mat-icon>
                                 </button>
 
                             </div>
@@ -95,3 +97,8 @@
     </mat-accordion>
 
 </div>
+<ng-template #loading class="d-flex justify-content-center align-items-center">
+    <div>
+        <img src="./../../../../assets/Loading.gif" style="height: 1.5em;" alt=""><span>Carregando registrons...</span>
+    </div>
+</ng-template>

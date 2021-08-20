@@ -1,0 +1,88 @@
+<form action="" [formGroup]="form" class="mt-3">
+    <div class="row">
+        <div class="col-8">
+            <div class="col-12">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-10">
+                            <label class="form-label" for="referency">Referencia</label>
+                            <input type="text" class="form-control" id="referency" formControlName="referency"
+                                placeholder="Digite o nome do escritório">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <label class="form-label" for="referency">Descrição</label>
+                            <input type="text" class="form-control" id="descricao" formControlName="descricao"
+                                placeholder="Descrição detalhada deste escritório.">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <label class="form-label" for="endereco">Endereço</label>
+                            <input type="text" class="form-control" id="endereco" formControlName="endereco"
+                                placeholder="Informe o endereço deste escritório.">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6 col-md-3 border d-flex justify-content-center align-items-center">
+            <img id="imagem" src="" alt="" style="width: 200px;heigth:200px:">
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <label class="form-label" for="email">e-mail</label>
+                    <input type="text" class="form-control" id="email" formControlName="email"
+                        placeholder="Informe o e-mail deste escritório.">
+                </div>
+                <div class="col-4">
+                    <label class="form-label" for="fone">Telefone</label>
+                    <input type="text" class="form-control" id="fone" formControlName="fone"
+                        placeholder="Informe o telefone deste escritório.">
+                </div>
+                <div class="col-4">
+                    <label class="form-label" for="zap">Celular/Whatsapp</label>
+                    <input type="text" class="form-control" id="zap" formControlName="zap"
+                        placeholder="Informe o número do whatsapp deste escritório.">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6">
+                <label for="municipio" class="form-label">Cidade</label>
+                <select id="municipio" class="form-select mb-2" formControlName="municipio">
+                    <option *ngFor="let mn of municipios" value="{{mn.nome}}">{{mn.nome}}</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="imageLogo">Logomarca</label>
+                <input type="file" class="form-control" accept='image/*' id="imageLogo" (change)="onChangeFile($event)"
+                    placeholder="inserir a logomarca do escritório/empresa">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 d-flex align-items-end">
+            <button title="" (click)="save($event)" class="btn btn-primary">
+                <span><span class="fas fa-mug-hot"></span></span> Registrar
+            </button>
+        </div>
+        <div class="col-4 d-flex align-items-end">
+            <button title="" (click)="add($event)" class="btn btn-primary">
+                <span><span class="fas fa-plus-square"></span></span> Novo
+            </button>
+        </div>
+    </div>
+</form>

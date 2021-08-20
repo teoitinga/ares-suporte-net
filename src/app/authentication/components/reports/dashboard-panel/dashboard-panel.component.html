@@ -1,18 +1,35 @@
 <div class="card">
     <div class="row">
         <div class="col-12 col-md-6 order-md-4">
-            <div class="chart" id="diario_usuario_chart"></div>
+            <div class="chart" id="diario_usuario_chart">
+                <div *ngIf="loading$ | async ; else loading"></div>
+            </div>
         </div>
         <div class="col-12 col-md-6 order-md-3">
-            <div class="chart" id="diario_chart"></div>
+            <div class="chart" id="diario_chart">
+                <div class="chart" id="diario_usuario_chart">
+                    <div *ngIf="loading$ | async ; else loading"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-md-6 order-md-2">
-            <div class="chart" id="mensal_chart"></div>
+            <div class="chart" id="mensal_chart">
+                <div class="chart" id="diario_usuario_chart">
+                    <div *ngIf="loading$ | async ; else loading"></div>
+                </div>
+            </div>
         </div>
         <div class="col-12 col-md-6 order-md-1">
-            <div class="chart" id="ano_chart"></div>
+            <div class="chart" id="ano_chart">
+                <div class="chart" id="diario_usuario_chart">
+                    <div *ngIf="loading$ | async ; else loading"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<ng-template #loading class="d-flex justify-content-center align-items-center">
+    <img src="./../../../../assets/Loading.gif" style="height: 1.5em;" alt=""><span>Carregando gráfico...</span>
+</ng-template>

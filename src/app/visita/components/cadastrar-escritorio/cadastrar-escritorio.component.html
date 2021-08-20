@@ -1,0 +1,6 @@
+<template-escritorio [input] = "escritorio" (salvar) = "onRegistraEscritorio($event)"></template-escritorio>
+<template-table-escritorio 
+(remove) = "onRemoveEscritorio($event)"
+(edita) = "onSelecionaEscritorio($event)"
+ [input$] = "escritorios$"></template-table-escritorio>
+ 

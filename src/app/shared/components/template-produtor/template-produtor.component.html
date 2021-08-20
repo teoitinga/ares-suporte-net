@@ -1,0 +1,56 @@
+<div class="h5 boder bg-light mt-3 d-flex justify-content-center">Cadastro de pessoal</div>
+<div class="col-12 form" [formGroup]="form">
+    <div class="row">
+        <div class="col-8">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" onclick="this.select()" class="form-control texto" id="nome" placeholder="Informe o nome."
+                formControlName="nome">
+        </div>
+        <div class="col-4">
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="text" (change)="verificaCpf($event)" mascara="999.999.999-99" onclick="this.select()" class="form-control texto" id="cpf" placeholder="Informe o cpf."
+            formControlName="cpf">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <label for="nascimento" class="form-label">Nascimento</label>
+            <input type="date" onclick="this.select()" class="form-control texto" id="nascimento"
+                placeholder="Informe a data de nascimento." formControlName="nascimento">
+        </div>
+        <div class="col-4">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" onclick="this.select()" mascara="(99) 9 9999-9999" class="form-control texto" id="telefone"
+                placeholder="Informe o telefone." formControlName="telefone">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <label for="endereco" class="form-label">Endereco</label>
+            <input type="text" onclick="this.select()" class="form-control texto" id="endereco"
+                placeholder="Informe o endereço." formControlName="endereco">
+        </div>
+        <div class="col-2">
+            <label for="situacaoAtual" class="form-label">CEP</label>
+            <input type="text" onclick="this.select()" mascara="99.999-999" class="form-control texto" id="cep" placeholder="Informe o CEP."
+                formControlName="cep">
+        </div>
+    </div>
+    <div class="col-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select id="categoria" class="form-select mb-2" formControlName="categoria">
+            <option *ngFor="let cat of categorias" value="{{cat.value}}">{{cat.descricao}}</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="cidade" class="form-label">Cidade</label>
+        <select id="cidade" class="form-select mb-2" formControlName="cidade">
+            <option *ngFor="let mn of municipios" value="{{mn.nome}}">{{mn.nome}}</option>
+        </select>
+    </div>
+<button class="btn btn-primary" [disabled]="!form.valid" (click)="onClick()">Registrar</button>
+</div>
+
+<div class="loading" *ngIf="loading">
+    <img src="../../../../assets/Loading.gif" alt="">
+</div>

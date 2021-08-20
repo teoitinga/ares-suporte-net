@@ -1,46 +1,29 @@
 <div class="fields-pesquisa row">
     <div class="col-4 option-search">
-        <!-- Infarmação da busca por data-->
-        <mat-form-field appearance="fill">
-            <mat-label>Informe o período da pesquisa</mat-label>
-            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                <input matStartDate formControlName="start" placeholder="Data inicial">
-                <input matEndDate formControlName="end" placeholder="Data final">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
+        <div class="row d-flex align-itens-center">
+            <div class="col-1">
+                <button mat-icon-button color="primary" (click)="pesquisar()" aria-label="Pesquisar com estas informações">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            <div class="col-5">
+                <!-- Infarmação da busca por data-->
+                <mat-form-field appearance="fill">
+                    <mat-label>Informe o período da pesquisa</mat-label>
+                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                        <input matStartDate formControlName="start" placeholder="Data inicial">
+                        <input matEndDate formControlName="end" placeholder="Data final">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+        
+                    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Data inicial não é válida!</mat-error>
+                    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Data final não é válida</mat-error>
+                </mat-form-field>
 
-            <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-            <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-        </mat-form-field>
-        <!-- Fim Infarmação da busca por data-->
-
-    </div>
-    <div class="col-4">
-        <mat-form-field class="servico-form-field">
-            <mat-label>Pesquisar Serviço</mat-label>
-            <input matInput type="text" [(ngModel)]="servico">
-            <button mat-button *ngIf="servico" matSuffix mat-icon-button aria-label="Clear" (click)="servico=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
-    </div>
-    <div class="col-3">
-        <!--Select Html-->
-        <mat-form-field appearance="fill">
-            <mat-label>Choose an option</mat-label>
-            <select matNativeControl [(ngModel)]="status" [disabled]="disableSelect.value">
-                <option value="INICIADA" selected>Iniciada</option>
-                <option value="FINALIZADA">Concluída</option>
-                <option value="CANCELADA">Cancelada</option>
-            </select>
-        </mat-form-field>
-        <!--Fim Select Html-->
-    </div>
-    <div class="col-1">
-        <button mat-icon-button color="primary" (click)="pesquisar()" aria-label="Pesquisar com estas informações">
-            <mat-icon>search</mat-icon>
-          </button>
+            </div>
+            <!-- Fim Infarmação da busca por data-->
+        </div>
     </div>
 </div>
 <div class="visita" *ngFor="let atendimentos of info">
@@ -50,12 +33,12 @@
         <div class="local col-6">Local: {{atendimentos.local}}</div>
     </div>
     <div class="corpo row bg-light">
-        <div class="servico col-6" >
+        <div class="servico col-6">
             <div class="" *ngFor="let srv of atendimentos.acoes">
                 {{srv.servico}}
             </div>
         </div>
-        <div class="produtor-data col-6" >
+        <div class="produtor-data col-6">
             <div class="row" *ngFor="let prd of atendimentos.produtores">
                 <div class="cpf col 3">{{prd.cpf}}</div>
                 <div class="nome col-9">{{prd.nome}}</div>

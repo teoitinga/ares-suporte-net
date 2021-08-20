@@ -1,0 +1,27 @@
+<table class="col-6 table table-striped" *ngIf="input$ | async as escritorios; else loading">
+    <thead>
+      <tr>
+        <th  colspan=2>Escritórios registrados</th>
+      </tr>
+    </thead>
+
+    <tbody >
+      <tr *ngFor="let escritorio of escritorios">
+        <td>{{escritorio.descricao}}</td>
+        <td>
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="mr-2 ml-2btn btn-danger btn-sm btn-custom" (click)="remover(escritorio)">
+              <i class="fa fa-ban"></i>
+            </button>
+            <button type="button" class="mr-2 btn btn-warning btn-sm btn-custom" (click)="editar(escritorio)">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #loading>
+    <img src="./../../../../assets/Loading.gif" style="height: 1.5em;" alt=""><span>Carregando escritórios...</span>
+  </ng-template>

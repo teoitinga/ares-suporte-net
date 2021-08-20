@@ -9,3 +9,13 @@
     align-items: center;
     justify-content: center;
 }
+.row div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+}
+.chart{
+    min-width: 20vw;
+    min-height: 30vh;
+}

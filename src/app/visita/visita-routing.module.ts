@@ -1,3 +1,6 @@
+import { ListaAtendimentosComponent } from './../produtores/components/lista-atendimentos/lista-atendimentos.component';
+import { CadastrarProdutorFormComponent } from './components/cadastrar-produtor-form/cadastrar-produtor-form.component';
+import { CadastrarEscritorioComponent } from './components/cadastrar-escritorio/cadastrar-escritorio.component';
 import { GeoimaComponent } from './components/servicos/geoima/geoima.component';
 import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
 
@@ -16,6 +19,7 @@ import { CarSegundaviaComponent } from './components/servicos/car-segundavia/car
 import { CarRetificarComponent } from './components/servicos/car-retificar/car-retificar.component';
 import { ConvUmEmaterComponent } from './components/servicos/conv-um-emater/conv-um-emater.component';
 import { EmissaoDapComponent } from './components/servicos/emissao-dap/emissao-dap.component';
+import { TemplateProdutorComponent } from '../shared/components/template-produtor/template-produtor.component';
 
 
 const routes: Routes = [
@@ -36,8 +40,32 @@ const routes: Routes = [
       data: {role_acess: ['TECNICO', 'CEDIDO']},
     },
     {
+      path: 'cadastrar-escritorio',
+      component: CadastrarEscritorioComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO']},
+    },
+    {
+      path: 'cadastrar-produtor',
+      component: CadastrarProdutorFormComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'PREFEITURA']},
+    },
+    {
+      path: 'produtor',
+      component: TemplateProdutorComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'PREFEITURA']},
+    },
+    {
       path: 'lista-visitas',
       component: ListaVisitasComponent,
+      canActivate: [AuthGuard],
+      data: {role_acess: ['TECNICO', 'CEDIDO']},
+    },
+    {
+      path: 'lista-atd/:produtor',
+      component: ListaAtendimentosComponent,
       canActivate: [AuthGuard],
       data: {role_acess: ['TECNICO', 'CEDIDO']},
     },

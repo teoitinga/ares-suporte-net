@@ -1,8 +1,22 @@
 <header-auth></header-auth>
-<mat-form-field class="pesquisa-input ml-2">
-  <mat-label>Consultar</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por qualquer informação" #input>
-</mat-form-field>
+<div class="row d-flex justify-content-center h5 mt-3">
+  Meus atendimentos não finalizados
+</div>
+<div class="row mt-1">
+  <div class="col-6">
+    <mat-form-field>
+      <mat-label>Consultar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Busca por campo" #input>
+    </mat-form-field>
+  </div>
+  <div class="col-6">
+    <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = $event">
+    </mat-paginator>
+  </div>
+</div>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
@@ -61,9 +75,4 @@
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
   </table>
-  <mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="pageEvent = $event">
-</mat-paginator>
 </div>

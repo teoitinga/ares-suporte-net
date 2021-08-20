@@ -1,3 +1,4 @@
+import { ListaAtendimentosComponent } from './../produtores/components/lista-atendimentos/lista-atendimentos.component';
 import { ProducaoRoutingModule } from './../producao/producao-routing.module';
 import { ProducaoModule } from './../producao/producao.module';
 import { AuthenticationModule } from './../authentication/authentication.module';
@@ -38,6 +39,8 @@ import { PainelServicosComponent } from '../info-view/painel-servicos/painel-ser
 import {MatSelectModule} from '@angular/material/select';
 import { PrgHortaComponent } from './components/servicos/prg-horta/prg-horta.component';
 import { GeoimaComponent } from './components/servicos/geoima/geoima.component';
+import { CadastrarEscritorioComponent } from './components/cadastrar-escritorio/cadastrar-escritorio.component';
+import { CadastrarProdutorFormComponent } from './components/cadastrar-produtor-form/cadastrar-produtor-form.component';
 
 @NgModule({
   declarations: [
@@ -58,12 +61,13 @@ import { GeoimaComponent } from './components/servicos/geoima/geoima.component';
     PainelServicosComponent,
     PrgHortaComponent,
     GeoimaComponent,
+    CadastrarEscritorioComponent,
+    CadastrarProdutorFormComponent,
+    ListaAtendimentosComponent
   ],
   imports: [
     CommonModule,
     MatAutocompleteModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,

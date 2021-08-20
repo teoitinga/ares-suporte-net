@@ -7,5 +7,7 @@ export interface LoginModel{
         role: string;
         title: string;
         expires: string;
+        esloc: string;
+        eslocName: string;
 
 }

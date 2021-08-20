@@ -32,8 +32,8 @@ export class AuthInterceptor implements HttpInterceptor {
           } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
-            this.messageService.sendError(this._snackBar, `Erro ${error.status}`, error.error);
+            //console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
+            //this.messageService.sendError(this._snackBar, `Erro ${error.status}`, error.error);
           }
   
           // If you want to return a new response:

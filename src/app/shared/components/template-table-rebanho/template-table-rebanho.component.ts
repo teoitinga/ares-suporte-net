@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./template-table-rebanho.component.css']
 })
 export class TemplateTableRebanhoComponent implements OnInit {
-  
+   
   @Input('inputRebanho') inputRebanho: RebanhoModel[] = [];
 
   @Output('remove') remove = new EventEmitter();

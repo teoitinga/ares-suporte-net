@@ -30,7 +30,6 @@ export class ChamadaService {
     
 
   loadCalls(pageSize, length): Observable<any>{
-    console.log(`${env.BASE_API_URL}${this.PATH}?size=${pageSize}&Number=${length}`);
     return this.http.get(`${env.BASE_API_URL}${this.PATH}?size=${pageSize}&Number=${length}`)
     ;
   }

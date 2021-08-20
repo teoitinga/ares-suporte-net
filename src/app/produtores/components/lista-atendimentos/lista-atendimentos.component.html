@@ -1,0 +1,74 @@
+<div class="h5 boder bg-light mt-3 d-flex justify-content-center">
+  Relatório de atendimentos a beneficiário
+</div>
+<div class="col-12 col-md-6" *ngIf="(beneficiario$ | async) as bnf; else loadingdata">
+  <div class="row">
+    <div class="col-8">
+      <strong>
+        Beneficiário:
+      </strong> {{bnf.nome}}
+    </div>
+    <div class="col-4">
+      <strong>CPF: </strong>
+      {{bnf.cpf}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <strong>Endereço:</strong>
+      {{bnf.endereco}}
+    </div>
+    <div class="col">
+      <strong>
+        Contato:
+      </strong>
+      {{bnf.telefone}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Gerado em: {{dataAtual}}
+    </div>
+  </div>
+
+</div>
+<table class="col-6 table table-striped" *ngIf="input$ | async as atendimentos; else loading">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Serviços prestados</th>
+      <th>Status</th>
+      <th>Funcionário</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let atd of atendimentos.content">
+      <td>{{atd.dataDaVisita}}</td>
+      <td>{{atd.callReferency}}</td>
+      <td>{{atd.status}}</td>
+      <td>{{atd.responsavelNome}}</td>
+      <td class="col">
+        <div class="col d-flex justify-content-around align-itens-center">
+          <button type="button" class="ml-1 btn btn-danger btn-sm" (click)="remover(atd)">
+            <i class="fa fa-ban"></i>
+          </button>
+          <button type="button" class="ml-1 btn btn-warning btn-sm" (click)="editar(atd)">
+            <i class="fa fa-pencil-square-o"></i>
+          </button>
+          <button type="button" class="ml-1 btn btn-primary btn-sm" [disabled]="!atd.idReport"
+            (click)="onDonwload(atd)">
+            <i class="fa fa-eye"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #loading>
+  <img src="./../../../../assets/Loading.gif" style="height: 1.5em;" alt=""><span>Carregando atendimentos...</span>
+</ng-template>
+<ng-template #loadingdata>
+  <img src="./../../../../assets/Loading.gif" style="height: 1.5em;" alt=""><span>lista de produtores...</span>
+</ng-template>

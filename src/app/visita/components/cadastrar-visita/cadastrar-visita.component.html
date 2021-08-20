@@ -2,7 +2,7 @@
   <img src="../../../../assets/Loading.gif" alt="">
 </div>
 <div class="container-fluid">
-  <div class="col-12" [formGroup]="visitaForm">
+  <div class="col-12 form" [formGroup]="visitaForm">
     <div class="row g-3">
       <!--
       <div class="col-12 form-check">
@@ -13,15 +13,14 @@
       </div>
       -->
       <div class="row mt-5">
-        <div class="col-9">
-          <label for="local-do-atendimento" class="form-label">Local do Atendimento</label>
-          <input type="text" class="form-control" id="local-do-atendimento" placeholder="Fazenda, Sitio..."
-            formControlName="localDoAtendimeno">
+        <div class="col-9 form-group">
+          <label for="localDoAtendimento" class="form-label">Local do Atendimento</label>
+          <input type="text" class="form-control" id="localDoAtendimento" placeholder="Fazenda, Sitio..."
+            formControlName="localDoAtendimento">
         </div>
         <div class="col-3">
           <label for="data-da-visita" onclick="this.select()" class="form-label">Data da visita</label>
-          <input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" id="data-da-visita"
-            placeholder="19/06/2020" formControlName="dataDaVisita">
+          <input type="date" class="form-control" id="dataDaVisita" formControlName="dataDaVisita">
         </div>
       </div>
     </div>
@@ -39,7 +38,8 @@
       </div>
       <div class="col-md-5">
         <label for="nome-do-produtor" class="form-label">Nome</label>
-        <input type="text" onclick="this.select()" (change)="verificarNomeProdutor($event)" class="form-control" id="nome-do-produtor" formControlName="nome">
+        <input type="text" onclick="this.select()" (change)="verificarNomeProdutor($event)" class="form-control"
+          id="nome-do-produtor" formControlName="nome">
       </div>
       <div class="col-4 d-flex align-items-end">
         <button title="" class="btn btn-primary" (click)="incluirProdutor($event)" [disabled]="!produtoresForm.valid">
@@ -61,19 +61,19 @@
         </search-tecnico-auto-complete>
       </div>
       <div class="col-12">
-        <label for="descricao-do-servico" class="form-label">Descrição do serviço</label>
-        <input type="text" onclick="this.select()" class="form-control" id="descricao-do-servico"
-          placeholder="Elaboração de laudo de vistoria para acesso a crédito rural" formControlName="servicoPrestado">
+        <label for="servicoPrestado" class="form-label">Descrição do serviço</label>
+        <input type="text" onclick="this.select()" class="form-control" id="servicoPrestado"
+          placeholder="Descreva o serviço prestado" formControlName="servicoPrestado">
       </div>
       <div class="col-12">
         <label for="ocorrencia" class="form-label">Ocorrência</label>
-        <input type="text" onclick="this.select()" class="form-control" id="ocorrencia" placeholder="***"
-          formControlName="ocorrencia">
+        <input type="text" onclick="this.select()" class="form-control" id="ocorrencia"
+          placeholder="Caso haja alguma ocorrência, informe aqui!!!" formControlName="ocorrencia">
       </div>
       <div class="row mt-2">
         <div class="col-2">
           <label for="valor-do-servico" class="form-label">Valor do serviço</label>
-          <input type="number" onclick="this.select()" class="form-control" id="valor-do-servico" placeholder="150"
+          <input type="number" onclick="this.select()" class="form-control" id="valor-do-servico" placeholder="0,00"
             formControlName="valor">
         </div>
         <div class="col-4 d-flex align-items-end">
@@ -84,39 +84,74 @@
       </div>
     </div>
     <div class="col-12">
-      <label for="situacao-atual" class="form-label">Situação atual</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="situacao-atual"
-        placeholder="descreva a situaçãi atual na referente ao serviço prestado" formControlName="situacaoAtual"></textarea>
+      <label for="situacaoAtual" class="form-label">Situação atual</label>
+      <textarea type="text" onclick="this.select()" class="form-control texto" id="situacaoAtual"
+        placeholder="Descreva a situação atual na referente ao serviço prestado com o máximo de 256 caracteres."
+        formControlName="situacaoAtual"></textarea>
     </div>
     <div class="col-12">
-      <label for="orientacoes" class="form-label">Orientações</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="orientacoes"
-        placeholder="Descreva a orientação ao beneficiário"
+      <label for="orientacao" class="form-label">Orientações</label>
+      <textarea type="text" onclick="this.select()" class="form-control texto" id="orientacao"
+        placeholder="Descreva uma orientação ao beneficiário com o máximo de 512 caracteres."
         formControlName="orientacao"></textarea>
     </div>
     <div class="col-12">
-      <label for="recomendaoes" class="form-label">Recomendações</label>
-      <textarea type="text" onclick="this.select()" class="form-control texto" id="recomendaoes"
-        placeholder="Deixe uma recomendação técnica ao beneficiário" formControlName="recomendacao"></textarea>
+      <label for="recomendacao" class="form-label">Recomendações</label>
+      <textarea type="text" onclick="this.select()" class="form-control texto" id="recomendacao"
+        placeholder="Deixe uma recomendação técnica ao beneficiário com o máximo de 126 caracteres."
+        formControlName="recomendacao"></textarea>
     </div>
-    <div class="col-md-4">
-      <label for="municipio" class="form-label">Cidade</label>
-      <select id="municipio" class="form-select mb-2" formControlName="municipio">
-        <option *ngFor="let mn of municipios" value="{{mn.nome}}">{{mn.nome}}</option>
-      </select>
+    <div class="col-md-12 mt-3">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="municipio" class="form-label">Cidade</label>
+          <select id="municipio" class="form-select mb-2" formControlName="municipio">
+            <option *ngFor="let mn of municipios" value="{{mn.nome}}">{{mn.nome}}</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label for="documento" class="form-label" id="documentoLabel">Doc Assinado</label>
+          <input type="file" class="form-control custom-file-input" (change)="onChange($event)" id="documento"
+            placeholder="Arquivo digitalizado" accept=".pdf" formControlName="documento">
+        </div>
+        <div class="col-3 d-flex align-items-end mb-2">
+          <button class="btn btn-primary" (click)="uploadFiles()" [disabled]="!uploadValid">
+            <span><span class="far fa-calendar-check"></span></span>
+            enviar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <template-table-produtors [inputProdutores]="produtores" (removed)="onRemoveProdutor($event)"></template-table-produtors>
+      <template-table-produtors [inputProdutores]="produtores" (removed)="onRemoveProdutor($event)">
+      </template-table-produtors>
     </div>
     <div class="col-6">
       <template-table-servicos [inputChamadas]="chamadas" (removed)="onRemoveServico($event)"></template-table-servicos>
     </div>
   </div>
 </div>
-<div class="col-12">
-  <button class="btn btn-primary" (click)="registrarVisita()" [disabled]="!visitaForm.valid">Registrar</button>
+<div class="col-8">
+  <div class="row">
+    <div class="col-5">
+      <button class="btn btn-success" 
+      [disabled]="!visitaForm.valid"
+       (click)="onPrintReport()">
+        <span><span class="fas fa-print"></span></span>
+        Imprimir relatório</button>
+    </div>
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="onSubmit()"
+      [disabled]="!visitaForm.valid"
+      >
+      <span><span class="far fa-calendar-check"></span></span>
+      Registrar</button>
+      
+    </div>
+  </div>
 </div>
+<!--
+-->

@@ -1,9 +1,18 @@
-<header class="agro-header text-white">
+<header class="agro-header text-white mt-2">
   <div class="container">
-    <div class="">
-      <div class="row justify-content-end">
-        <h1 class="moon dark-text">DARK<small class="moon demeter-text"><i>deméter</i></small></h1>
-        <small class="moon" style="margin-top: -15px;">Sistema de monitoramento de atividades e projetos</small>
+    <div class="row justify-content-end">
+      <div class="col-6 mt-2">
+        <div class="row justify-content-end">
+          <h1 class="moon dark-text"><span>
+              <img src="./../../../../assets/ares.png" class="img-logo" alt="">
+            </span>Ares<small class="moon demeter-text"><i>#</i></small></h1>
+          <small class="moon" style="margin-top: -10px;">Sistema de monitoramento de atividades e projetos</small>
+        </div>
+      </div>
+      <div class="col-6 d-flex justify-content-start d-flex align-items-end">
+        <div class="h4">
+          {{esloc}}
+        </div>
       </div>
     </div>
     <div class="row">
@@ -11,12 +20,14 @@
         <!-- Dados do usuario -->
         <div>
           {{ nome }}
-          <button data-toggle="tooltip" class="btn " matTooltip="Você tem {{callNumber}} serviços para concluir" (click)="conferirChamadas()" *ngIf="callNumber > 0">
+          <button mat-button data-toggle="tooltip" class="btn "
+            matTooltip="Você tem {{callNumber}} serviços para concluir" (click)="conferirChamadas()"
+            *ngIf="callNumber > 0">
             <span class="badge badge-pill text-danger bg-warning badge-warning">{{ callNumber }}</span>
           </button>
         </div>
         <div>
-          <button type="button" matTooltip="Sair do sistema" class="col-1 btn " (click)="logout()">
+          <button mat-button type="button" matTooltip="Sair do sistema" class="col-1 btn " (click)="logout()">
             <span class="d-flex justify-content-start">
               <i class="fas fa-door-open text-light"></i>
             </span>
@@ -25,22 +36,72 @@
       </div>
     </div>
     <div class="row menu">
-      <div class="col-6 d-flex justify-content-start">
-        <button type="button" matTooltip="Ir para tela inicial" class="col-1 btn " (click)="home()">
-          <span class="d-flex justify-content-start">
-            <mat-icon aria-hidden="false" class="text-light">home</mat-icon>
-          </span>
-        </button>
-        <button type="button" matTooltip="Alterar meus dados" class="col-1 btn " (click)="updateUser()">
-          <span class="d-flex justify-content-start">
-            <mat-icon aria-hidden="false" class="text-light">people_alt</mat-icon>
-          </span>
-        </button>
-        <button type="button" [disabled]="true" matTooltip="Menu Gerenciar" class="col-1 btn " (click)="updateUser()">
-          <span class="d-flex justify-content-start">
+      <div class="col-1 d-flex justify-content-start">
+        <div>
+          <button type="button" matTooltip="Ir para tela inicial" class="col-1 btn btnmenu" (click)="home()">
+            <span class="d-flex justify-content-center">
+              <mat-icon aria-hidden="false" class="text-light">home</mat-icon>
+            </span>
+          </button>
+        </div>
+        <div>
+          <button type="button" matTooltip="Alterar meus dados" class="col-1 btn btnmenu" (click)="updateUser()">
+            <span class="d-flex justify-content-center">
+              <mat-icon aria-hidden="false" class="text-light">people_alt</mat-icon>
+            </span>
+          </button>
+        </div>
+        <div>
+          <button type="button" [disabled]="true" matTooltip="Menu Gerenciar" class="col-1 btn btnmenu"
+            (click)="updateUser()">
+            <span class="d-flex justify-content-center">
+              <mat-icon aria-hidden="false" class="text-light">home_repair_service</mat-icon>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col d-flex justify-content-start align-self-end itens-menu">
+        <div *ngIf="role=='TECNICO' || 'PREFEITURA'">
+          <button mat-button [matMenuTriggerFor]="gerenciar">
             <mat-icon aria-hidden="false" class="text-light">home_repair_service</mat-icon>
-          </span>
-        </button>
+            Gerenciar
+          </button>
+          <mat-menu #gerenciar="matMenu">
+            <a class="dropdown-item" href="/visitas/cadastrar-escritorio">Escritório</a>
+            <a class="dropdown-item" href="/visitas/cadastrar-produtor">Produtores</a>
+          </mat-menu>
+          <button mat-button [matMenuTriggerFor]="atendimentos">
+            <mat-icon>menu</mat-icon>
+            Atendimentos
+          </button>
+          <mat-menu #atendimentos="matMenu">
+            <a class="dropdown-item" href="/visitas/cadastrar-escritorio">Diversos</a>
+            <a class="dropdown-item" href="/visitas/cadastrar-produtor">CAR</a>
+            <a class="dropdown-item" href="/visitas/cadastrar-produtor">2 via CAR</a>
+            <a class="dropdown-item" href="/visitas/cadastrar-produtor">Retificação CAR</a>
+            <a class="dropdown-item" href="/visitas/cadastrar-produtor">Doação Sementes Horta</a>
+          </mat-menu>
+          <button mat-button [matMenuTriggerFor]="ferramentas">
+            <mat-icon>agriculture</mat-icon>
+            Ferramentas
+          </button>
+          <mat-menu #ferramentas="matMenu">
+            <a class="dropdown-item" href="/visitas/cadastrar-escritorio">Perda de carga</a>
+            <a class="dropdown-item" href="/visitas/cadastrar-escritorio">Dim. pastagem</a>
+          </mat-menu>
+          <button mat-button [matMenuTriggerFor]="report">
+            <mat-icon>summarize</mat-icon>
+            Relatório
+          </button>
+          <mat-menu #report="matMenu">
+            <a class="dropdown-item" href="/visitas/cadastrar-escritorio">Atendimentos por data</a>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <div *ngIf="role=='TECNICO'">
+        </div>
       </div>
     </div>
   </div>

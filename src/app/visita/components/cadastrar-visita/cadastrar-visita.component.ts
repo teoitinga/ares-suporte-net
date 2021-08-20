@@ -1,8 +1,8 @@
+import { EscritorioService } from './../../../shared/services/escritorio.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { CpfValidator } from './../../../shared/validators/cpf-validator';
 import { MessageService } from 'src/app/shared/service/responses-messages.service';
 
@@ -14,6 +14,9 @@ import { Chamada, Produtore, VisitaPostModel } from '../../models/visita-post.mo
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ConfirmDialogComponent } from 'src/app/chamadas/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+
+import * as moment from 'moment';
+import { geraDocumentoPdf } from './docpdf';
 
 @Component({
   selector: 'app-cadastrar-visita',
@@ -34,17 +37,25 @@ export class CadastrarVisitaComponent implements OnInit {
 
   visita: VisitaPostModel;
 
+  idFileReport: string;//Nome do Arquivo de relatório
+
   //Forms Utilizados no registro
   produtoresForm: FormGroup;
   servicosForm: FormGroup;
   visitaForm: FormGroup;
   tecnicoResponsavel: TecnicoModel;
 
+  //Variáveis de controle
   loading: boolean = false;
+  //readonly hoje: any = moment();
 
   //FIELDS of form
   FIELD_NAME_PRODUTOR: string = 'nome';
- 
+  esloc: any;
+  files: Set<any>;
+  timeNow: string;
+  isAnexed: boolean = false;//Indica se existe um arquivo anexado à este atendimento
+
   constructor(
     private fb: FormBuilder,
     private municipioService: SearchMunicipioService,
@@ -53,31 +64,41 @@ export class CadastrarVisitaComponent implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _escritorioService: EscritorioService
   ) {
     this.loadMunicipios();
 
   }
 
   ngOnInit(): void {
+
     //Carrega o formulário de produtores
     this.produtorLoadForm();
     //Carrega o formulário de servicos
     this.servicoLoadForm();
     //Carrega o formulário de visita
     this.visitaLoadForm();
+
+    this.timeNow = moment().format('YYYYMMDDHHmmss');
+    const codEsloc = this.authenticationService.getCodEsloc();
+    const idChamada = `${codEsloc}-${this.timeNow}`;
+
+    this.idFileReport = idChamada;
   }
 
   private visitaLoadForm() {
     const municipioDoTecnico = this.authenticationService.getMunicipioDoTecnico();
+
     this.visitaForm = new FormGroup({
-      createFolder: new FormControl('true', [Validators.required]),
-      localDoAtendimeno: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      createFolder: new FormControl('true'),
+      localDoAtendimento: new FormControl('', [Validators.required, Validators.minLength(6)]),
       dataDaVisita: new FormControl('', [Validators.required]),
-      situacaoAtual: new FormControl('O produtor solicitou apoio pois necessita da prestação deste serviço', [Validators.required]),
-      orientacao: new FormControl('***'),
-      recomendacao: new FormControl('***'),
-      municipio: new FormControl(municipioDoTecnico)
+      situacaoAtual: new FormControl('', [Validators.maxLength(256)]),
+      orientacao: new FormControl('', [Validators.maxLength(512)]),
+      recomendacao: new FormControl('', [Validators.maxLength(126)]),
+      municipio: new FormControl(municipioDoTecnico),
+      documento: new FormControl('')
     });
   }
 
@@ -97,7 +118,48 @@ export class CadastrarVisitaComponent implements OnInit {
       valor: new FormControl('', [Validators.required])
     });
   }
+  onChange(event) {
+    const selectedFiles = <FileList>event.srcElement.files;
+    document.getElementById('documentoLabel').innerHTML = selectedFiles[0].name;
+    const fileNames = [];
+    this.files = new Set();
 
+    for (let i = 0; i < selectedFiles.length; i++) {
+      fileNames.push(selectedFiles[i]);
+      this.files.add(selectedFiles[i]);
+    }
+  }
+
+  get uploadValid(): boolean {
+    let valid: boolean;
+
+    try {
+      this.files.size;
+    } catch {
+      return false;
+    }
+    if ((this.files.size > 0) && (this.formValid)) {
+      valid = true;
+    } else {
+      valid = false;
+    }
+
+    return valid;
+  }
+  async uploadFiles() {
+
+    await this.visitaService.uploadReport(this.files, this.idFileReport)
+      .subscribe(
+        data => {
+          this.messageService.sendInfoMessage(this._snackBar, "Sucesso!", "O Arquivo foi enviado com sucesso");
+          this.isAnexed = true;
+        },
+        error => {
+          console.error(error);
+          this.messageService.sendError(this._snackBar, "Erro", "Não foi possível registrar este arquivo!");
+        }
+      )
+  }
   private produtorLoadForm() {
 
     this.produtoresForm = this.fb.group({
@@ -121,7 +183,7 @@ export class CadastrarVisitaComponent implements OnInit {
       }
     );
   }
-  
+
   private clearFormProdutor() {
     this.produtoresForm.controls['nome'].disable();
     this.produtoresForm.controls['nome'].setValue('');
@@ -148,18 +210,18 @@ export class CadastrarVisitaComponent implements OnInit {
     this.produtoresFormClean();
   }
 
-  verificarNomeProdutor(value: any){
+  verificarNomeProdutor(value: any) {
 
     const prd: Produtore = this.produtoresForm.value;
-    try{
-      
+    try {
+
       prd.nome = prd.nome.replace(/[^a-zA-Z -]/g, "");
       //Remove espaços ni inicio ou final do nome
       prd.nome = prd.nome.trim();
       this.produtoresForm[this.FIELD_NAME_PRODUTOR] = prd.nome;
 
-    }catch{
-      
+    } catch {
+
     }
 
   }
@@ -174,10 +236,6 @@ export class CadastrarVisitaComponent implements OnInit {
       //Configura a chamada
       this.chamada.cpfReponsavel = this.tecnicoResponsavel.login;
 
-      //imprime os dados para auditoria
-      console.log('Chamadas atual');
-      console.log(this.chamada);
-
       this.chamadas.push(this.chamada);
     } else {
       this.messageService.sendError(this._snackBar, "Erro", "Você já registrou este atendimento, por favor especifique os detalhes deste serviço.");
@@ -189,21 +247,21 @@ export class CadastrarVisitaComponent implements OnInit {
     this.loading = true;
 
     const cpf: string = value.target.value.replace(/\.|\-/g, '');
-    
+
     let nomeProdutor: string = '';
-    
+
     this.visitaService.obterProdutor(cpf).subscribe(
       data => {
-        if(data!=null){
+        if (data != null) {
           nomeProdutor = data['nome'];
           this.produtoresForm.controls['nome'].disable();
           this.produtoresForm.controls['nome'].setValue(nomeProdutor);
-  
+
           this.produtor = this.produtoresForm.value;
-  
+
           this.produtor.nome = this.produtoresForm.controls['nome'].value;
           this.loading = !true;
-        }else{
+        } else {
           this.habilitaInfoNome()
           this.loading = !true;
         }
@@ -218,7 +276,7 @@ export class CadastrarVisitaComponent implements OnInit {
     this.produtoresForm.controls['nome'].setValue('');
     this.produtoresForm.controls['nome'].setValidators([Validators.required, Validators.minLength(6)]);
   }
-  
+
   produtoresFormClean() {
     this.produtor = null;
     this.produtoresForm = this.fb.group({
@@ -228,7 +286,28 @@ export class CadastrarVisitaComponent implements OnInit {
     this.produtoresForm.controls['nome'].disable();
   }
 
+  async onPrintReport() {
+    const eslocCod = this.authenticationService.getCodEsloc();
+    const userName =  this.authenticationService.getUserNameDesc();
+    const escritorio = await this._escritorioService.loadEscritorio(eslocCod).toPromise()
+      .then(
+        data => {
+          this.esloc = data;
+        }
+      );
 
+
+    this.atualizaVisitaData();
+    const imagem = this.esloc.imageLogo;
+
+    const pdf = new geraDocumentoPdf(
+      this.visita,
+      this.esloc,
+      userName,
+      imagem
+    );
+    pdf.geraDocumento();
+  }
   servicosFormClean() {
     this.chamada = null;
     this.servicosForm = new FormGroup({
@@ -238,22 +317,66 @@ export class CadastrarVisitaComponent implements OnInit {
       valor: new FormControl('', [Validators.required])
     });
   }
-
+  get formValid(): boolean {
+    const valid = (this.produtores.length > 0 && this.chamadas.length > 0 && this.visitaForm.valid) ? true : false;
+    return valid;
+  }
   formularioValido(): boolean {
     return this.chamadas.length > 0 ? true : false;
   }
 
+  //Checa se o campo já foi clicado/tocado
+  checkTouched(campo: string) {
+    const field = this.visitaForm.get(campo);
+
+    return (
+      !field.valid && (field.touched || field.dirty)
+    );
+  }
+  async onSubmit() {
+    //Verifica se o arquivo anexado foi enviado corretamente
+    let uploadDirty: boolean = false;
+    try {
+      uploadDirty = this.files.size ? true : false;
+
+    } catch { }
+
+    if (uploadDirty && !this.isAnexed) {
+      //Caixa de diálogo informando o acontecido
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        restoreFocus: false,
+        data: { title: "Esqueceu de anexar o arquivo", info: "Você anexou um arquivo mas não enviou. Deseja continuar com a operação?" }
+      });
+      
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.idFileReport = null;
+          this.registrarVisita();
+        }else{
+          Object.keys(this.visitaForm.controls).forEach(campo => {
+            const controle = this.visitaForm.get(campo);
+            controle.markAsDirty;
+            controle.markAsTouched;
+            const valido = controle.valid;
+            
+          });
+        }
+      });
+      //Fim da caixa de diálogo
+    }else{
+      this.registrarVisita();
+    }
+  }
   registrarVisita() {
 
     //Configurando visita com os dados do form
 
-    this.visita = this.visitaForm.value;
-    this.visita.chamadas = this.chamadas;
-    this.visita.produtores = this.produtores;
-    this.loading = true;
+    this.atualizaVisitaData();
+
 
     console.log('>>> Registrando visita');
     console.log(this.visita);
+
     //Verifica se pretende cria pasta de atendimento
     let hasCreateFolder: boolean = false;
 
@@ -261,12 +384,12 @@ export class CadastrarVisitaComponent implements OnInit {
       restoreFocus: false,
       data: { title: "Criando pasta de atendimento", info: "É necessário criar uma pasta para este atendimento?" }
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
+      if (result) {
         hasCreateFolder = true;
         this.visita.createFolder = hasCreateFolder;
-        
+
         this.visitaService.sendVisita(this.visita).subscribe(
           data => {
             this.loading = !true;
@@ -278,10 +401,10 @@ export class CadastrarVisitaComponent implements OnInit {
             this.messageService.sendError(this._snackBar, "Erro", error.error.errors)
           }
         );
-      }else{
+      } else {
         hasCreateFolder = false;
         this.visita.createFolder = hasCreateFolder;
-        
+
         this.visitaService.sendVisita(this.visita).subscribe(
           data => {
             this.loading = !true;
@@ -296,7 +419,7 @@ export class CadastrarVisitaComponent implements OnInit {
 
       }
     });
-  
+
     ///////////////////////////////////////////////////
   }
 
@@ -317,4 +440,15 @@ export class CadastrarVisitaComponent implements OnInit {
       valor: this.servico.defaultValue
     });
   }
+
+  atualizaVisitaData() {
+    this.visita = this.visitaForm.value;
+    this.visita.chamadas = this.chamadas;
+    this.visita.produtores = this.produtores;
+    this.visita.idReport = this.idFileReport;
+    this.loading = true;
+  }
 }
+
+
+

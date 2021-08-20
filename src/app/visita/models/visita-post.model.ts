@@ -19,10 +19,11 @@
         codigoVisita: string;
         createFolder: boolean;
         dataDaVisita: string;
-        localDoAtendimeno: string;
+        localDoAtendimento: string;
         municipio: string;
         orientacao: string;
         produtores: Produtore[];
         recomendacao: string;
         situacaoAtual: string;
+        idReport: string;
     }

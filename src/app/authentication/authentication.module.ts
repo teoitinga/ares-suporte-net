@@ -34,7 +34,7 @@ import { DialogViewData, PerdaDeCargaComponent } from '../tools/components/perda
 import { DashboardPanelComponent } from './components/reports/dashboard-panel/dashboard-panel.component';
 import { UpdateComponent } from './components/users/update/update.component';
 import { DmPastagemComponent } from '../tools/components/dm-pastagem/dm-pastagem.component';
-
+import {MatMenuModule} from '@angular/material/menu';
 ///
 //charts mdbbootstrap
 
@@ -75,6 +75,7 @@ import { DmPastagemComponent } from '../tools/components/dm-pastagem/dm-pastagem
     ReactiveFormsModule,
     ProducaoModule,
     MatAutocompleteModule,
+    MatMenuModule,
     SharedModule   
     
   ],

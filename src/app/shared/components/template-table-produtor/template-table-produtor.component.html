@@ -1,0 +1,72 @@
+<div class="mt-3">
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field class="pesquisa-input ml-2">
+        <mat-label>Consultar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Busca por nome ou cpf" #input>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = $event">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <div class="mt-3 mat-elevation-z8">
+    <table class="table-striped table-hover" mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Previsão de conclusão do serviço Column -->
+      <ng-container matColumnDef="CPF">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="CPF"> CPF </th>
+        <td mat-cell *matCellDef="let row"> {{row.cpf}} </td>
+      </ng-container>
+
+      <!-- Descrição do serviço Column -->
+      <ng-container matColumnDef="Nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="servico"> Nome </th>
+        <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+      </ng-container>
+
+      <!-- Propriedade rural Column -->
+      <ng-container matColumnDef="endereço">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="propriedade-rural"> Endereço </th>
+        <td mat-cell *matCellDef="let row"> {{row.endereco}} </td>
+      </ng-container>
+
+      <!-- Ações Column -->
+      <ng-container matColumnDef="acao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="acoes"> Ações </th>
+        <td mat-cell *matCellDef="let row" class="d-flex justify-content-end align-items-center p-2">
+          <button mat-button matTooltip="Editar cadastro desta pessoa" class="btn-acoes text-warning"
+            aria-label="Verificar ou editar os dados deste produtor"(click)="updateAtd(row.cpf)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-button matTooltip="Visualizar os dados de cadastro" class="btn-acoes text-primary"
+            aria-label="Atribuir status de cancelada a esta tarefa" (click)="viewAtd(row.cpf)">
+            <mat-icon>
+                visibility
+            </mat-icon>
+          </button>
+          <button mat-button matTooltip="Listar todos os atendimentos desta pessoa" class="btn-acoes text-success"
+            aria-label="Atribuir status de expirado a esta tarefa">
+            <mat-icon>
+                fact_check
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<ng-template #loading>
+  <img src="./../../../../assets/Loading.gif" style="height: 1.5em;" alt=""><span>lista de produtores...</span>
+</ng-template>
